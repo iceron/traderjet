@@ -1,0 +1,1 @@
+extern bool AutoMagic = true;

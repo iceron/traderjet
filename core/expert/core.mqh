@@ -1,0 +1,26 @@
+#include <TraderJet\const\error.mqh>
+#include <TraderJet\const\order.mqh>
+#include <TraderJet\const\math.mqh>
+#include <TraderJet\var\server.mqh>
+#include <TraderJet\var\symbol.mqh>
+#include <TraderJet\var\order.mqh>
+#include <TraderJet\var\error.mqh>
+#include <TraderJet\init\symbol.mqh>
+#include <TraderJet\common\account.mqh>
+#include <TraderJet\common\array.mqh>
+#include <TraderJet\common\conversion.mqh>
+#include <TraderJet\common\error.mqh>
+#include <TraderJet\common\string.mqh>
+#include <TraderJet\common\server.mqh>
+#include <TraderJet\common\symbol.mqh>
+#include <TraderJet\common\object.mqh>
+#include <TraderJet\common\order.mqh>
+#include <TraderJet\common\math.mqh>
+#include <TraderJet\common\arrow.mqh>
+#include <TraderJet\common\candle.mqh>
+#include <TraderJet\common\loop.mqh>
+#include <TraderJet\common\print.mqh>
+#include <TraderJet\common\trade\open.mqh>
+#include <TraderJet\common\trade\modify.mqh>
+#include <TraderJet\common\trade\close.mqh>
+

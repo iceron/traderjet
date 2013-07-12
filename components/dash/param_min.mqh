@@ -1,0 +1,10 @@
+int            dashCorner = 1;
+int            dashX = 5,
+               dashY = 25,     
+               dashXSpacing = 0,
+               dashYSpacing = 15;
+extern int     dashFontSize = 8,
+               dashXOffset = 150;
+string         dashFont = "Arial";
+extern color   dashTermColor = Gray,
+               dashValueColor = Gray;
