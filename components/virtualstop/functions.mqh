@@ -91,8 +91,8 @@ void vstopAdjustOrder(string name,int ticket,int magic=EMPTY_VALUE,int select=SE
 void vstopAdjust(string name)   {
    double vstopStoploss,vstopTakeprofit,objStoploss,objTakeprofit;
    bool mod1,mod2,mod,sendtobroker = true;
-   objStoploss = objectGet(name+vstopStopLossName+orderTicket,OBJPROP_PRICE1);
-   objTakeprofit = objectGet(name+vstopTakeProfitName+orderTicket,OBJPROP_PRICE1);
+   objStoploss = hlineGet(name+vstopStopLossName+orderTicket,OBJPROP_PRICE1);
+   objTakeprofit = hlineGet(name+vstopTakeProfitName+orderTicket,OBJPROP_PRICE1);
    vstopStoploss = orderStopLoss;
    vstopTakeprofit = orderTakeProfit;    
    vstopAdjustCompare(mod1,objStoploss,orderStopLoss,vstopStoploss);
@@ -100,7 +100,7 @@ void vstopAdjust(string name)   {
    if (mod1 || mod2) mod = true;
    if (!mod) return;
    vstopAdjustSendToBroker(sendtobroker,objStoploss,objTakeprofit);      
-   if (sendtobroker) orderModify(orderTicket,orderOpenPrice,vstopStoploss,vstopTakeprofit);             
+   if (sendtobroker) cOrderModify(orderTicket,orderOpenPrice,vstopStoploss,vstopTakeprofit);             
 }
 
 void vstopAdjustCompare(bool& ret,double& objval,double& val,double& stop)   {
@@ -137,11 +137,11 @@ void vstopCheck(string name,double lots=0) {
    double val;
    if (orderCloseTime>0) return;     
    if (vstopStopLossMode>0) {
-      val = objectGet(name+vstopStopLossName+orderTicket,OBJPROP_PRICE1);
+      val = hlineGet(name+vstopStopLossName+orderTicket,OBJPROP_PRICE1);
       vstopCheckClose(name,val,vstopStopLossName,lots);
    }   
    if (vstopTakeProfitMode>0)  {
-      val = objectGet(name+vstopTakeProfitName+orderTicket,OBJPROP_PRICE1);
+      val = hlineGet(name+vstopTakeProfitName+orderTicket,OBJPROP_PRICE1);
       vstopCheckClose(name,val,vstopTakeProfitName,lots);
    }   
 }
@@ -161,7 +161,7 @@ bool vstopCheckClose(string& name,double& val,string type,double& lots)   {
          if (orderClosePrice>=val) close = true; 
    }   
    if (close)   {
-      if (orderClose(orderTicket,lots))  {
+      if (cOrderClose(orderTicket,lots))  {
          objectHide(name+type+orderTicket);
          printOut("vstopCheckClose",StringConcatenate("exit signal by: ",name,type,orderTicket));
          if (lots>0 || orderVolume>lots)   {
@@ -200,7 +200,7 @@ void vstopClean(string name) {
 }
 
 int ticketGet()  {
-   int total = OrdersTotal();
+   int total = ordersTotal();
    for (int i=0;i<total;i++)  {
       if (!OrderSelect(i,SELECT_BY_POS)) continue;
       if (OrderMagicNumber()==serverMagic) return(OrderTicket());
@@ -211,8 +211,8 @@ int ticketGet()  {
 bool vstopInherit(int newticket, int oldticket)   {
    if (newticket<=0) return;
    int total = objectsTotal();
-   string n = DoubleToStr(newticket,0);
-   string o = DoubleToStr(oldticket,0);
+   string n = doubleToString(newticket,0);
+   string o = doubleToString(oldticket,0);
    for (int i=0;i<total;i++)   {
       string newname,name = objectName(i);
       if (name=="") continue;    

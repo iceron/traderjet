@@ -7,7 +7,7 @@ void magicSet(int digits = 3)  {
          Sleep(serverSleepError);
          continue;
       }      
-      int rand = mathRand(TimeCurrent()+windowhandle);
+      int rand = mathRandS(TimeCurrent()+windowhandle);
       val = MathPow(10,digits)*(rand/32767.0); 
       if (!magicCollisionCheck(val)) {
          GlobalVariableSet(DoubleToStr(val,0),val);  

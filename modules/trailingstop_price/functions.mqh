@@ -4,8 +4,8 @@ void trailingStopLossPriceLoop(string name,double v,int magic=EMPTY_VALUE,int ty
 }
 
 void trailingStopLossPriceOrder(string name,int ticket,int select,double v,int magic=EMPTY_VALUE,int type=CMD_ALL,bool floating=false)   {
-   if (magic==EMPTY_VALUE) magic = server.magic;  
-   if (order.select(ticket,select)) trailingStopLossPrice(v,type,name,floating);       
+   if (magic==EMPTY_VALUE) magic = serverMagic;  
+   if (orderSelect(ticket,select)) trailingStopLossPrice(v,type,name,floating);       
 }
 
 void trailingStopLossPrice(string name,double v,int type=CMD_ALL,bool floating=false)   {   

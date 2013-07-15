@@ -177,7 +177,7 @@ double orderProfitTicks(int ticket=-1){
    if (ticket>0 && ticket!=-1)
       orderSelect(ticket,SELECT_BY_TICKET);
    if (orderType==OP_BUY)
-      val = (orderOpenPrice-orderClosePrice)/tickSize;  
+      val = (orderClosePrice-orderOpenPrice)/tickSize;  
    else if (orderType==OP_SELL)
       val = (orderOpenPrice-orderClosePrice)/tickSize; 
    return(val);   

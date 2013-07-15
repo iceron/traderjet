@@ -1,1 +1,1 @@
-trading.counter();
+tradingCounter();

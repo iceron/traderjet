@@ -4,24 +4,24 @@
 #define symsize   1936
 #define symnext   1849
 
-string marketwatch.symbol[];
-string marketwatch.desc[];
+string marketwatchSymbol[];
+string marketwatchDesc[];
 
-void marketwatch.getsymbols() {
+void marketwatchGetSymbols() {
    int handle = FileOpenHistory(symfile,FILE_BIN|FILE_READ);
    if (handle==-1)   {
       Print("FILE: ",symfile," - error opening file ",GetLastError()); 
       return;
    }
    int symbolcount = FileSize(handle)/symsize;
-   ArrayResize(marketwatch.symbol,symbolcount);
-   ArrayResize(marketwatch.desc,symbolcount);
+   ArrayResize(marketwatchSymbol,symbolcount);
+   ArrayResize(marketwatchDesc,symbolcount);
    for (int i=0;i<symbolcount;i++)  {     
       string s = FileReadString(handle,symname);
       string desc = FileReadString(handle,symdesc);
       FileSeek(handle,symnext,SEEK_CUR);
-      marketwatch.symbol[i] = s;      
-      marketwatch.desc[i] = desc;        
+      marketwatchSymbol[i] = s;      
+      marketwatchDesc[i] = desc;        
    }   
    //printresult();
    FileClose(handle);   
@@ -30,9 +30,9 @@ void marketwatch.getsymbols() {
 /*
 void printresult()
 {
-   int size = ArraySize(marketwatch.symbol);
+   int size = ArraySize(marketwatchSymbol);
    for (int i=0;i<size;i++)   {
-      Print(i," ",marketwatch.symbol[i]," ",marketwatch.desc[i]);
+      Print(i," ",marketwatchSymbol[i]," ",marketwatchDesc[i]);
    }
 }
 */

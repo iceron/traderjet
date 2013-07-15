@@ -1,2 +1,2 @@
-symbol.get();
+symbolGet();
 Comment("www.cyberforexworks.com");

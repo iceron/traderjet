@@ -1,2 +1,2 @@
 datetime tradingcounterStart;
-string tradingcounterName = "trading_counter";
+string tradingcounterName = "Trading Counter";

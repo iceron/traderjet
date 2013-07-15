@@ -1,4 +1,4 @@
-bool trading.hour(string s, string e)  {
+bool tradingIsValid(string s, string e)  {
    bool res;
    datetime current  = TimeCurrent();  
    datetime start    = StrToTime(s);

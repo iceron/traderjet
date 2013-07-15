@@ -1,6 +1,6 @@
 color orderCloseArrowColor = CLR_NONE;
 
-bool orderClose(int ticket, double lots=0, double price=0) {
+bool cOrderClose(int ticket, double lots=0, double price=0) {
    if (orderCloseTime>0) return;
    bool result;
    int status;   
@@ -8,20 +8,20 @@ bool orderClose(int ticket, double lots=0, double price=0) {
       status = tradeStatus();
       if (status<1)	{
          if (status==-1) return(false);         
-         Sleep(serverSleepError);
+         sleep(serverSleepError);
          continue;
       }
       if (!orderSelect(ticket,SELECT_BY_TICKET)) return(false);
       if (orderType<=1)  {
          if (price==0) price = orderClosePrice;
          if (lots==0) lots = orderVolume;
-         else lots = normalizeDouble(MathMin(orderVolume,lots),DOUBLE_VOLUME);
-         result = OrderClose(orderTicket,lots,price,serverSlippageExit*tickFractPips,orderCloseArrowColor);
+         else lots = normalizeDouble(mathMin(orderVolume,lots),DOUBLE_VOLUME);
+         result = orderClose(orderTicket,lots,price,serverSlippageExit*tickFractPips,orderCloseArrowColor);
       }   
       else if (orderType>1) 
-         result = OrderDelete(ticket);   
+         result = orderDelete(ticket);   
       if (result) {         
-         Sleep(serverSleepSuccess);
+         sleep(serverSleepSuccess);
          break;
       }
       else {
@@ -30,15 +30,16 @@ bool orderClose(int ticket, double lots=0, double price=0) {
          Sleep(serverSleepError);
       }
    }   
-   if (!result && status>=1) printOut("orderClose",StringConcatenate("trade closing aborted [resend request(s) failed reason ",lastError," ]")); 
+   if (!result && status>=1) printOut("orderClose",stringConcatenate("trade closing aborted [resend request(s) failed reason ",lastError," ]")); 
+   if (result) printOut("orderClose",stringConcatenate("order processing (exit) - ",cmdToString(orderType)," volume: ",volumeFormat(lots)," price: ",priceFormat(price)," bid/ask: ",priceFormat(tickBid),"/",priceFormat(tickAsk)," magic: ",serverMagic));
    return(result);
 }
 
 int orderCloseAll(int type=CMD_ALL)   {
-   int i, total = OrdersTotal();
+   int i, total = ordersTotal();
    for (i=total-1; i>=0; i--)   {
       if (!orderSelect(i,SELECT_BY_POS)) continue;
       if (!orderInGroup(type,orderType)) continue;
-      orderClose(orderTicket,orderVolume);
+      cOrderClose(orderTicket,orderVolume);
    }
 }

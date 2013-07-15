@@ -1,4 +1,4 @@
-bool orderModify(int ticket,double price,double stoploss,double takeprofit,double expiration=0,color arrowcl=CLR_NONE)   {
+bool cOrderModify(int ticket,double price,double stoploss,double takeprofit,double expiration=0,color arrowcl=CLR_NONE)   {
    bool mod,res;
    int status;
    if (!orderSelect(ticket,SELECT_BY_TICKET)) return(false);
@@ -6,7 +6,7 @@ bool orderModify(int ticket,double price,double stoploss,double takeprofit,doubl
    else takeprofit = orderTakeProfit;
    if (!pricesIsEqual(stoploss,orderStopLoss) && serverStopLossModify) mod = true;
    else stoploss = orderStopLoss;   
-   printOut("orderModify",StringConcatenate("order processing (modify): #",orderTicket," ",cmdToString(orderType)," new price: ",price," new stoploss: ",stoploss," new takeprofit: ",takeprofit," bid/ask: ",tickBid,"/",tickAsk," magic: ",serverMagic));
+   printOut("orderModify",stringConcatenate("order processing (modify) - #",orderTicket," ",cmdToString(orderType)," price: ",priceFormat(price)," old sl: ",priceFormat(orderStopLoss)," new sl: ",priceFormat(stoploss)," old tp: ",priceFormat(orderTakeProfit)," new tp: ",priceFormat(takeprofit)," bid/ask: ",priceFormat(tickBid),"/",priceFormat(tickAsk)," magic: ",serverMagic));
    for (int i=0;i<serverRetryMax;i++)	{
       status = tradeStatus();
       if (status<1)	{
@@ -14,10 +14,11 @@ bool orderModify(int ticket,double price,double stoploss,double takeprofit,doubl
          if (status==-1) return(false);                  
          continue;
       }      
-      if (mod) res = OrderModify(ticket,price,stoploss,takeprofit,expiration,arrowcl);
+      if (mod) res = orderModify(ticket,price,stoploss,takeprofit,expiration,arrowcl);
       if (res) {       
-         printOut("orderModify",StringConcatenate("order processed (modify): #",orderTicket," ",cmdToString(orderType)," new price: ",price," new stoploss: ",stoploss," new takeprofit: ",takeprofit," bid/ask: ",tickBid,"/",tickAsk," magic: ",serverMagic));
+         printOut("orderModify",stringConcatenate("order processed (modify): #",orderTicket));
          Sleep(serverSleepSuccess);
+         onTradeModify();
          break;
       }   
       if (!res && mod) {
@@ -26,6 +27,6 @@ bool orderModify(int ticket,double price,double stoploss,double takeprofit,doubl
          Sleep(serverSleepError);
       }   
    }
-   if (!res && mod) printOut("orderModify",StringConcatenate("trade modification aborted [resend request(s) failed reason ",lastError," ] "));
+   if (!res && mod) printOut("orderModify",stringConcatenate("trade modification aborted [resend request(s) failed reason ",lastError," ] "));
    return(res);
 }

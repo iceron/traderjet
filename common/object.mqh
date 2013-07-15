@@ -1,4 +1,28 @@
-//main object functions
+
+
+string objectDescription(string name)  {
+   return(ObjectDescription(name));
+}
+
+string objectGetFiboDescription(string name,int index)  {
+   return(ObjectGetFiboDescription(name,index));
+}
+
+bool objectSetFiboDescription(string name,int index,string text)  {
+   return(ObjectSetFiboDescription(name,index,text));
+}
+
+int objectGetShiftByValue(string name,double value)   {
+   return(ObjectGetShiftByValue(name,value));
+}
+
+int objectGetValueByShift(string name,int shift)   {
+   return(ObjectGetValueByShift(name,shift));
+}
+
+bool objectMove(string name,int point,datetime time,double price) {
+   return(ObjectMove(name,point,time,price));
+}
 
 int objectsTotal()  {
    return(ObjectsTotal());
@@ -6,6 +30,10 @@ int objectsTotal()  {
 
 string objectName(int pos)   {
    return(ObjectName(pos));
+}
+
+int objectsDeleteAll(int window=EMPTY,int type=EMPTY) {
+   return(ObjectsDeleteAll());
 }
 
 int objectType(string name)  {
@@ -21,24 +49,21 @@ bool objectCreate(string object.name,int objectType,int object.window=0,datetime
 
 bool objectSet(string object.name,int object.index,double object.value)   {
    bool res;
-   if (objectFind(object.name)!=-1) {
+   if (objectFind(object.name)!=-1) 
       res = ObjectSet(object.name,object.index,object.value);
-   }
    return(res);   
 }
 
 bool objectSetText(string object.name,string objectText,int object.fontsize=8,string object.font="Arial",color object.color=CLR_NONE)   {
    bool res;
-   if (objectFind(object.name)!=-1) {
+   if (objectFind(object.name)!=-1)
       res = ObjectSetText(object.name,objectText,object.fontsize,object.font,object.color);
-   }
    return(res);   
 }
 
 double objectGet(string object.name,int object.index)  {
-   if (objectFind(object.name)!=-1)   {
+   if (objectFind(object.name)!=-1)
       return(ObjectGet(object.name,object.index));      
-   } 
    return(-1);
 }
 

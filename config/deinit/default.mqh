@@ -2,7 +2,7 @@
 orderLoopHistory(3);
 
 //DASH DEINIT
-dashDelete();
+dashEADelete();
 
 //COMMENT DEINIT
 Comment("");

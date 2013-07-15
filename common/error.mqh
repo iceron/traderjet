@@ -1,3 +1,6 @@
+int errorCritListReal[] = {3,65,147,149};
+int errorCritListTest[] = {3,65,129.130,131,134,147,149};
+
 void errorManager(int type)  {
    lastError = GetLastError();
    string desc = "["+errorDescription(lastError)+"]";
@@ -17,7 +20,7 @@ void errorManager(int type)  {
       }
    }   
    lastErrorMessage = message+desc+" "+lastErrorString;
-   printOut("error_manager",lastErrorMessage);
+   printOut("errorManager",lastErrorMessage);
    return;
 }
 
@@ -119,4 +122,12 @@ string errorDescription(int error_code)  {
       default:   error_string="unknown error";
      }
    return(error_string);
+}
+
+bool errorCheckCritical(int error)  {
+   if (error==0) return(false);
+   if (IsTesting())
+      if (intInArray(error,errorCritListTest)) return(true);
+   else if (intInArray(error,errorCritListReal)) return(true);   
+   return(true);
 }

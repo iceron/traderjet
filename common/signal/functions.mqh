@@ -1,18 +1,30 @@
-int signalFilter(int& array[]){
+bool signalNewBar;
+string signalOut,signalDone;
+string signalOpen,signalClose;
+
+#define SIGNAL_VOID     "VOID"
+#define SIGNAL_LONG     "LONG"
+#define SIGNAL_SHORT    "SHORT"
+#define SIGNAL_DONE     "DONE"
+#define SIGNAL_NOT_DONE "..."
+#define SIGNAL_OPEN     "OPEN"
+#define SIGNAL_CLOSE    "CLOSE"
+
+int signalFilter(int& arr[]){
    int a,b,i,s;
-   if (array[ArrayMinimum(array)]==CMD_VOID) return(CMD_VOID);
-   if (array[ArrayMaximum(array)]==CMD_ALL) return(CMD_ALL);  
-   int size = ArraySize(array);
+   if (arr[ArrayMinimum(arr)]==CMD_VOID) return(CMD_VOID);
+   if (arr[ArrayMaximum(arr)]==CMD_ALL) return(CMD_ALL);  
+   int size = arraySizeInt(arr);
    while (i<size-2)   {
-      a = array[i];
-      b = array[i+1];      
+      a = arr[i];
+      b = arr[i+1];      
       if (a==CMD_NEUTRAL)  {
          i++;
          continue;  
       }  else s = a;
       while(b==CMD_NEUTRAL && i<size-1){
          i++;
-         b = array[i];
+         b = arr[i];
       }
       if (a&b!=a|b && b!=CMD_NEUTRAL){
          s = CMD_VOID;
@@ -48,11 +60,12 @@ string signalText(int signal,bool reverse=false){
    return(NULL);  
 }
 
-void signalManage(int& open,int& close,int timeframe=0)
-{
+void signalManage(int& open,int& close,int timeframe=0)  {
+   signalManageReset();
    static int last;
    bool newbar = barIsNew(timeframe);
-   string out = "OPEN";
+   signalNewBar = newbar;
+   string out = SIGNAL_OPEN;
    if (SignalModeReverse)   {
       if (open==CMD_LONG) open = CMD_SHORT;
       else if (open==CMD_SHORT) open = CMD_LONG;   
@@ -63,34 +76,47 @@ void signalManage(int& open,int& close,int timeframe=0)
       open = CMD_VOID;     
    if (!serverExitEnabled)
       close = CMD_NEUTRAL;    
-   dashAdd("entry_filters","entry filters",signalText(open)); 
-   dashAdd("exit_filters","exit filters",signalText(close,true));   
-   if (signalText(open)==signalText(close,true) || close==CMD_ALL) {      
+   //dashAdd("entry_filters","entry filters",signalText(open)); 
+   //dashAdd("exit_filters","exit filters",signalText(close,true));   
+   signalOpen = signalText(open);
+   signalClose = signalText(close,true);
+   if (open==signalReverse(close) || close==CMD_ALL) {      
       open = CMD_VOID;
-      out = "CLOSE";
+      out = SIGNAL_CLOSE;
    }   
-   else if (open==CMD_VOID) out = "VOID";
-   dashAdd("signal.overall","overall signal status",out); 
+   else if (open==CMD_VOID) out = SIGNAL_VOID;
+   //dashAdd("signal.overall","overall signal status",out); 
+   signalOut = out;
    if (SignalModeTradeOncePerBar && open>CMD_VOID) {
       if (newbar) last = CMD_VOID;
       if (last!=open)   {
          last = open;
-         dashAdd("signal.once","signal for bar","..."); 
+         //dashAdd("signal.once","signal for bar","..."); 
          //dash.add("onceperbar ","onceperbar",open+" ",+last);
+         signalDone = SIGNAL_NOT_DONE;
       }   
       else  {
          last = open;  
          open = CMD_VOID;       
-         dashAdd("signal.once","signal for bar","DONE"); 
+         //dashAdd("signal.once","signal for bar","DONE"); 
+         signalDone = SIGNAL_DONE;         
       }        
    }      
+}
+
+void signalManageReset()   {
+   signalNewBar = false;
+   signalOut = "";
+   signalDone = "";
+   signalOpen = "";
+   signalClose = "";
 }
 
 
 
 void signalInit(int open=0,int close=0)   {
-   ArrayResize(signalEntryArray,open);
-   ArrayResize(signalExitArray,close); 
+   arrayResizeInt(signalEntryArray,open);
+   arrayResizeInt(signalExitArray,close); 
    ArrayInitialize(signalEntryArray,0);
    ArrayInitialize(signalExitArray,0); 
 }

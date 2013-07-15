@@ -1,5 +1,5 @@
 void trailingStopLossLoop(string name,double start,double step,double trailingstop,int magic=EMPTY_VALUE) {   
-   int total = OrdersTotal();
+   int total = ordersTotal();
    for (int i=0;i<total;i++) trailingStopLossOrder(i,start,step,trailingstop,magic,SELECT_BY_POS,name);
 }
 
@@ -11,6 +11,7 @@ void trailingStopLossOrder(string name,int ticket,double start,double step,doubl
 void trailingStopLoss(string name,double start,double step,double trailingstop)   {
    if (trailingstop<=0) return;
 	bool mod;
+	double newPrice,newPrice1,newPrice2;
    start *= tickFractPips;
    step *= tickFractPips;
    trailingstop *= tickFractPips;   
@@ -21,21 +22,32 @@ void trailingStopLoss(string name,double start,double step,double trailingstop) 
    int closeTicks = ticks(orderClosePrice);
    if (orderType==OP_BUY) {
       if (orderProfitTicks>=start)	{
-			if ((objval<openTicks+start-trailingstop && closeTicks-trailingstop<=openTicks+start+step) || (objval==-1))
+         newPrice1 = openTicks+start-trailingstop;
+         newPrice2 = closeTicks-trailingstop;
+			if ((objvalTicks<newPrice1 && newPrice2<=openTicks+start+step) || (objval==-1))  {
+			   newPrice = newPrice1;
 				mod = true;
-			else if (closeTicks-trailingstop>objvalTicks+step)  
+	      }			
+			else if (newPrice2>objvalTicks+step) {  
+			   newPrice = newPrice2;
 				mod = true;				
+	      }			
 		}
-		if (mod) objectSet(name+vstopStopLossName+orderTicket,OBJPROP_PRICE1,(closeTicks-trailingstop)*tickSize);
    }
    
    else if (orderType==OP_SELL) {
 		if (orderProfitTicks>=start)	{
-			if ((objvalTicks>openTicks-start+trailingstop && closeTicks+trailingstop>=openTicks-start-step) || (objval==-1))
+		   newPrice1 = openTicks-start+trailingstop;
+         newPrice2 = closeTicks+trailingstop;
+			if ((objvalTicks>newPrice1 && newPrice2>=openTicks-start-step) || (objval==-1))  {
+			   newPrice = newPrice1;
 				mod = true;
-			else if (closeTicks+trailingstop<objvalTicks-step)       
+			}	
+			else if (newPrice2<objvalTicks-step) {
+			   newPrice = newPrice2;    
 				mod = true;
+			}	
 		}
-		if (mod) objectSet(name+vstopStopLossName+orderTicket,OBJPROP_PRICE1,(closeTicks+trailingstop)*tickSize);
    }      
+   if (mod) objectSet(name+vstopStopLossName+orderTicket,OBJPROP_PRICE1,normalizeDouble(newPrice*tickSize));
 }	

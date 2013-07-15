@@ -1,1 +1,1 @@
-tradingCounterInit(); 
+tradingcounterInit(); 
