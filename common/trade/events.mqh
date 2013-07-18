@@ -6,7 +6,7 @@ bool orderJustIn()   {
    static datetime opentime;
    if (opentime==0) {
       opentime = orderOpenTime;
-      return(false);
+      if (orderOpenTime>tickTime-20) return(true);
    }   
    if (orderOpenTime>opentime)   {      
       opentime = orderOpenTime;

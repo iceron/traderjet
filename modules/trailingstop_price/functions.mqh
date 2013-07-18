@@ -1,11 +1,11 @@
 void trailingStopLossPriceLoop(string name,double v,int magic=EMPTY_VALUE,int type=CMD_ALL,bool floating=false) {   
-   int total = OrdersTotal();
+   int total = ordersTotal();
    for (int i=0;i<total;i++) trailingStopLossPriceOrder(i,SELECT_BY_POS,v,magic,type,name,floating); ;
 }
 
 void trailingStopLossPriceOrder(string name,int ticket,int select,double v,int magic=EMPTY_VALUE,int type=CMD_ALL,bool floating=false)   {
    if (magic==EMPTY_VALUE) magic = serverMagic;  
-   if (orderSelect(ticket,select)) trailingStopLossPrice(v,type,name,floating);       
+   if (cOrderSelect(ticket,select)) trailingStopLossPrice(v,type,name,floating);       
 }
 
 void trailingStopLossPrice(string name,double v,int type=CMD_ALL,bool floating=false)   {   

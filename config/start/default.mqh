@@ -1,2 +1,2 @@
 symbolGet();
-Comment("www.cyberforexworks.com");
+comment("www.cyberforexworks.com");

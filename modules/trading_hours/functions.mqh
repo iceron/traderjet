@@ -1,8 +1,8 @@
 bool tradingIsValid(string s, string e)  {
    bool res;
-   datetime current  = TimeCurrent();  
-   datetime start    = StrToTime(s);
-   datetime stop     = StrToTime(e);
+   datetime current  = timeCurrent();  
+   datetime start    = stringToTime(s);
+   datetime stop     = stringToTime(e);
    if (start<stop)  {
       if (current>start && current<stop) res = true;
    }

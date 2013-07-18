@@ -10,7 +10,7 @@ void vstopInit(int slmode,int tpmode)  {
 }
 
 void vstopSetLoop(string name,double stoploss,double takeprofit,int magic=EMPTY_VALUE) {   
-   int ticket,total = OrdersTotal();
+   int ticket,total = ordersTotal();
    for (int i=0;i<total;i++) vstopSetOrder(name,stoploss,takeprofit,i,magic,SELECT_BY_POS);
 }
 
@@ -124,7 +124,7 @@ void vstopAdjustSendToBroker(bool& sendtobroker,double& stoploss,double& takepro
 }
 
 void vstopCheckLoop(string name,int magic=EMPTY_VALUE){   
-   int ticket,total = OrdersTotal();
+   int ticket,total = ordersTotal();
    for (int i=0;i<total;i++) vstopCheckOrder(name,i,magic,SELECT_BY_POS);
 }
 
@@ -163,7 +163,7 @@ bool vstopCheckClose(string& name,double& val,string type,double& lots)   {
    if (close)   {
       if (cOrderClose(orderTicket,lots))  {
          objectHide(name+type+orderTicket);
-         printOut("vstopCheckClose",StringConcatenate("exit signal by: ",name,type,orderTicket));
+         Print(StringConcatenate("vstopCheckClose","exit signal by: ",name,type,orderTicket));
          if (lots>0 || orderVolume>lots)   {
             int newticket = ticketGet();
             vstopInherit(newticket, orderTicket);
@@ -185,7 +185,7 @@ void vstopCleanLoop() {
       if (orderSelect(ticket,SELECT_BY_TICKET))      {
          if (orderCloseTime>0) 
             if (objectDelete(name))
-               Print(name," deleted");
+               Print(StringConcatenate("vstopCleanLoop: ",name," deleted"));
       }
    }
 }
@@ -195,17 +195,8 @@ void vstopCleanObject(string name)   {
 }
 
 void vstopClean(string name) {
-   if (objectExistsDeleted(name+vstopStopLossName+orderTicket)) Print(name+vstopStopLossName+orderTicket+" deleted");
-   if (objectExistsDeleted(name+vstopTakeProfitName+orderTicket)) Print(name+vstopTakeProfitName+orderTicket+" deleted");
-}
-
-int ticketGet()  {
-   int total = ordersTotal();
-   for (int i=0;i<total;i++)  {
-      if (!OrderSelect(i,SELECT_BY_POS)) continue;
-      if (OrderMagicNumber()==serverMagic) return(OrderTicket());
-   }
-   return(-1);
+   if (objectExistsDeleted(name+vstopStopLossName+orderTicket)) Print("vstopClean: ",StringConcatenate(name,vstopStopLossName,orderTicket," deleted"));
+   if (objectExistsDeleted(name+vstopTakeProfitName+orderTicket)) Print("vstopClean: ",StringConcatenate(name,vstopTakeProfitName,orderTicket," deleted"));
 }
 
 bool vstopInherit(int newticket, int oldticket)   {
@@ -226,4 +217,12 @@ bool vstopInherit(int newticket, int oldticket)   {
    return(true);
 }
 
+int ticketGet()  {
+   int total = ordersTotal();
+   for (int i=0;i<total;i++)  {
+      if (!OrderSelect(i,SELECT_BY_POS)) continue;
+      if (OrderMagicNumber()==serverMagic) return(OrderTicket());
+   }
+   return(-1);
+}
 

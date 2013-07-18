@@ -1,11 +1,11 @@
 void trailingTakeProfitLoop(string name,double start,double step,double trailingtake,int magic=EMPTY_VALUE) {   
-   int total = OrdersTotal();
+   int total = ordersTotal();
    for (int i=0;i<total;i++) trailingTakeProfitOrder(i,start,step,trailingtake,magic,SELECT_BY_POS,name);
 }
 
 void trailingTakeProfitOrder(string name, int ticket,double start,double step,double trailingtake,int magic=EMPTY_VALUE,int select=SELECT_BY_TICKET)   {
    if (magic==EMPTY_VALUE) magic = serverMagic;  
-   if (orderSelect(ticket,select)) trailingTakeProfit(start,step,trailingtake,name);       
+   if (cOrderSelect(ticket,select)) trailingTakeProfit(start,step,trailingtake,name);       
 }
 
 void trailingTakeProfit(string name, double start,double step,double trailingtake)   {

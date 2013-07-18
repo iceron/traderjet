@@ -1,15 +1,3 @@
-bool signalNewBar;
-string signalOut,signalDone;
-string signalOpen,signalClose;
-
-#define SIGNAL_VOID     "VOID"
-#define SIGNAL_LONG     "LONG"
-#define SIGNAL_SHORT    "SHORT"
-#define SIGNAL_DONE     "DONE"
-#define SIGNAL_NOT_DONE "..."
-#define SIGNAL_OPEN     "OPEN"
-#define SIGNAL_CLOSE    "CLOSE"
-
 int signalFilter(int& arr[]){
    int a,b,i,s;
    if (arr[ArrayMinimum(arr)]==CMD_VOID) return(CMD_VOID);
@@ -132,6 +120,15 @@ void filterInit(int& num) {
 void filterAdd(int filter,int& arr[],int& num) {
    arr[num] = filter; 
    num++;
+}
+
+bool filterInclude(bool toggle,bool entry=true) {
+   if (toggle)   {
+      if (entry) filterEntryNum++;
+      else filterExitNum++;
+      return(true);
+   }
+   return(false);
 }
 
 int signalReverse(int signal) {

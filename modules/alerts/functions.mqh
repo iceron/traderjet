@@ -1,10 +1,10 @@
 void sendAlert(string text="",string subject="") {
    if (AlertSoundOn)
-      PlaySound(AlertSound);
+      playSound(AlertSound);
    if (AlertEmailOn)
-      SendMail(subject,text);   
+      sendMail(subject,text);   
    if (AlertPopupOn)
-      Alert(text);    
+      alert(text);    
    if (AlertPushOn)
-      SendNotification(text);     
+      sendNotification(text);     
 }

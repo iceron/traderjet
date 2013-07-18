@@ -5,7 +5,7 @@ void trailingStopLossLoop(string name,double start,double step,double trailingst
 
 void trailingStopLossOrder(string name,int ticket,double start,double step,double trailingstop,int magic=EMPTY_VALUE,int select=SELECT_BY_TICKET)   {
    if (magic==EMPTY_VALUE) magic = serverMagic;  
-   if (orderSelect(ticket,select)) trailingStopLoss(start,step,trailingstop,name);       
+   if (cOrderSelect(ticket,select)) trailingStopLoss(start,step,trailingstop,name);       
 }
 
 void trailingStopLoss(string name,double start,double step,double trailingstop)   {
@@ -49,5 +49,5 @@ void trailingStopLoss(string name,double start,double step,double trailingstop) 
 			}	
 		}
    }      
-   if (mod) objectSet(name+vstopStopLossName+orderTicket,OBJPROP_PRICE1,normalizeDouble(newPrice*tickSize));
+   if (mod) objectSet(name+vstopStopLossName+orderTicket,OBJPROP_PRICE1,cNormalizeDouble(newPrice*tickSize));
 }	

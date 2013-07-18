@@ -4,12 +4,12 @@ bool tradingCounter()  {
    if (!serverEntryEnabled)   {
       if (msg=="")   {  
          msg = "trading countdown is up";
-         Print(msg);
+         print(msg);
       }
       if (TradingCounterShow) dashAdd(tradingcounterName,msg);  
       return(false);
    }    
-   datetime timeCurrent = TimeCurrent();   
+   datetime timeCurrent = timeCurrent();   
    int duration = (timeCurrent - tradingcounterStart)/60;
    int val = TradingCounterMinutes-duration;
    if (duration>TradingCounterMinutes)
@@ -24,5 +24,5 @@ void tradingcounterInit()   {
 }
 
 void tradingcounterStart()   {
-   tradingcounterStart = TimeCurrent();
+   tradingcounterStart = timeCurrent();
 }

@@ -12,7 +12,7 @@ int getTickCount()   {
    return(GetTickCount());
 }
 
-double marketInfo(string symbol,string type) {
+double marketInfo(string symbol,int type) {
    return(MarketInfo(symbol,type));
 }
 

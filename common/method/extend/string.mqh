@@ -1,17 +1,20 @@
 string stringLeft(string str,int len)   {
    if (len==0) return("");
-   return(StringSubstr(str,0,len));  
+   return(stringSub(str,0,len));  
 }
 
 string stringRight(string str,int start)  {
-   return(StringSubstr(str,start,0));  
+   int size = stringLen(str);
+   if (size>start) return("");
+   return(stringSub(str,start,0));  
 }
 
 string stringReplace(string str,string match,string rep)   {
-   int i = StringLen(str)-1;
+   int i = stringLen(str)-1;
    while (i>=0)   {
-      int len = StringLen(match);
-      string ch = StringSubstr(str,i,len);     
+      int len = stringLen(match);
+      string ch = "";
+      ch = stringSub(str,i,len);     
       if (ch==match) {
          string right = stringRight(str,i+len);
          string left = stringLeft(str,i);
@@ -23,7 +26,7 @@ string stringReplace(string str,string match,string rep)   {
 }
 
 string stringInsert(string str,string ins,int pos)   {
-   int i = StringLen(str)-1;
+   int i = stringLen(str)-1;
    string right = stringRight(str,pos);
    string left = stringLeft(str,pos);
    str = StringConcatenate(left,ins,right);
@@ -32,17 +35,18 @@ string stringInsert(string str,string ins,int pos)   {
 
 int stringExtractInt(string str)   {
    int i,len = stringLen(str)-1;
-   string s;
+   string s = "";
    while (i<=len)   {
-      string ch = stringSub(str,i,1);     
-      if (charIsNumeric(ch)) StringConcatenate(s,ch);    
+      string ch = "";
+      ch = stringSub(str,i,1);      
+      if (charIsNumeric(ch)) StringConcatenate(s,ch);          
       i++;
    }
    return(stringToInteger(s));
 }
 
 string stringConvert(string str,int mode)   {
-   int upper,lower,count,i=StringLen(str)-1;
+   int upper,lower,count,i=stringLen(str)-1;
    if (mode==MODE_LOWER)   {
       upper = 90;
       lower = 65; 
@@ -71,10 +75,11 @@ string stringToUpper(string str)  {
 }
 
 string stringExtractUpper(string str)   {
-   int i,len = stringLen(str)-1;
-   string s;
-   while (i<=len)   {
-      string ch = stringSub(str,i,1);     
+   int i,len = stringLen(str);
+   string s = "";
+   while (i<len)   {
+      string ch = "";
+      ch = stringSub(str,i,1);     
       if (charIsUpper(ch)) StringConcatenate(s,ch);    
       i++;
    }
@@ -82,10 +87,11 @@ string stringExtractUpper(string str)   {
 }
 
 string stringExtractNoUpper(string str)   {
-   int i,len = stringLen(str)-1;
-   string s;
-   while (i<=len)   {
-      string ch = stringSub(str,i,1);     
+   int i,len = stringLen(str);
+   string s = "";
+   while (i<len)   {
+      string ch = "";
+      ch = stringSub(str,i,1);    
       if (!charIsUpper(ch)) StringConcatenate(s,ch);    
       i++;
    }
@@ -93,10 +99,11 @@ string stringExtractNoUpper(string str)   {
 }
 
 string stringExtractLower(string str)   {
-   int i,len = stringLen(str)-1;
-   string s;
-   while (i<=len)   {
-      string ch = stringSub(str,i,1);     
+   int i,len = stringLen(str);
+   string s = "";
+   while (i<len)   {
+      string ch = "";
+      ch = stringSub(str,i,1);   
       if (charIsLower(ch)) s = StringConcatenate(s,ch);    
       i++;
    }
@@ -104,17 +111,21 @@ string stringExtractLower(string str)   {
 }
 
 string stringExtractNoLower(string str)   {
-   int i,len = stringLen(str)-1;
-   string s;
-   while (i<=len)   {
-      string ch = stringSub(str,i,1);     
-      if (!charIsLower(ch)) s = StringConcatenate(s,ch);    
+   int i,len = stringLen(str);
+   string s = "";
+   while (i<len)   {
+      string ch = "";
+      ch = stringSub(str,i,1);  
+      if (!charIsLower(ch)) s = StringConcatenate(s,ch);     
       i++;
    }
    return(s);
 }
 
-// char
+bool stringIsEmpty(string str)   {
+   if (stringLen(str)==0) return(true);
+   return(false);
+}
 
 bool charIsNumeric(string ch)   {
    if (charIsBounded(ch,48,57)) return(true);
@@ -143,7 +154,7 @@ bool charIsBounded(string ch,int lower,int upper)   {
    return(false);
 }
 
-bool stringIsEmpty(string str)   {
-   if (stringLen(str)==0) return(true);
+bool charIsWhiteSpace(string str)   {
+   if (stringGetChar(str,0)==32) return(true);
    return(false);
 }

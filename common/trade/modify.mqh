@@ -6,27 +6,27 @@ bool cOrderModify(int ticket,double price,double stoploss,double takeprofit,doub
    else takeprofit = orderTakeProfit;
    if (!pricesIsEqual(stoploss,orderStopLoss) && serverStopLossModify) mod = true;
    else stoploss = orderStopLoss;   
-   printOut("orderModify",stringConcatenate("order processing (modify) - #",orderTicket," ",cmdToString(orderType)," price: ",priceFormat(price)," old sl: ",priceFormat(orderStopLoss)," new sl: ",priceFormat(stoploss)," old tp: ",priceFormat(orderTakeProfit)," new tp: ",priceFormat(takeprofit)," bid/ask: ",priceFormat(tickBid),"/",priceFormat(tickAsk)," magic: ",serverMagic));
+   Print(StringConcatenate("orderModify: ","order processing (modify) - #",orderTicket," ",cmdToString(orderType)," price: ",priceFormat(price)," old sl: ",priceFormat(orderStopLoss)," new sl: ",priceFormat(stoploss)," old tp: ",priceFormat(orderTakeProfit)," new tp: ",priceFormat(takeprofit)," bid/ask: ",priceFormat(tickBid),"/",priceFormat(tickAsk)," magic: ",serverMagic));
    for (int i=0;i<serverRetryMax;i++)	{
       status = tradeStatus();
       if (status<1)	{
-         Sleep(serverSleepError);
+         sleep(serverSleepError);
          if (status==-1) return(false);                  
          continue;
       }      
       if (mod) res = orderModify(ticket,price,stoploss,takeprofit,expiration,arrowcl);
       if (res) {       
-         printOut("orderModify",stringConcatenate("order processed (modify): #",orderTicket));
-         Sleep(serverSleepSuccess);
+         Print(StringConcatenate("orderModify: ","order processed (modify): #",orderTicket));
+         sleep(serverSleepSuccess);
          onTradeModify();
          break;
       }   
       if (!res && mod) {
-         lastErrorString = "symbol: "+ tickSymbol + " magic: "+ serverMagic + " type: "+cmdToString(orderType)+" lotsize: "+DoubleToStr(orderVolume,tickVolumePrecision)+" price "+DoubleToStr(orderOpenPrice,tickDigits)+" sl: "+DoubleToStr(orderStopLoss,tickDigits)+" tp: "+DoubleToStr(orderTakeProfit,tickDigits)+" bid: "+DoubleToStr(tickBid,tickDigits)+" ask: "+DoubleToStr(tickAsk,tickDigits);
+         lastErrorString = StringConcatenate("symbol:",tickSymbol,"magic:",serverMagic,"type:"+cmdToString(orderType)+"lotsize:"+volumeFormat(orderVolume)+"price"+priceFormat(orderOpenPrice)+"sl:"+priceFormat(orderStopLoss)+"tp:"+priceFormat(orderTakeProfit)+"bid/ask:"+priceFormat(tickBid)+"/"+priceFormat(tickAsk));
          errorManager(ERR_MODIFY);
-         Sleep(serverSleepError);
+         sleep(serverSleepError);
       }   
    }
-   if (!res && mod) printOut("orderModify",stringConcatenate("trade modification aborted [resend request(s) failed reason ",lastError," ] "));
+   if (!res && mod) Print(StringConcatenate("orderModify: ","trade modification aborted [resend request(s) failed reason ",lastError," ] "));
    return(res);
 }

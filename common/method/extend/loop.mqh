@@ -2,7 +2,8 @@ void orderLoop(int magic=EMPTY_VALUE,int type=CMD_ALL) {
    int total = ordersTotal();
    if (magic==EMPTY_VALUE) magic = serverMagic;
    for (int i=0;i<total;i++)   {
-      if (!cOrderSelect(i,SELECT_BY_POS,MODE_TRADES)) continue;      
+      if (!cOrderSelect(i,SELECT_BY_POS,MODE_TRADES)) continue;
+      if (orderCloseTime>0) continue;      
       loopOrderTasks();
    }
 }

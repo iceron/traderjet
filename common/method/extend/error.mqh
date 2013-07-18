@@ -20,7 +20,7 @@ void errorManager(int type)  {
       }
    }   
    lastErrorMessage = message+desc+" "+lastErrorString;
-   printOut("errorManager",lastErrorMessage);
+   Print("errorManager: ",lastErrorMessage);
    return;
 }
 
@@ -125,9 +125,11 @@ string errorDescription(int error_code)  {
 }
 
 bool errorCheckCritical(int error)  {
+   if (error==0) error = getLastError();
    if (error==0) return(false);
+   if (error>4000) return(true);
    if (isTesting())
       if (intInArray(error,errorCritListTest)) return(true);
    else if (intInArray(error,errorCritListReal)) return(true);   
-   return(true);
+   return(false);
 }

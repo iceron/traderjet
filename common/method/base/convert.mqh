@@ -22,4 +22,9 @@ string timeToString(datetime time,int mode=3)   {
    return(TimeToStr(time,mode));
 }
 
+double normalizeDouble(double value,int digits) {
+   return(NormalizeDouble(value,digits));
+}
+
+
 

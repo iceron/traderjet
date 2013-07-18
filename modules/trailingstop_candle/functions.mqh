@@ -1,13 +1,13 @@
 #include <traderjet\modules\candle\functions.mqh>
 
 void trailingStopLossCandleLoop(string name,int start,int price,int shift,double offset,int magic=EMPTY_VALUE,int type=CMD_ALL,bool floating=false) {   
-   int total = OrdersTotal();
+   int total = ordersTotal();
    for (int i=0;i<total;i++) trailingStopLossCandleOrder(i,SELECT_BY_POS,start,price,shift,offset,type,name,floating);
 }
 
 void trailingStopLossCandleOrder(string name,int ticket,int select,int start,int price,int shift,double offset,int magic=EMPTY_VALUE,int type=CMD_ALL,bool floating=false)   {
    if (magic==EMPTY_VALUE) magic = server.magic;  
-   if (order.select(ticket,select)) trailingStopLossCandle(start,price,shift,offset,type,name,floating);       
+   if (cOrderSelect(ticket,select)) trailingStopLossCandle(start,price,shift,offset,type,name,floating);       
 }
 
 

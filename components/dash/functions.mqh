@@ -3,7 +3,7 @@
 
 void dashCreate()  {
    dashDelete();
-   if (IsTesting() && !IsVisualMode()) return;
+   if (isTesting() && !isVisualMode()) return;
    labelCreateUpdate(dashName,DASH_HEADER,0,dashCorner,dashX,dashY,dashFontSize,dashFont,dashTermColor);
    dashXDef = dashX;
    dashYDef = dashY;
@@ -26,7 +26,7 @@ void dashReset() {
 }
 
 void dashDelete()   {
-   int i,total = ObjectsTotal();
+   int i,total = objectsTotal();
    for (i=total-1;i>=0;i--)   {
       string name = objectName(i);
       if (objectType(name)!=OBJ_LABEL) continue;

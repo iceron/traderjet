@@ -8,23 +8,23 @@ string marketwatchSymbol[];
 string marketwatchDesc[];
 
 void marketwatchGetSymbols() {
-   int handle = FileOpenHistory(symfile,FILE_BIN|FILE_READ);
+   int handle = fileOpenHistory(symfile,FILE_BIN|FILE_READ);
    if (handle==-1)   {
-      Print("FILE: ",symfile," - error opening file ",GetLastError()); 
+      print("FILE: ",symfile," - error opening file ",GetLastError()); 
       return;
    }
-   int symbolcount = FileSize(handle)/symsize;
-   ArrayResize(marketwatchSymbol,symbolcount);
-   ArrayResize(marketwatchDesc,symbolcount);
+   int symbolcount = fileSize(handle)/symsize;
+   arrayResizeString(marketwatchSymbol,symbolcount);
+   arrayResizeString(marketwatchDesc,symbolcount);
    for (int i=0;i<symbolcount;i++)  {     
-      string s = FileReadString(handle,symname);
-      string desc = FileReadString(handle,symdesc);
-      FileSeek(handle,symnext,SEEK_CUR);
+      string s = fileReadString(handle,symname);
+      string desc = fileReadString(handle,symdesc);
+      fileSeek(handle,symnext,SEEK_CUR);
       marketwatchSymbol[i] = s;      
       marketwatchDesc[i] = desc;        
    }   
    //printresult();
-   FileClose(handle);   
+   fileClose(handle);   
 }
 
 /*

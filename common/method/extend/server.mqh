@@ -17,5 +17,5 @@ void serverNoFractional()  {
 }
 
 int serverPrecision(double minLot)  {
-   return(MathMax(-MathLog(minLot),0));
+   return(mathMax(-mathLog(minLot),0));
 }

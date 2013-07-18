@@ -38,6 +38,7 @@ int orderSellLimit(double volume,double price,double stoploss,double takeprofit,
 int cOrderSend(int cmd,double volume,double price,double stoploss,double takeprofit,string comment="",datetime expiration=0)   {
    int ticket,status;   
    double vo,pr,sl,tp;
+   
    for (int i=0;i<=serverRetryMax;i++)	{
       symbolGet();
       pr = price;
@@ -47,25 +48,25 @@ int cOrderSend(int cmd,double volume,double price,double stoploss,double takepro
       orderCalc(cmd,vo,pr,sl,tp);
       status = tradeStatus();
       if (!tradeVolumePass(volume))   {
-         printOut("orderSend","order procesing aborted - invalid lotsize");
+         Print("orderSend: order procesing aborted - invalid lotsize");
          lastError = 131;
          return(-1);
       }
       if (!tradeMarginCallPass(cmd,volume)) {
-         printOut("orderSend","order procesing aborted - trade execution will trigger margin call");
+         Print("orderSend: order procesing aborted - trade execution will trigger margin call");
          lastError = 134;
          return(-1);
       }   
       if (status<1)	{
          if (status==-1) return(0);
-         Sleep(serverSleepError);
+         sleep(serverSleepError);
       }
       else	{
          ticket = sendOrder(cmd,vo,pr,sl,tp,comment,expiration);            
       }   	   
-      if (ticket>0) break;
-   }
-	if (ticket<=0) printOut("orderSend","trade operation aborted [resend request(s) failed]");
+      if (ticket>0) break;      
+   }   
+	if (ticket<=0) Print("orderSend: trade operation aborted [resend request(s) failed]");	
    return(ticket); 
 }
 
@@ -79,18 +80,18 @@ void orderCalc(int& cmd,double& volume,double& price,double& stoploss,double& ta
    price = priceCalc(cmd,price);  
    volume = lotCalc(volume);
    if (stoploss_mode==PRICE)
-      stoploss = normalizeDouble(stoploss);
+      stoploss = cNormalizeDouble(stoploss);
    else if (stoploss_mode==TICKS && stoploss>0)  {
       if (isShort(cmd))
-         stoploss = normalizeDouble(price+stoploss*tickFractPoints);
-      else stoploss = normalizeDouble(price-stoploss*tickFractPoints);      
+         stoploss = cNormalizeDouble(price+stoploss*tickFractPoints);
+      else stoploss = cNormalizeDouble(price-stoploss*tickFractPoints);      
    }   
    if (takeprofit_mode==PRICE)
-      takeprofit = normalizeDouble(takeprofit);
+      takeprofit = cNormalizeDouble(takeprofit);
    else if (takeprofit_mode==TICKS && takeprofit>0)   {
       if (isShort(cmd))
-         takeprofit = normalizeDouble(price-takeprofit*tickFractPoints);
-      else takeprofit = normalizeDouble(price+takeprofit*tickFractPoints);
+         takeprofit = cNormalizeDouble(price-takeprofit*tickFractPoints);
+      else takeprofit = cNormalizeDouble(price+takeprofit*tickFractPoints);
    }
 }
 
@@ -103,11 +104,11 @@ double priceCalc(int& cmd,double& p)	{
 	if (isLong(cmd))	
 	  p += tickAsk;
 	else p += tickBid;  
-	return(normalizeDouble(p));
+	return(cNormalizeDouble(p));
 }
 
 double lotCalc(double& volume)   {
-   return(normalizeDouble(volume,DOUBLE_VOLUME));
+   return(cNormalizeDouble(volume,DOUBLE_VOLUME));
 }
 
 bool isShort(int& cmd) {
@@ -141,28 +142,28 @@ int sendOrder(int& cmd,double& volume,double& price,double& stoploss,double& tak
    datetime exp;   
    if (serverStopLossModify)   {
       if (stoploss>0 && ticks(mathAbs(price-stoploss))<tickStopLevel) {
-         printOut("orderSend","hard sl ignored [invalid sl]");
+         Print("orderSend: hard sl ignored [invalid sl]");
          stoploss = 0;
       }   
    }   
    else  stoploss = 0;
    if (serverTakeProfitModify)   {    
       if (takeprofit>0 && ticks(mathAbs(price-takeprofit))<tickStopLevel) {
-         printOut("orderSend","hard tp ignored [invalid tp]");
+         Print("orderSend: hard tp ignored [invalid tp]");
          takeprofit = 0;
       }   
    }   
-   else takeprofit = 0;      
-   printOut("orderSend",stringConcatenate("order processing (entry) - ",cmdToString(cmd)," volume: ",volumeFormat(volume)," price: ",priceFormat(price)," sl: ",priceFormat(stoploss)," tp: ",priceFormat(takeprofit)," bid/ask: ",priceFormat(tickBid),"/",priceFormat(tickAsk)," magic: ",serverMagic));
+   else takeprofit = 0;    
+   Print(StringConcatenate("orderSend: ","order processing (entry) - ",cmdToString(cmd)," volume: ",volumeFormat(volume)," price: ",priceFormat(price)," sl: ",priceFormat(stoploss)," tp: ",priceFormat(takeprofit)," bid/ask: ",priceFormat(tickBid),"/",priceFormat(tickAsk)," magic: ",serverMagic));
    if (cmd>1 && expiration>0) exp=expiration*1000+timeCurrent();
    if (serverECNEnabled && cmd<=1)   {
       ticket = orderSend(tickSymbol,cmd,volume,price,serverSlippageEntry*tickFractPips,0,0,comment,serverMagic,exp,arrowcolor);
-      Sleep(serverSleepSuccess);
+      sleep(serverSleepSuccess);
       if (ticket>0)  {
          if (stoploss>0 || takeprofit>0)  {
             res = orderModify(ticket,orderOpenPrice(),stoploss,takeprofit,orderExpiration());
             if (!res)   {
-               lastErrorString = "symbol: "+ tickSymbol + " magic: "+ serverMagic + " type: "+cmdToString(cmd)+" lotsize: "+doubleToString(volume,tickVolumePrecision)+" price "+doubleToString(price,tickDigits)+" sl: "+doubleToString(stoploss,tickDigits)+" tp: "+doubleToString(takeprofit,tickDigits)+" bid/ask: "+doubleToString(tickBid,tickDigits)+"/"+DoubleToStr(tickAsk,tickDigits);
+               lastErrorString = StringConcatenate("symbol:",tickSymbol,"magic:",serverMagic,"type:"+cmdToString(orderType)+"lotsize:"+volumeFormat(orderVolume)+"price"+priceFormat(orderOpenPrice)+"sl:"+priceFormat(orderStopLoss)+"tp:"+priceFormat(orderTakeProfit)+"bid/ask:"+priceFormat(tickBid)+"/"+priceFormat(tickAsk));
                errorManager(ERR_MODIFY);
             }
          }   
@@ -172,13 +173,13 @@ int sendOrder(int& cmd,double& volume,double& price,double& stoploss,double& tak
       ticket = orderSend(tickSymbol,cmd,volume,price,serverSlippageEntry*tickFractPips,stoploss,takeprofit,comment,serverMagic,exp,arrowcolor);      
    }         
    if (ticket>0) {
-      printOut("orderSend",stringConcatenate("order processed (entry) - #",ticket," magic: ",serverMagic));
+      Print(StringConcatenate("orderSend: ","order processed (entry) - #",ticket," magic: ",serverMagic));
       sleep(serverSleepSuccess);
       return(ticket); 
    }   
    else  {
       sleep(serverSleepError);
-      lastErrorString = "symbol: "+ tickSymbol + " magic: "+ serverMagic + " type: "+cmdToString(cmd)+" lotsize: "+doubleToString(volume,tickVolumePrecision)+" price "+doubleToString(price,tickDigits)+" sl: "+doubleToString(stoploss,tickDigits)+" tp: "+doubleToString(takeprofit,tickDigits)+" bid/ask: "+doubleToString(tickBid,tickDigits)+"/"+doubleToString(tickAsk,tickDigits);
+      lastErrorString = StringConcatenate("symbol:",tickSymbol,"magic:",serverMagic,"type:"+cmdToString(orderType)+"lotsize:"+volumeFormat(orderVolume)+"price"+priceFormat(orderOpenPrice)+"sl:"+priceFormat(orderStopLoss)+"tp:"+priceFormat(orderTakeProfit)+"bid/ask:"+priceFormat(tickBid)+"/"+priceFormat(tickAsk));
       errorManager(ERR_OPEN);
    } 
    return(-1);   

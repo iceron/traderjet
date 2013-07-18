@@ -1,11 +1,11 @@
 void breakevenLoop(string name,double breakeven,int magic=-1,int type=CMD_MARKET,string name="stealth")  {
    bool mod;
-   int i,total = OrdersTotal();
+   int i,total = ordersTotal();
    for (i=0;i<total;i++) breakevenOrder(i,SELECT_BY_POS,breakeven,magic,type); 
 }
 
 void breakevenOrder(string name,int ticket,int select,double breakeven,int magic,int type=CMD_MARKET,string name="stealth"){
-   if (order.select(ticket,select,MODE_TRADES)) breakeven(breakeven);
+   if (cOrderSelect(ticket,select,MODE_TRADES)) breakeven(breakeven);
 }
 
 void breakeven(string name,double breakeven,double target=0,string name="stealth")  {   
