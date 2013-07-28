@@ -52,8 +52,8 @@ void vstopSet(string name,double vstopsetStoploss,double vstopsetTakeprofit)   {
       clr_sl = vstopShortStopLossColor;
       clr_tp = vstopShortTakeProfitColor;
    }   
-   if (vstopStopLossMode>0) vstopSetCreate(name,vstopStopLossName,vstopsetStoploss,MODE_STOPLOSS,clr_sl);
-   if (vstopTakeProfitMode>0) vstopSetCreate(name,vstopTakeProfitName,vstopsetTakeprofit,MODE_TAKEPROFIT,clr_tp);
+   if (vstopStopLossMode>0 && mathAbs(vstopsetStoploss)>0) vstopSetCreate(name,vstopStopLossName,vstopsetStoploss,MODE_STOPLOSS,clr_sl);
+   if (vstopTakeProfitMode>0 && mathAbs(vstopsetTakeprofit)>0) vstopSetCreate(name,vstopTakeProfitName,vstopsetTakeprofit,MODE_TAKEPROFIT,clr_tp);
 }
 
 void vstopSetCreate(string& name,string type,double& val,int stoptype,color clr)  {
@@ -75,7 +75,7 @@ void vstopSetCreate(string& name,string type,double& val,int stoptype,color clr)
       if (name==vstopStandardName && mode!=STEALTH_PURE) v = stop;
       else  {
          if (!pricesIsEqual(val,0)) v = orderOpenPrice+val*tickFractPoints;
-         else v = stop;
+         //else v = stop;
       }
       if (!pricesIsEqual(v,0)) hlineCreate(name+type+orderTicket,v);
       else hlineCreate(name+type+orderTicket,temp);      
