@@ -408,24 +408,24 @@ string timeframeToString(int tm)
 }
 
 string priceFormat(double v)  {
-   return(doubleToString(v,tickDigits));
+   return(doubleToStr(v,tickDigits));
 }
 
 string volumeFormat(double v) {
-   return(doubleToString(v,tickVolumePrecision));
+   return(doubleToStr(v,tickVolumePrecision));
 }
 
 double cNormalizeDouble(double value,int mode=DOUBLE_PRICE) {
    string dblstr;
    int precision;
    if (mode==DOUBLE_PRICE)   {
-      dblstr = doubleToString(value,tickDigits);
+      dblstr = doubleToStr(value,tickDigits);
       return(stringToDouble(dblstr));
    }
    else if (mode==DOUBLE_VOLUME)   {
       if (value>tickMinLot) precision = serverPrecision(tickLotStep);
       else precision = serverPrecision(tickMinLot);
-      dblstr = doubleToString(value,precision);
+      dblstr = doubleToStr(value,precision);
       return(stringToDouble(dblstr));
    }
    return(0);

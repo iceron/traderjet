@@ -184,7 +184,7 @@ bool vstopCheckClose(string& name,double& val,string type,double& lots)   {
    if (close)   {
       if (cOrderClose(orderTicket,lots))  {
          objectHide(name+type+orderTicket);
-         Print(StringConcatenate("vstopCheckClose","exit signal by: ",name,type,orderTicket));
+         Print(StringConcatenate("vstopCheckClose():","exit signal by: ",name,type,orderTicket));
          if (lots>0 || orderVolume>lots)   {
             int newticket = ticketGet();
             vstopInherit(newticket, orderTicket);
@@ -206,7 +206,7 @@ void vstopCleanLoop() {
       if (orderSelect(ticket,SELECT_BY_TICKET))      {
          if (orderCloseTime>0) 
             if (objectDelete(name))
-               Print(StringConcatenate("vstopCleanLoop: ",name," deleted"));
+               Print(StringConcatenate("vstopCleanLoop(): ",name," deleted"));
       }
    }
 }
@@ -216,15 +216,15 @@ void vstopCleanObject(string name)   {
 }
 
 void vstopClean(string name) {
-   if (objectExistsDeleted(name+vstopStopLossName+orderTicket)) Print("vstopClean: ",StringConcatenate(name,vstopStopLossName,orderTicket," deleted"));
-   if (objectExistsDeleted(name+vstopTakeProfitName+orderTicket)) Print("vstopClean: ",StringConcatenate(name,vstopTakeProfitName,orderTicket," deleted"));
+   if (objectExistsDeleted(name+vstopStopLossName+orderTicket)) Print("vstopClean(): ",StringConcatenate(name,vstopStopLossName,orderTicket," deleted"));
+   if (objectExistsDeleted(name+vstopTakeProfitName+orderTicket)) Print("vstopClean(): ",StringConcatenate(name,vstopTakeProfitName,orderTicket," deleted"));
 }
 
 bool vstopInherit(int newticket, int oldticket)   {
    if (newticket<=0) return;
    int total = objectsTotal();
-   string n = doubleToString(newticket,0);
-   string o = doubleToString(oldticket,0);
+   string n = doubleToStr(newticket,0);
+   string o = doubleToStr(oldticket,0);
    for (int i=0;i<total;i++)   {
       string newname,name = objectName(i);
       if (name=="") continue;    

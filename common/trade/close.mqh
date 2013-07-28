@@ -1,9 +1,8 @@
-color orderCloseArrowColor = CLR_NONE;
-
 bool cOrderClose(int ticket, double lots=0, double price=0) {
    if (orderCloseTime>0) return;
    bool result;
-   int status;   
+   int status; 
+   color clr;  
    for (int i=0;i<serverRetryMax;i++)	{
       status = tradeStatus();
       if (status<1)	{
@@ -12,11 +11,13 @@ bool cOrderClose(int ticket, double lots=0, double price=0) {
          continue;
       }
       if (!orderSelect(ticket,SELECT_BY_TICKET)) return(false);
+      if (orderIsLong()) clr = serverArrowColorLongExit;
+      else if (orderIsShort()) clr = serverArrowColorShortExit;
       if (orderType<=1)  {
          if (price==0) price = orderClosePrice;
          if (lots==0) lots = orderVolume;
          else lots = cNormalizeDouble(mathMin(orderVolume,lots),DOUBLE_VOLUME);
-         result = orderClose(orderTicket,lots,price,serverSlippageExit*tickFractPips,orderCloseArrowColor);
+         result = orderClose(orderTicket,lots,price,serverSlippageExit*tickFractPips,clr);
       }   
       else if (orderType>1) 
          result = orderDelete(ticket);   
@@ -30,8 +31,8 @@ bool cOrderClose(int ticket, double lots=0, double price=0) {
          sleep(serverSleepError);
       }
    }   
-   if (!result && status>=1) Print(StringConcatenate("orderClose: ","trade closing aborted [resend request(s) failed reason ",lastError," ]")); 
-   if (result) Print(StringConcatenate("orderClose: ","order processing (exit) - ",cmdToString(orderType)," volume: ",volumeFormat(lots)," price: ",priceFormat(price)," bid/ask: ",priceFormat(tickBid),"/",priceFormat(tickAsk)," magic: ",serverMagic));
+   if (!result && status>=1) Print(StringConcatenate("orderClose(): ","trade closing aborted [resend request(s) failed reason ",lastError," ]")); 
+   if (result) Print(StringConcatenate("orderClose(): ","order processing (exit) - ",cmdToString(orderType)," volume: ",volumeFormat(lots)," price: ",priceFormat(price)," bid/ask: ",priceFormat(tickBid),"/",priceFormat(tickAsk)," magic: ",serverMagic));
    return(result);
 }
 

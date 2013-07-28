@@ -23,18 +23,18 @@
 signalInit(5,5);
 
 //SERVER INIT
-serverMagic           = Magic;   
-serverSleepSuccess    = TradeSleepSuccess;
-serverSleepError      = TradeSleepError;   
-serverRetryMax        = TradeRetryMax;
-serverSlippageEntry   = SlippageEntry;
-serverSlippageExit    = SlippageExit;   
-serverArrowColorLong  = TradeArrowColorLong;
-serverArrowColorShort = TradeArrowColorShort;    
-serverArrowColorLong  = TradeArrowColorLongMod;
-serverArrowColorShort = TradeArrowColorShortMod;
-serverArrowColorLong  = TradeArrowColorLongExit;
-serverArrowColorShort = TradeArrowColorShortExit;
+serverMagic                = Magic;   
+serverSleepSuccess         = TradeSleepSuccess;
+serverSleepError           = TradeSleepError;   
+serverRetryMax             = TradeRetryMax;
+serverSlippageEntry        = SlippageEntry;
+serverSlippageExit         = SlippageExit;   
+serverArrowColorLong       = TradeArrowColorLong;
+serverArrowColorShort      = TradeArrowColorShort;    
+serverArrowColorLongMod    = TradeArrowColorLongMod;
+serverArrowColorShortMod   = TradeArrowColorShortMod;
+serverArrowColorLongExit   = TradeArrowColorLongExit;
+serverArrowColorShortExit  = TradeArrowColorShortExit;
 symbolSet();
 
 //ORDER INIT

@@ -31,7 +31,7 @@ string charToString(int code)   {
    return(CharToStr(code));
 }
 
-string doubleToString(double v,int p=0)   {
+string doubleToStr(double v,int p=0)   {
    return(DoubleToStr(v,p));
 }
 

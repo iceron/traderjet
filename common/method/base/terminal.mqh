@@ -23,7 +23,7 @@ string terminalCompany()   {
    return(TerminalCompany());
 }
 
-string terminalNamey()   {
+string terminalName()   {
    return(TerminalName());
 }   
 

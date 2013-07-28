@@ -49,13 +49,13 @@ void orderSelectReset() {
 
 bool orderIsShort(int ticket=-1) {
    if (ticket>0)
-      if (!orderSelect(ticket,SELECT_BY_TICKET)) return(false);
+      if (!cOrderSelect(ticket,SELECT_BY_TICKET)) return(false);
    return (orderType==OP_SELL || orderType==OP_SELLSTOP || orderType==OP_SELLLIMIT);
 }
 
 bool orderIsLong(int ticket=-1)  {
    if (ticket>0)
-      if (!orderSelect(ticket,SELECT_BY_TICKET)) return(false);
+      if (!cOrderSelect(ticket,SELECT_BY_TICKET)) return(false);
    return (orderType==OP_BUY || orderType==OP_BUYSTOP || orderType==OP_BUYLIMIT);
 }
 
