@@ -1,3 +1,24 @@
+/* Copyright (C) 2013 Enrico Lambino
+ *
+ *  This file is part of TraderJet Framework
+ *
+ *  TraderJet is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  TraderJet is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with TraderJet; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ *  @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
+ */
+
 int errorCritListReal[] = {3,65,147,149};
 int errorCritListTest[] = {3,65,129.130,131,134,147,149};
 
@@ -112,7 +133,7 @@ string errorDescription(int error_code)  {
       case 4109: error_string="trade is not allowed in the expert properties";            break;
       case 4110: error_string="longs are not allowed in the expert properties";           break;
       case 4111: error_string="shorts are not allowed in the expert properties";          break;
-      case 4200: error_string="object is already exist";                                  break;
+      case 4200: error_string="object already exists";                                    break;
       case 4201: error_string="unknown object property";                                  break;
       case 4202: error_string="object is not exist";                                      break;
       case 4203: error_string="unknown object type";                                      break;

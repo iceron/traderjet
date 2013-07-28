@@ -1,11 +1,31 @@
-void orderSelectSet(int magic,int type=CMD_ALL, string symbol="")
-{
+/* Copyright (C) 2013 Enrico Lambino
+ *
+ *  This file is part of TraderJet Framework
+ *
+ *  TraderJet is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  TraderJet is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with TraderJet; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ *  @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
+ */
+
+void orderSelectSet(int magic,int type=CMD_ALL, string symbol="") {
    orderSelectMagic = magic;
    orderSelectType = type;
    orderSelectSymbol = symbol;  
 }
 
-void orderSelectReset(){
+void orderSelectReset() {
    orderOpenPrice = 0;
    orderClosePrice = 0;
    orderComment = "";
@@ -116,49 +136,63 @@ int ticks(double val){
    return(val/tickSize);
 }
 
-bool orderInGroup(int& type,int& orderType){
+bool orderInGroup(int type,int ordType){
+   bool res;   
    switch(type)   {
       case CMD_BUY:      {
-         if (orderType==OP_BUY) return(true);
+         if (ordType==OP_BUY) res = true;
+         break;
       }
       case CMD_SELL:      {
-         if (orderType==OP_SELL) return(true);
+         if (ordType==OP_SELL) res = true;
+         break;
       }
       case CMD_BUYLIMIT:      {
-         if (orderType==OP_BUYLIMIT) return(true);
+         if (ordType==OP_BUYLIMIT) res = true;
+         break;
       }
       case CMD_SELLLIMIT:      {
-         if (orderType==OP_SELLLIMIT) return(true);
+         if (ordType==OP_SELLLIMIT) res = true;
+         break;
       }
       case CMD_BUYSTOP:      {
-         if (orderType==OP_BUYSTOP) return(true);
+         if (ordType==OP_BUYSTOP) res = true;
+         break;
       }
       case CMD_SELLSTOP:      {
-         if (orderType==OP_SELLSTOP) return(true);
+         if (ordType==OP_SELLSTOP) res = true;
+         break;
       }
       case CMD_LONG:      {
-         if (orderType==OP_BUY || orderType==OP_BUYSTOP || orderType==OP_BUYLIMIT) return(true);
+         if (ordType==OP_BUY || ordType==OP_BUYSTOP || ordType==OP_BUYLIMIT) res = true;
+         break;
       }
       case CMD_SHORT:      {
-         if (orderType==OP_SELL || orderType==OP_SELLSTOP || orderType==OP_SELLLIMIT) return(true);
+         if (ordType==OP_SELL || ordType==OP_SELLSTOP || ordType==OP_SELLLIMIT) res = true;
+         break;
       }
       case CMD_STOP:      {
-         if (orderType==OP_SELLSTOP || orderType==OP_BUYSTOP) return(true);
+         if (ordType==OP_SELLSTOP || ordType==OP_BUYSTOP) res = true;
+         break;
       }
       case CMD_LIMIT:      {
-         if (orderType==OP_SELLLIMIT || orderType==OP_BUYLIMIT) return(true);
+         if (ordType==OP_SELLLIMIT || ordType==OP_BUYLIMIT) res = true;
+         break;
       }
       case CMD_MARKET:      {
-         if (orderType<=1) return(true);
+         if (ordType<=1) res = true;
+         break;
       }
       case CMD_PENDING:      {
-         if (orderType>1) return(true);
+         if (ordType>1) res = true;
+         break;
       }
       case CMD_ALL:      {      
-         return(true);
+         res = true;
+         break;
       }
    }
-   return(false);
+   return(res);
 }
 
 int orderCount(int pool=MODE_TRADES){

@@ -25,13 +25,13 @@ bool cOrderClose(int ticket, double lots=0, double price=0) {
          break;
       }
       else {
-         lastErrorString = StringConcatenate("symbol:",tickSymbol,"magic:",serverMagic,"type:"+cmdToString(orderType)+"lotsize:"+volumeFormat(orderVolume)+"price"+priceFormat(orderOpenPrice)+"sl:"+priceFormat(orderStopLoss)+"tp:"+priceFormat(orderTakeProfit)+"bid/ask:"+priceFormat(tickBid)+"/"+priceFormat(tickAsk));
+         lastErrorString = StringConcatenate("symbol: ",tickSymbol," magic: ",serverMagic," type: "+cmdToString(orderType)+" lotsize: "+volumeFormat(orderVolume)+" price "+priceFormat(orderOpenPrice)+" sl: "+priceFormat(orderStopLoss)+" tp: "+priceFormat(orderTakeProfit)+" bid/ask: "+priceFormat(tickBid)+"/"+priceFormat(tickAsk));
          errorManager(ERR_CLOSE);
          sleep(serverSleepError);
       }
    }   
-   if (!result && status>=1) Print(StringConcatenate("orderClose","trade closing aborted [resend request(s) failed reason ",lastError," ]")); 
-   if (result) Print(StringConcatenate("orderClose","order processing (exit) - ",cmdToString(orderType)," volume: ",volumeFormat(lots)," price: ",priceFormat(price)," bid/ask: ",priceFormat(tickBid),"/",priceFormat(tickAsk)," magic: ",serverMagic));
+   if (!result && status>=1) Print(StringConcatenate("orderClose: ","trade closing aborted [resend request(s) failed reason ",lastError," ]")); 
+   if (result) Print(StringConcatenate("orderClose: ","order processing (exit) - ",cmdToString(orderType)," volume: ",volumeFormat(lots)," price: ",priceFormat(price)," bid/ask: ",priceFormat(tickBid),"/",priceFormat(tickAsk)," magic: ",serverMagic));
    return(result);
 }
 

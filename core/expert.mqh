@@ -1,35 +1,23 @@
-/*
-#include <TraderJet\const\error.mqh>
-#include <TraderJet\const\order.mqh>
-#include <TraderJet\const\math.mqh>
-#include <TraderJet\var\server.mqh>
-#include <TraderJet\var\symbol.mqh>
-#include <TraderJet\var\order.mqh>
-#include <TraderJet\var\error.mqh>
-#include <TraderJet\init\symbol.mqh>
-#include <TraderJet\common\account.mqh>
-#include <TraderJet\common\array.mqh>
-#include <TraderJet\common\candle.mqh>
-#include <TraderJet\common\checkup.mqh>
-#include <TraderJet\common\convert.mqh>
-#include <TraderJet\common\error.mqh>
-#include <TraderJet\common\file.mqh>
-#include <TraderJet\common\string.mqh>
-#include <TraderJet\common\server.mqh>
-#include <TraderJet\common\symbol.mqh>
-#include <TraderJet\common\time.mqh>
-#include <TraderJet\common\object.mqh>
-#include <TraderJet\common\order.mqh>
-#include <TraderJet\common\math.mqh>
-#include <TraderJet\common\loop.mqh>
-#include <TraderJet\common\print.mqh>
-#include <TraderJet\common\trade\open.mqh>
-#include <TraderJet\common\trade\modify.mqh>
-#include <TraderJet\common\trade\close.mqh>
-#include <TraderJet\common\trade\events.mqh>
-*/
-
-
+/* Copyright (C) 2013 Enrico Lambino
+ *
+ *  This file is part of TraderJet Framework
+ *
+ *  TraderJet is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *
+ *  TraderJet is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with TraderJet; if not, write to the Free Software
+ *  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ *  @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
+ */
 
 #include <traderjet\const\error.mqh>
 #include <traderjet\const\order.mqh>
@@ -77,6 +65,8 @@
 #include <traderjet\common\method\extend\timeseries.mqh>
 #include <traderjet\common\method\extend\trade.mqh>
 #include <traderjet\common\method\extend\window.mqh>
+
+#include <traderjet\components\traderjet\functions.mqh>
 
 #include <traderjet\common\trade\open.mqh>
 #include <traderjet\common\trade\modify.mqh>
