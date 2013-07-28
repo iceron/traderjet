@@ -19,12 +19,13 @@
  *  @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
  */
 
-
-string printString(string desc,string message) {
-   return(stringConcatenate(desc,": ",message));  
+void sendAlert(string text="",string subject="") {
+   if (AlertSoundOn)
+      playSound(AlertSound);
+   if (AlertEmailOn)
+      sendMail(subject,text);   
+   if (AlertPopupOn)
+      alert(text);    
+   if (AlertPushOn)
+      sendNotification(text);     
 }
-
-void printOut(string desc,string message) {
-   Print(printString(desc,message));
-}
-

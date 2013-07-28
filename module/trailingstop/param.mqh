@@ -18,13 +18,7 @@
  *
  *  @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
  */
-
-
-string printString(string desc,string message) {
-   return(stringConcatenate(desc,": ",message));  
-}
-
-void printOut(string desc,string message) {
-   Print(printString(desc,message));
-}
-
+ 
+extern double trailingStopLossValue = 10;
+extern double trailingStopLossStart = 10;
+extern double trailingStopLossStep = 10;

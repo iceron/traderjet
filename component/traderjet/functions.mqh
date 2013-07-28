@@ -19,12 +19,7 @@
  *  @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
  */
 
-
-string printString(string desc,string message) {
-   return(stringConcatenate(desc,": ",message));  
+void TraderJet()  {
+   Print(windowExpertName() + ". Powered by TraderJet Framework."); 
+   Print("Copyright (C) 2013 by Enrico Lambino. Released under the GNU Public License v3.0 <http://spdx.org/licenses/GPL-3.0+>.");
 }
-
-void printOut(string desc,string message) {
-   Print(printString(desc,message));
-}
-

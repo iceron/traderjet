@@ -19,12 +19,28 @@
  *  @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
  */
 
+#include <traderjet\component\dash\var.mqh>
+#include <traderjet\component\dash\functions.mqh>
 
-string printString(string desc,string message) {
-   return(stringConcatenate(desc,": ",message));  
+void dashEACreate()  {
+   dashCreate();
 }
 
-void printOut(string desc,string message) {
-   Print(printString(desc,message));
+void dashEAAdd(string n,string h,string v)   {
+    dashAdd(n,h,v);
 }
 
+void dashEAMainAdd() {
+   dashEAAdd("entry_filters","entry filters",signalText(signalOpen)); 
+   dashEAAdd("exit_filters","exit filters",signalText(signalClose,true));   
+   dashEAAdd("signal.overall","overall signal status",signalOut); 
+   dashEAAdd("signal.once","signal for bar",signalDone); 
+}
+
+void dashEAUpdate()  {
+   dashUpdate();
+}
+
+void dashEADelete()  {
+   dashDelete();
+}

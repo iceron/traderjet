@@ -19,12 +19,13 @@
  *  @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
  */
 
-
-string printString(string desc,string message) {
-   return(stringConcatenate(desc,": ",message));  
-}
-
-void printOut(string desc,string message) {
-   Print(printString(desc,message));
-}
-
+int            dashCorner = 1;
+int            dashX = 5,
+               dashY = 25,     
+               dashXSpacing = 0,
+               dashYSpacing = 15;
+extern int     dashFontSize = 8,
+               dashXOffset = 150;
+string         dashFont = "Arial";
+extern color   dashTermColor = Gray,
+               dashValueColor = Gray;

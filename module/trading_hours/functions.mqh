@@ -19,12 +19,17 @@
  *  @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
  */
 
-
-string printString(string desc,string message) {
-   return(stringConcatenate(desc,": ",message));  
+bool tradingIsValid(string s, string e)  {
+   bool res;
+   datetime current  = timeCurrent();  
+   datetime start    = stringToTime(s);
+   datetime stop     = stringToTime(e);
+   if (start<stop)  {
+      if (current>start && current<stop) res = true;
+   }
+   else if (start>stop)  {
+      if (!(current>stop && current<start)) res = true;
+   }
+   else if (start==stop) res = true;
+   return (res);
 }
-
-void printOut(string desc,string message) {
-   Print(printString(desc,message));
-}
-

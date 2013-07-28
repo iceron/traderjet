@@ -19,12 +19,31 @@
  *  @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
  */
 
-
-string printString(string desc,string message) {
-   return(stringConcatenate(desc,": ",message));  
+bool tradingCounter()  {
+   static string msg="";
+   if (TradingCounterMinutes<=0 || !tradingcounterStart) return(true);
+   if (!serverEntryEnabled)   {
+      if (msg=="")   {  
+         msg = "trading countdown is up";
+         print(msg);
+      }
+      if (TradingCounterShow) dashAdd(tradingcounterName,msg);  
+      return(false);
+   }    
+   datetime timeCurrent = timeCurrent();   
+   int duration = (timeCurrent - tradingcounterStart)/60;
+   int val = TradingCounterMinutes-duration;
+   if (duration>TradingCounterMinutes)
+      serverEntryEnabled = false;
+   if (TradingCounterShow) 
+      dashAdd(tradingcounterName,"trading countdown",val+" minutes left");  
+   return(true);
 }
 
-void printOut(string desc,string message) {
-   Print(printString(desc,message));
+void tradingcounterInit()   {
+   tradingcounterStart = 0;
 }
 
+void tradingcounterStart()   {
+   tradingcounterStart = timeCurrent();
+}

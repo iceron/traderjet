@@ -19,12 +19,8 @@
  *  @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
  */
 
-
-string printString(string desc,string message) {
-   return(stringConcatenate(desc,": ",message));  
-}
-
-void printOut(string desc,string message) {
-   Print(printString(desc,message));
-}
-
+extern bool AlertPopupOn = true;
+extern bool AlertEmailOn = true;
+extern bool AlertPushOn = true;
+extern bool AlertSoundOn = true;
+extern string AlertSound = "alert.wav";

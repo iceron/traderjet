@@ -19,12 +19,9 @@
  *  @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
  */
 
-
-string printString(string desc,string message) {
-   return(stringConcatenate(desc,": ",message));  
+bool virtualentry(int cmd,double volume,double price,double stoploss,double takeprofit,string comment="")
+{
+   
 }
 
-void printOut(string desc,string message) {
-   Print(printString(desc,message));
-}
 

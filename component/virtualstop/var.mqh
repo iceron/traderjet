@@ -19,12 +19,22 @@
  *  @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
  */
 
+#define STEALTH_DISABLED      0
+#define STEALTH_AUTOMATIC     1
+#define STEALTH_PURE          2
 
-string printString(string desc,string message) {
-   return(stringConcatenate(desc,": ",message));  
-}
+#define MODE_ENTRY            0
+#define MODE_STOPLOSS         1
+#define MODE_TAKEPROFIT       2
 
-void printOut(string desc,string message) {
-   Print(printString(desc,message));
-}
+int vstopStopLossMode = STEALTH_AUTOMATIC;
+int vstopTakeProfitMode = STEALTH_AUTOMATIC;
+color vstopLongStopLossColor = Red;
+color vstopLongTakeProfitColor = Green;
+color vstopShortStopLossColor = Red;
+color vstopShortTakeProfitColor = Green;
 
+string vstopSep = ".";
+string vstopStopLossName = ".sl.";
+string vstopTakeProfitName = ".tp.";
+string vstopStandardName = "stealth";

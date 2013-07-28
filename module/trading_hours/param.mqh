@@ -19,12 +19,5 @@
  *  @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
  */
 
-
-string printString(string desc,string message) {
-   return(stringConcatenate(desc,": ",message));  
-}
-
-void printOut(string desc,string message) {
-   Print(printString(desc,message));
-}
-
+extern string TradingHourStart = "00:00";
+extern string TradingHourStop  = "23:00"; 
