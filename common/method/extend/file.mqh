@@ -27,3 +27,22 @@ bool fileExists(string filename) {
    return(res);
 }
 
+int fileOpenNew(string& filename,int mode,int delim=';')  {
+   int i;
+   while (fileExists(filename))   {
+      i++;
+      filename = StringConcatenate(filename,i);
+   }
+   return(fileOpen(filename,mode,delim));
+}
+
+bool filePutContents(string filename,int mode,int delimiter=';',string str="")   {
+   int handle = fileOpen(filename,mode,delimiter);
+   int ret = fileWrite(handle,str);
+   fileClose(handle);
+   if (ret>=0) return(true);
+   return(false);
+}
+
+
+

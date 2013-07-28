@@ -18,3 +18,12 @@
  *
  *  @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
  */
+ 
+bool windowScreenShotNew(string& filename,int x,int y,int start=-1,int scale=-1,int mode=-1) {
+   int i;
+   while (fileExists(filename))   {
+      i++;
+      filename = StringConcatenate(filename,i);
+   }
+   return(windowScreenShot(filename,x,y,start,scale,mode));
+}

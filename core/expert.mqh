@@ -66,15 +66,15 @@
 #include <traderjet\common\method\extend\timeseries.mqh>
 
 //optional extended functions
-//#include <traderjet\common\method\extend\account.mqh>
-//#include <traderjet\common\method\extend\checkup.mqh>
-//#include <traderjet\common\method\extend\file.mqh>
-//#include <traderjet\common\method\extend\global.mqh>
-//#include <traderjet\common\method\extend\print.mqh>
-//#include <traderjet\common\method\extend\terminal.mqh>
-//#include <traderjet\common\method\extend\time.mqh>
-//#include <traderjet\common\method\extend\trade.mqh>
-//#include <traderjet\common\method\extend\window.mqh>
+#include <traderjet\common\method\extend\account.mqh>
+#include <traderjet\common\method\extend\checkup.mqh>
+#include <traderjet\common\method\extend\file.mqh>
+#include <traderjet\common\method\extend\global.mqh>
+#include <traderjet\common\method\extend\print.mqh>
+#include <traderjet\common\method\extend\terminal.mqh>
+#include <traderjet\common\method\extend\time.mqh>
+#include <traderjet\common\method\extend\trade.mqh>
+#include <traderjet\common\method\extend\window.mqh>
 
 //components
 #include <traderjet\component\traderjet\functions.mqh>

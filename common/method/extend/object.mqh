@@ -19,7 +19,7 @@
  *  @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
  */
 
-bool objectsDelete(string pref)  {
+void objectsDelete(string pref)  {
    int total = objectsTotal();
    for (int i=total-1;i>=0;i--)  {
       string name = objectName(i);
