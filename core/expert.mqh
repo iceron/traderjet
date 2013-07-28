@@ -77,7 +77,7 @@
 #include <traderjet\common\method\extend\window.mqh>
 
 //components
-#include <traderjet\component\traderjet\functions.mqh>
+#include <traderjet\component\traderjet\methods.mqh>
 
 //core functions
 #include <traderjet\common\trade\open.mqh>
