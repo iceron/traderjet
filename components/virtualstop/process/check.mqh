@@ -1,1 +1,0 @@
-vstop.check("stealth");

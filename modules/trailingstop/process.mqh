@@ -1,1 +1,0 @@
-trailingStopLoss(trailingStopLossStart,trailingStopStep,trailingStopLossValue);

@@ -1,1 +1,0 @@
-volume = mm(volume,mm.mode,stoploss,mm.term1,mm.term2,mm.capital.mode);

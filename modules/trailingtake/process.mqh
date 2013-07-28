@@ -1,1 +1,0 @@
-trailingTakeProfit(TrailingTakeProfitStart,TrailingTakeProfitStep,TrailingTakeProfitValue);

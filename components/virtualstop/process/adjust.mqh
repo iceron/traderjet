@@ -1,1 +1,0 @@
-vstop.adjust("stealth");
