@@ -1,5 +1,4 @@
-bool cOrderClose(int ticket, double lots=0, double price=0) {
-   if (orderCloseTime>0) return;
+bool cOrderClose(int ticket, double lots=0, double price=0) {   
    bool result;
    int status; 
    color clr;  
@@ -10,7 +9,8 @@ bool cOrderClose(int ticket, double lots=0, double price=0) {
          sleep(serverSleepError);
          continue;
       }
-      if (!orderSelect(ticket,SELECT_BY_TICKET)) return(false);
+      if (!cOrderSelect(ticket,SELECT_BY_TICKET)) return(false);
+      if (orderCloseTime>0) return(false);
       if (orderIsLong()) clr = serverArrowColorLongExit;
       else if (orderIsShort()) clr = serverArrowColorShortExit;
       if (orderType<=1)  {
@@ -41,6 +41,6 @@ int orderCloseAll(int type=CMD_ALL)   {
    for (i=total-1; i>=0; i--)   {
       if (!cOrderSelect(i,SELECT_BY_POS)) continue;
       if (!orderInGroup(type,orderType)) continue;
-      cOrderClose(orderTicket,orderVolume);
+      cOrderClose(orderTicket);
    }
 }

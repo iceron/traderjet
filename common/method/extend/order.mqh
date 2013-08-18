@@ -208,11 +208,12 @@ int orderCount(int pool=MODE_TRADES){
 
 double orderProfitTicks(int ticket=-1){
    double val;
+   double size = MarketInfo(orderSymbol(),MODE_TICKSIZE);
    if (ticket>0 && ticket!=-1)
       orderSelect(ticket,SELECT_BY_TICKET);
    if (orderType==OP_BUY)
-      val = (orderClosePrice-orderOpenPrice)/tickSize;  
+      val = (orderClosePrice-orderOpenPrice)/size;  
    else if (orderType==OP_SELL)
-      val = (orderOpenPrice-orderClosePrice)/tickSize; 
+      val = (orderOpenPrice-orderClosePrice)/size; 
    return(val);   
 }
