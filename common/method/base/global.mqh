@@ -35,6 +35,10 @@ string globalVariableName(int index)  {
    return(GlobalVariableName(index));
 }
 
+datetime globalVariableSet(string name,double val) {
+   return(GlobalVariableSet(name,val));
+}
+
 datetime globalVariableSetOnCondition(string name,double val,double check) {
    return(GlobalVariableSetOnCondition(name,val,check));
 }
