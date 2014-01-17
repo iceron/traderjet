@@ -187,7 +187,7 @@ int sendOrder(int& cmd,double& volume,double& price,double& stoploss,double& tak
 
 bool tradeMarginCallPass(int cmd,double vol,string s="") {
    if (cmd>1) return(true);
-   if (accountFreeMarginCheck(cmd,vol,s)<=0) return(false);
+   if (accountFreeMarginCheck(s,cmd,vol)<=0) return(false);
    return(true); 
 }
 

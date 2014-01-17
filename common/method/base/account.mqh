@@ -43,7 +43,7 @@ double accountFreeMargin() {
    return(AccountFreeMargin());
 }
 
-double accountFreeMarginCheck(int cmd,double volume,string symbol="") {
+double accountFreeMarginCheck(string symbol,int cmd,double volume) {
    if (symbol=="") symbol = tickSymbol;
    return(AccountFreeMarginCheck(symbol,cmd,volume));
 }

@@ -23,7 +23,7 @@ void magicSet(int digits = 3)  {
    int val;
    if (serverMagic>=0) return;
    while(true)   {
-      int windowhandle = windowHandle(tickSymbol,timeframe);
+      int windowhandle = windowHandle(tickSymbol,0);
       if (windowhandle==0) {
          sleep(serverSleepError);
          continue;
@@ -46,11 +46,11 @@ bool magicCollisionCheck(int& value)  {
       name = globalVariableName(i);
       existing = globalVariableGet(name);  
       if (value==existing || value==0) {
-         printOut("automagic",stringConcatenate("calculated magic number already in use, getting new value.."," calculated: ",value," existing: ",existing));
+         Print("automagic: ",stringConcatenate("calculated magic number already in use, getting new value.."," calculated: ",value," existing: ",existing));
          return(true);
       }   
    }   
-   printOut("automagic",stringConcatenate("no magic number collission"," magic: ",value));
+   Print("automagic: ",stringConcatenate("no magic number collission"," magic: ",value));
    return(false);
 }
 
