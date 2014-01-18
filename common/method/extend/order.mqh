@@ -195,13 +195,20 @@ bool orderInGroup(int type,int ordType){
    return(res);
 }
 
-int orderCount(int pool=MODE_TRADES){
+int orderCount(int pool=MODE_TRADES, int mode=CMD_ALL){
    int count,total;
    if (pool==MODE_TRADES) total = ordersTotal();
    else total = ordersHistoryTotal();
    for (int i=0;i<total;i++)   {
       if (!orderSelect(i,SELECT_BY_POS,pool)) continue;
-      else count++;
+      else 
+      {
+         if (mode==CMD_ALL) count++;
+         else
+         {
+            if (orderInGroup(mode,orderType)) count++
+         }
+      }
    }
    return(count);
 }
