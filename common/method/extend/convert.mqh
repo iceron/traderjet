@@ -423,7 +423,7 @@ double cNormalizeDouble(double value,int mode=DOUBLE_PRICE) {
       return(stringToDouble(dblstr));
    }
    else if (mode==DOUBLE_VOLUME)   {
-      if (value>tickMinLot) precision = serverPrecision(tickLotStep);
+      if (ticks(value)>ticks(tickMinLot)) precision = serverPrecision(tickLotStep); 
       else precision = serverPrecision(tickMinLot);
       dblstr = doubleToStr(value,precision);
       return(stringToDouble(dblstr));

@@ -47,12 +47,13 @@ int cOrderSend(int cmd,double volume,double price,double stoploss,double takepro
       tp = takeprofit;
       orderCalc(cmd,vo,pr,sl,tp);
       status = tradeStatus();
-      if (!tradeVolumePass(volume))   {
+      if (!tradeVolumePass(vo))   {
+         Print("log ",mathMax(-mathLog(tickMinLot)/mathLog(10),0)," vo: ",vo," volume: ",volume," tick: ",tickVolumePrecision);
          Print("orderSend(): order procesing aborted - invalid lotsize");
          lastError = 131;
          return(-1);
       }
-      if (!tradeMarginCallPass(cmd,volume)) {
+      if (!tradeMarginCallPass(cmd,vo)) {         
          Print("orderSend(): order procesing aborted - trade execution will trigger margin call");
          lastError = 134;
          return(-1);
@@ -95,8 +96,8 @@ void orderCalc(int& cmd,double& volume,double& price,double& stoploss,double& ta
    }
 }
 
-double priceCalc(int& cmd,double& p)	{
-   if (price_mode==PRICE) return(p);	
+double priceCalc(int& cmd,double p)	{
+   if (price_mode==PRICE) return(cNormalizeDouble(p));	
    if (cmd<=1) p = 0;	
 	else if (cmd==OP_BUYLIMIT || cmd==OP_SELLSTOP)	
 	  p *= -tickSize;
@@ -107,7 +108,7 @@ double priceCalc(int& cmd,double& p)	{
 	return(cNormalizeDouble(p));
 }
 
-double lotCalc(double& volume)   {
+double lotCalc(double volume)   {
    return(cNormalizeDouble(volume,DOUBLE_VOLUME));
 }
 

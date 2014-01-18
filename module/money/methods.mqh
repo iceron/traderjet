@@ -60,7 +60,7 @@ double moneyManage(double volume,int mode,double sl,double term1=0,double term2=
 
 double moneyRiskPercent(double percent,double sl,double capital)   {
    double risk_capital = capital*percent;
-   return(cNormalizeDouble((risk_capital/(sl*tickFractPips))/tickValue,DOUBLE_VOLUME));
+   return(cNormalizeDouble((risk_capital/sl)/tickValue,DOUBLE_VOLUME));
 }
 
 double moneyFixedRatio(double risk, double growth, double capital) {
@@ -68,10 +68,10 @@ double moneyFixedRatio(double risk, double growth, double capital) {
 }
 
 double moneyFixedMoney(double risk_capital, double sl) {
-   return(cNormalizeDouble((risk_capital/(sl*tickFractPips))/tickValue,DOUBLE_VOLUME));
+   return(cNormalizeDouble((risk_capital/sl)/tickValue,DOUBLE_VOLUME));
 }
 
 double moneyFixedPip(double risk_capital) {
-   return(cNormalizeDouble((risk_capital/tickFractPips)/tickValue,DOUBLE_VOLUME));
+   return(cNormalizeDouble(risk_capital/tickValue,DOUBLE_VOLUME));
 }
 
