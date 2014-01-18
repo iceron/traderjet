@@ -49,7 +49,7 @@ int cOrderSend(int cmd,double volume,double price,double stoploss,double takepro
       status = tradeStatus();
       if (!tradeVolumePass(vo))   {
          Print("log ",mathMax(-mathLog(tickMinLot)/mathLog(10),0)," vo: ",vo," volume: ",volume," tick: ",tickVolumePrecision);
-         Print("orderSend(): order procesing aborted - invalid lotsize");
+         Print("orderSend(): order procesing aborted - invalid lotsize ","lotsize: ",vo," minlot: ",tickMinLot," maxlot: ",tickMaxLot);
          lastError = 131;
          return(-1);
       }
