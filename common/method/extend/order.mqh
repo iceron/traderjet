@@ -206,7 +206,7 @@ int orderCount(int pool=MODE_TRADES, int mode=CMD_ALL){
          if (mode==CMD_ALL) count++;
          else
          {
-            if (orderInGroup(mode,orderType)) count++
+            if (orderInGroup(mode,orderType)) count++;
          }
       }
    }
