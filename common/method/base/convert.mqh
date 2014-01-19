@@ -35,7 +35,7 @@ string doubleToStr(double v,int p=0)   {
    return(DoubleToStr(v,p));
 }
 
-datetime stringToTime(string str) {
+datetime strToTime(string str) {
    return(StrToTime(str));
 }
 

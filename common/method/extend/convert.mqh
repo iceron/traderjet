@@ -373,7 +373,7 @@ bool stringToBool(string str)  {
 
 // str <-> time
 void timeExtract(string tm,int& hour,int& min) {
-   datetime dt = stringToTime(tm);
+   datetime dt = strToTime(tm);
    hour = timeHour(dt);
    min = timeMinute(dt);
 }
