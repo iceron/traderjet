@@ -19,11 +19,17 @@
  *  @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
  */
 
-bool tradingIsValid(string s, string e)  {
+bool tradingIsValid(string s,string e,bool enable=true,int gmt=0)  {
+   if (!enable) return(false);
+   if (gmt!=0)
+   {
+      s += gmt;
+      e += gmt;
+   }
    bool res;
    datetime current  = timeCurrent();  
-   datetime start    = stringToTime(s);
-   datetime stop     = stringToTime(e);
+   datetime start    = strToTime(s);
+   datetime stop     = strToTime(e);
    if (start<stop)  {
       if (current>start && current<stop) res = true;
    }
