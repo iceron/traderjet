@@ -31,7 +31,7 @@ void vstopInit(int slmode,int tpmode)  {
 }
 
 void vstopSetLoop(string name,double stoploss,double takeprofit,int magic=EMPTY_VALUE) {   
-   int ticket,total = ordersTotal();
+   int total = ordersTotal();
    for (int i=0;i<total;i++) vstopSetOrder(name,stoploss,takeprofit,i,magic,SELECT_BY_POS);
 }
 
@@ -145,7 +145,7 @@ void vstopAdjustSendToBroker(bool& sendtobroker,double& stoploss,double& takepro
 }
 
 void vstopCheckLoop(string name,int magic=EMPTY_VALUE){   
-   int ticket,total = ordersTotal();
+   int total = ordersTotal();
    for (int i=0;i<total;i++) vstopCheckOrder(name,i,magic,SELECT_BY_POS);
 }
 
@@ -170,7 +170,7 @@ void vstopCheck(string name,double lots=0) {
 bool vstopCheckClose(string& name,double& val,string type,double& lots)   {
    double stop;
    bool close;
-   if (objectHidden(name+type+orderTicket)) return;
+   if (objectHidden(name+type+orderTicket)) return(false);
    if (type==vstopStopLossName) stop = orderStopLoss;
    else if (type==vstopTakeProfitName) stop = orderTakeProfit;
    if ((orderType==OP_SELL && type==vstopTakeProfitName) || (orderType==OP_BUY && type==vstopStopLossName))   {
@@ -221,7 +221,7 @@ void vstopClean(string name) {
 }
 
 bool vstopInherit(int newticket, int oldticket)   {
-   if (newticket<=0) return;
+   if (newticket<=0) return(false);
    int total = objectsTotal();
    string n = doubleToStr(newticket,0);
    string o = doubleToStr(oldticket,0);

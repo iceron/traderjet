@@ -28,23 +28,23 @@ void objectsDelete(string pref)  {
    }
 }
 
-bool objectExistsDeleted(string object.name)  {
-   if (objectExists(object.name))
-      return(objectDelete(object.name));
+bool objectExistsDeleted(string objectName)  {
+   if (objectExists(objectName))
+      return(objectDelete(objectName));
    return(false);   
 }
 
-bool objectExists(string object.name) {
-   if (objectFind(object.name)>=0) return(true);
+bool objectExists(string objectName) {
+   if (objectFind(objectName)>=0) return(true);
    return(false);
 }
 
-bool objectHide(string object.name)   {
-   objectSet(object.name,OBJPROP_TIMEFRAMES,-1);
+bool objectHide(string objectName)   {
+   return(objectSet(objectName,OBJPROP_TIMEFRAMES,-1));
 }
 
-bool objectHidden(string object.name) {
-   int val = objectGet(object.name,OBJPROP_TIMEFRAMES);
+bool objectHidden(string objectName) {
+   int val = objectGet(objectName,OBJPROP_TIMEFRAMES);
    if (val==-1) return(true);
    return(false);
 }
@@ -481,590 +481,590 @@ bool objectUseProp(int type,int prop) {
 
 //hline object functions
 
-bool hlineCreate(string object.name,double object.price1,color object.color=Red,int object.window=0) {
-   if (objectCreate(object.name,OBJ_HLINE,object.window,0,object.price1))   {
-      if (object.color!=Red) hlineSet(object.name,OBJPROP_COLOR,object.color);
+bool hlineCreate(string objectName,double objectPrice1,color objectColor=Red,int objectWindow=0) {
+   if (objectCreate(objectName,OBJ_HLINE,objectWindow,0,objectPrice1))   {
+      if (objectColor!=Red) hlineSet(objectName,OBJPROP_COLOR,objectColor);
       return(true);
    }
    return(false);
 }
 
-bool hlineSet(string object.name,int object.index,double object.value) {
-   return(objectSet(object.name,object.index,object.value));
+bool hlineSet(string objectName,int objectIndex,double objectValue) {
+   return(objectSet(objectName,objectIndex,objectValue));
 }
 
-bool hlineSetText(string object.name,string objectText,int object.fontsize,string object.font="Arial",color object.color=CLR_NONE) {
-   return(objectSetText(object.name,objectText,object.fontsize,object.font,object.color));
+bool hlineSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
+   return(objectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
 }
 
-double hlineGet(string object.name,int object.index) {
-   return(objectGet(object.name,object.index));
+double hlineGet(string objectName,int objectIndex) {
+   return(objectGet(objectName,objectIndex));
 }
 
 //vline object functions
 
-bool vlineCreate(string object.name,datetime object.time1,color object.color=Red,int object.window=0) {
-   if (objectCreate(object.name,OBJ_VLINE,object.window,object.time1))   {
-      if (object.color!=Red) vlineSet(object.name,OBJPROP_COLOR,object.color);
+bool vlineCreate(string objectName,datetime objectTime1,color objectColor=Red,int objectWindow=0) {
+   if (objectCreate(objectName,OBJ_VLINE,objectWindow,objectTime1))   {
+      if (objectColor!=Red) vlineSet(objectName,OBJPROP_COLOR,objectColor);
       return(true);
    }
    return(false);
 }
 
-bool vlineSet(string object.name,int object.index,double object.value) {
-   return(objectSet(object.name,object.index,object.value));
+bool vlineSet(string objectName,int objectIndex,double objectValue) {
+   return(objectSet(objectName,objectIndex,objectValue));
 }
 
-bool vlineSetText(string object.name,string objectText,int object.fontsize,string object.font="Arial",color object.color=CLR_NONE) {
-   return(objectSetText(object.name,objectText,object.fontsize,object.font,object.color));
+bool vlineSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
+   return(objectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
 }
 
-double vlineGet(string object.name,int object.index) {
-   return(objectGet(object.name,object.index));
+double vlineGet(string objectName,int objectIndex) {
+   return(objectGet(objectName,objectIndex));
 }
 
 //trendline object functions
 
-bool trendCreate(string object.name,datetime object.time1,double object.price1,datetime object.time2,double object.price2,color object.color=Red,int object.window=0) {
-   if (objectCreate(object.name,OBJ_TREND,object.window,object.time1,object.price1,object.time2,object.price2))   {
-      if (object.color!=Red) trendSet(object.name,OBJPROP_COLOR,object.color);
+bool trendCreate(string objectName,datetime objectTime1,double objectPrice1,datetime objectTime2,double objectPrice2,color objectColor=Red,int objectWindow=0) {
+   if (objectCreate(objectName,OBJ_TREND,objectWindow,objectTime1,objectPrice1,objectTime2,objectPrice2))   {
+      if (objectColor!=Red) trendSet(objectName,OBJPROP_COLOR,objectColor);
       return(true);
    }
    return(false);
 }
 
-bool trendSet(string object.name,int object.index,double object.value) {
-   return(objectSet(object.name,object.index,object.value));
+bool trendSet(string objectName,int objectIndex,double objectValue) {
+   return(objectSet(objectName,objectIndex,objectValue));
 }
 
-bool trendSetText(string object.name,string objectText,int object.fontsize,string object.font="Arial",color object.color=CLR_NONE) {
-   return(objectSetText(object.name,objectText,object.fontsize,object.font,object.color));
+bool trendSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
+   return(objectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
 }
 
-double trendGet(string object.name,int object.index) {
-   return(objectGet(object.name,object.index));
+double trendGet(string objectName,int objectIndex) {
+   return(objectGet(objectName,objectIndex));
 }
 
 //angled trendline object functions
 
-bool atrendCreate(string object.name,double object.angle,datetime object.time1,double object.price1,color object.color=Red,int object.window=0) {
-   if (objectCreate(object.name,OBJ_TRENDBYANGLE,object.window,object.time1,object.price1))   {
-      if (object.color!=Red) atrendSet(object.name,OBJPROP_COLOR,object.color);
-      objectSet(object.name,OBJPROP_ANGLE,object.angle);
+bool atrendCreate(string objectName,double objectAngle,datetime objectTime1,double objectPrice1,color objectColor=Red,int objectWindow=0) {
+   if (objectCreate(objectName,OBJ_TRENDBYANGLE,objectWindow,objectTime1,objectPrice1))   {
+      if (objectColor!=Red) atrendSet(objectName,OBJPROP_COLOR,objectColor);
+      objectSet(objectName,OBJPROP_ANGLE,objectAngle);
       return(true);
    }
    return(false);
 }
 
-bool atrendSet(string object.name,int object.index,double object.value) {
-   return(objectSet(object.name,object.index,object.value));
+bool atrendSet(string objectName,int objectIndex,double objectValue) {
+   return(objectSet(objectName,objectIndex,objectValue));
 }
 
-bool atrendSetText(string object.name,string objectText,int object.fontsize,string object.font="Arial",color object.color=CLR_NONE) {
-   return(objectSetText(object.name,objectText,object.fontsize,object.font,object.color));
+bool atrendSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
+   return(objectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
 }
 
-double atrendGet(string object.name,int object.index) {
-   return(objectGet(object.name,object.index));
+double atrendGet(string objectName,int objectIndex) {
+   return(objectGet(objectName,objectIndex));
 }
 
 //linear regression object functions
 
-bool lregressionCreate(string object.name,datetime object.time1,datetime object.time2,color object.color=Blue,int object.window=0) {
-   if (objectCreate(object.name,OBJ_REGRESSION,object.window,object.time1,0,object.time2,0))   {
-      if (object.color!=Blue) lregressionSet(object.name,OBJPROP_COLOR,object.color);
+bool lregressionCreate(string objectName,datetime objectTime1,datetime objectTime2,color objectColor=Blue,int objectWindow=0) {
+   if (objectCreate(objectName,OBJ_REGRESSION,objectWindow,objectTime1,0,objectTime2,0))   {
+      if (objectColor!=Blue) lregressionSet(objectName,OBJPROP_COLOR,objectColor);
       return(true);
    }
    return(false);
 }
 
-bool lregressionSet(string object.name,int object.index,double object.value) {
-   return(objectSet(object.name,object.index,object.value));
+bool lregressionSet(string objectName,int objectIndex,double objectValue) {
+   return(objectSet(objectName,objectIndex,objectValue));
 }
 
-bool lregressionSetText(string object.name,string objectText,int object.fontsize,string object.font="Arial",color object.color=CLR_NONE) {
-   return(objectSetText(object.name,objectText,object.fontsize,object.font,object.color));
+bool lregressionSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
+   return(objectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
 }
 
-double lregressionGet(string object.name,int object.index) {
-   return(objectGet(object.name,object.index));
+double lregressionGet(string objectName,int objectIndex) {
+   return(objectGet(objectName,objectIndex));
 }
 
 //equidistant channel object functions
 
-bool channelCreate(string object.name,datetime object.time1,double object.price1,datetime object.time2,double object.price2,datetime object.time3,double object.price3,color object.color=Blue,int object.window=0) {
-   if (objectCreate(object.name,OBJ_CHANNEL,object.window,object.time1,object.price1,object.time2,object.price2,object.time3,object.price3))   {
-      if (object.color!=Blue) channelSet(object.name,OBJPROP_COLOR,object.color);
+bool channelCreate(string objectName,datetime objectTime1,double objectPrice1,datetime objectTime2,double objectPrice2,datetime objectTime3,double objectPrice3,color objectColor=Blue,int objectWindow=0) {
+   if (objectCreate(objectName,OBJ_CHANNEL,objectWindow,objectTime1,objectPrice1,objectTime2,objectPrice2,objectTime3,objectPrice3))   {
+      if (objectColor!=Blue) channelSet(objectName,OBJPROP_COLOR,objectColor);
       return(true);
    }
    return(false);
 }
 
-bool channelSet(string object.name,int object.index,double object.value)   {
+bool channelSet(string objectName,int objectIndex,double objectValue)   {
    bool res;
-   if (objectFind(object.name)!=-1) {
-      res = objectSet(object.name,object.index,object.value);
+   if (objectFind(objectName)!=-1) {
+      res = objectSet(objectName,objectIndex,objectValue);
    }
    return(res);   
 }
 
-bool channelSetText(string object.name,string objectText,int object.fontsize,string object.font="Arial",color object.color=CLR_NONE) {
-   return(objectSetText(object.name,objectText,object.fontsize,object.font,object.color));
+bool channelSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
+   return(objectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
 }
 
-double channelGet(string object.name,int object.index)  {
-   if (objectFind(object.name)!=-1)   {
-      return(objectGet(object.name,object.index));      
+double channelGet(string objectName,int objectIndex)  {
+   if (objectFind(objectName)!=-1)   {
+      return(objectGet(objectName,objectIndex));      
    } 
    return(-1);
 }
 
 //standard deviation channel object functions
 
-bool schannelCreate(string object.name,datetime object.time1,datetime object.time2,color object.color=Blue,int object.window=0) {
-   if (objectCreate(object.name,OBJ_STDDEVCHANNEL,object.window,object.time1,0,object.time2,0))   {
-      if (object.color!=Blue) schannelSet(object.name,OBJPROP_COLOR,object.color);
+bool schannelCreate(string objectName,datetime objectTime1,datetime objectTime2,color objectColor=Blue,int objectWindow=0) {
+   if (objectCreate(objectName,OBJ_STDDEVCHANNEL,objectWindow,objectTime1,0,objectTime2,0))   {
+      if (objectColor!=Blue) schannelSet(objectName,OBJPROP_COLOR,objectColor);
       return(true);
    }
    return(false);
 }
 
-bool schannelSet(string object.name,int object.index,double object.value) {
-   return(objectSet(object.name,object.index,object.value));
+bool schannelSet(string objectName,int objectIndex,double objectValue) {
+   return(objectSet(objectName,objectIndex,objectValue));
 }
 
-bool schannelSetText(string object.name,string objectText,int object.fontsize,string object.font="Arial",color object.color=CLR_NONE) {
-   return(objectSetText(object.name,objectText,object.fontsize,object.font,object.color));
+bool schannelSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
+   return(objectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
 }
 
-double schannelGet(string object.name,int object.index) {
-   return(objectGet(object.name,object.index));
+double schannelGet(string objectName,int objectIndex) {
+   return(objectGet(objectName,objectIndex));
 }
 
 //gann line object functions
 
-bool glineCreate(string object.name,datetime object.time1,double object.price1,datetime object.time2,double object.scale=1.0,color object.color=Blue,int object.window=0) {
-   if (objectCreate(object.name,OBJ_GANNLINE,object.window,object.time1,object.price1,object.time2))   {
-      if (object.color!=Blue) glineSet(object.name,OBJPROP_COLOR,object.color);
-      if (object.scale!=1.0) glineSet(object.name,OBJPROP_SCALE,object.scale);
+bool glineCreate(string objectName,datetime objectTime1,double objectPrice1,datetime objectTime2,double objectScale=1.0,color objectColor=Blue,int objectWindow=0) {
+   if (objectCreate(objectName,OBJ_GANNLINE,objectWindow,objectTime1,objectPrice1,objectTime2))   {
+      if (objectColor!=Blue) glineSet(objectName,OBJPROP_COLOR,objectColor);
+      if (objectScale!=1.0) glineSet(objectName,OBJPROP_SCALE,objectScale);
       return(true);
    }
    return(false);
 }
 
-bool glineSet(string object.name,int object.index,double object.value) {
-   return(objectSet(object.name,object.index,object.value));
+bool glineSet(string objectName,int objectIndex,double objectValue) {
+   return(objectSet(objectName,objectIndex,objectValue));
 }
 
-bool glineSetText(string object.name,string objectText,int object.fontsize,string object.font="Arial",color object.color=CLR_NONE) {
-   return(objectSetText(object.name,objectText,object.fontsize,object.font,object.color));
+bool glineSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
+   return(objectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
 }
 
-double glineGet(string object.name,int object.index) {
-   return(objectGet(object.name,object.index));
+double glineGet(string objectName,int objectIndex) {
+   return(objectGet(objectName,objectIndex));
 }
 
 //gann fan object functions
 
-bool gfanCreate(string object.name,datetime object.time1,double object.price1,datetime object.time2,double object.scale=1.0,color object.color=Blue,int object.window=0) {
-   if (objectCreate(object.name,OBJ_GANNFAN,object.window,object.time1,object.price1,object.time2))   {
-      if (object.color!=Blue) gfanSet(object.name,OBJPROP_COLOR,object.color);
-      if (object.scale!=1.0) gfanSet(object.name,OBJPROP_SCALE,object.scale);
+bool gfanCreate(string objectName,datetime objectTime1,double objectPrice1,datetime objectTime2,double objectScale=1.0,color objectColor=Blue,int objectWindow=0) {
+   if (objectCreate(objectName,OBJ_GANNFAN,objectWindow,objectTime1,objectPrice1,objectTime2))   {
+      if (objectColor!=Blue) gfanSet(objectName,OBJPROP_COLOR,objectColor);
+      if (objectScale!=1.0) gfanSet(objectName,OBJPROP_SCALE,objectScale);
       return(true);
    }
    return(false);
 }
 
-bool gfanSet(string object.name,int object.index,double object.value) {
-   return(objectSet(object.name,object.index,object.value));
+bool gfanSet(string objectName,int objectIndex,double objectValue) {
+   return(objectSet(objectName,objectIndex,objectValue));
 }
 
-bool gfanSetText(string object.name,string objectText,int object.fontsize,string object.font="Arial",color object.color=CLR_NONE) {
-   return(objectSetText(object.name,objectText,object.fontsize,object.font,object.color));
+bool gfanSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
+   return(objectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
 }
 
-double gfanGet(string object.name,int object.index) {
-   return(objectGet(object.name,object.index));
+double gfanGet(string objectName,int objectIndex) {
+   return(objectGet(objectName,objectIndex));
 }
 
 //gann grid object functions
 
-bool ggridCreate(string object.name,datetime object.time1,double object.price1,datetime object.time2,double object.scale=1,color object.color=Blue,int object.window=0) {
-   if (objectCreate(object.name,OBJ_GANNGRID,object.window,object.time1,object.price1,object.time2))   {
-      if (object.color!=Blue) ggridSet(object.name,OBJPROP_COLOR,object.color);
-      if (object.scale!=1.0) ggridSet(object.name,OBJPROP_SCALE,object.scale);
+bool ggridCreate(string objectName,datetime objectTime1,double objectPrice1,datetime objectTime2,double objectScale=1,color objectColor=Blue,int objectWindow=0) {
+   if (objectCreate(objectName,OBJ_GANNGRID,objectWindow,objectTime1,objectPrice1,objectTime2))   {
+      if (objectColor!=Blue) ggridSet(objectName,OBJPROP_COLOR,objectColor);
+      if (objectScale!=1.0) ggridSet(objectName,OBJPROP_SCALE,objectScale);
       return(true);
    }
    return(false);
 }
 
-bool ggridSet(string object.name,int object.index,double object.value) {
-   return(objectSet(object.name,object.index,object.value));
+bool ggridSet(string objectName,int objectIndex,double objectValue) {
+   return(objectSet(objectName,objectIndex,objectValue));
 }
 
-bool ggridSetText(string object.name,string objectText,int object.fontsize,string object.font="Arial",color object.color=CLR_NONE) {
-   return(objectSetText(object.name,objectText,object.fontsize,object.font,object.color));
+bool ggridSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
+   return(objectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
 }
 
-double ggridGet(string object.name,int object.index) {
-   return(objectGet(object.name,object.index));
+double ggridGet(string objectName,int objectIndex) {
+   return(objectGet(objectName,objectIndex));
 }
 
 //fibonacci object functions
 
-bool fiboCreate(string object.name,datetime object.time1,double object.price1,datetime object.time2,double object.price2,color object.color=Yellow,int object.window=0) {
-   if (objectCreate(object.name,OBJ_FIBO,object.window,object.time1,object.price1,object.time2,object.price2))   {
-      if (object.color!=Yellow) fiboSet(object.name,OBJPROP_COLOR,object.color);
+bool fiboCreate(string objectName,datetime objectTime1,double objectPrice1,datetime objectTime2,double objectPrice2,color objectColor=Yellow,int objectWindow=0) {
+   if (objectCreate(objectName,OBJ_FIBO,objectWindow,objectTime1,objectPrice1,objectTime2,objectPrice2))   {
+      if (objectColor!=Yellow) fiboSet(objectName,OBJPROP_COLOR,objectColor);
       return(true);
    }
    return(false);
 }
 
-bool fiboSet(string object.name,int object.index,double object.value) {
-   return(objectSet(object.name,object.index,object.value));
+bool fiboSet(string objectName,int objectIndex,double objectValue) {
+   return(objectSet(objectName,objectIndex,objectValue));
 }
 
-bool fiboSetText(string object.name,string objectText,int object.fontsize,string object.font="Arial",color object.color=CLR_NONE) {
-   return(objectSetText(object.name,objectText,object.fontsize,object.font,object.color));
+bool fiboSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
+   return(objectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
 }
 
-double fiboGet(string object.name,int object.index) {
-   return(objectGet(object.name,object.index));
+double fiboGet(string objectName,int objectIndex) {
+   return(objectGet(objectName,objectIndex));
 }
 
 //fibonacci timezone object functions
 
-bool fibotCreate(string object.name,datetime object.time1,double object.price1,datetime object.time2,double object.price2,color object.color=Yellow,int object.window=0) {
-   if (objectCreate(object.name,OBJ_FIBOTIMES,object.window,object.time1,object.price1,object.time2,object.price2))   {
-      if (object.color!=Yellow) fibotSet(object.name,OBJPROP_COLOR,object.color);
+bool fibotCreate(string objectName,datetime objectTime1,double objectPrice1,datetime objectTime2,double objectPrice2,color objectColor=Yellow,int objectWindow=0) {
+   if (objectCreate(objectName,OBJ_FIBOTIMES,objectWindow,objectTime1,objectPrice1,objectTime2,objectPrice2))   {
+      if (objectColor!=Yellow) fibotSet(objectName,OBJPROP_COLOR,objectColor);
       return(true);
    }
    return(false);
 }
 
-bool fibotSet(string object.name,int object.index,double object.value) {
-   return(objectSet(object.name,object.index,object.value));
+bool fibotSet(string objectName,int objectIndex,double objectValue) {
+   return(objectSet(objectName,objectIndex,objectValue));
 }
 
-bool fibotSetText(string object.name,string objectText,int object.fontsize,string object.font="Arial",color object.color=CLR_NONE) {
-   return(objectSetText(object.name,objectText,object.fontsize,object.font,object.color));
+bool fibotSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
+   return(objectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
 }
 
-double fibotGet(string object.name,int object.index) {
-   return(objectGet(object.name,object.index));
+double fibotGet(string objectName,int objectIndex) {
+   return(objectGet(objectName,objectIndex));
 }
 
 //fibonacci fan object functions
 
-bool fibofCreate(string object.name,datetime object.time1,double object.price1,datetime object.time2,double object.price2,color object.color=Yellow,int object.window=0) {
-   if (objectCreate(object.name,OBJ_FIBOFAN,object.window,object.time1,object.price1,object.time2,object.price2))   {
-      if (object.color!=Yellow) fibofSet(object.name,OBJPROP_COLOR,object.color);
+bool fibofCreate(string objectName,datetime objectTime1,double objectPrice1,datetime objectTime2,double objectPrice2,color objectColor=Yellow,int objectWindow=0) {
+   if (objectCreate(objectName,OBJ_FIBOFAN,objectWindow,objectTime1,objectPrice1,objectTime2,objectPrice2))   {
+      if (objectColor!=Yellow) fibofSet(objectName,OBJPROP_COLOR,objectColor);
       return(true);
    }
    return(false);
 }
 
-bool fibofSet(string object.name,int object.index,double object.value) {
-   return(objectSet(object.name,object.index,object.value));
+bool fibofSet(string objectName,int objectIndex,double objectValue) {
+   return(objectSet(objectName,objectIndex,objectValue));
 }
 
-bool fibofSetText(string object.name,string objectText,int object.fontsize,string object.font="Arial",color object.color=CLR_NONE) {
-   return(objectSetText(object.name,objectText,object.fontsize,object.font,object.color));
+bool fibofSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
+   return(objectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
 }
 
-double fibofGet(string object.name,int object.index) {
-   return(objectGet(object.name,object.index));
+double fibofGet(string objectName,int objectIndex) {
+   return(objectGet(objectName,objectIndex));
 }
 
 //fibonacci arc object functions
 
-bool fiboaCreate(string object.name,datetime object.time1,double object.price1,datetime object.time2,double object.price2,color object.color=Yellow,int object.window=0) {
-   if (objectCreate(object.name,OBJ_FIBOARC,object.window,object.time1,object.price1,object.time2,object.price2))   {
-      if (object.color!=Yellow) fiboaSet(object.name,OBJPROP_COLOR,object.color);
+bool fiboaCreate(string objectName,datetime objectTime1,double objectPrice1,datetime objectTime2,double objectPrice2,color objectColor=Yellow,int objectWindow=0) {
+   if (objectCreate(objectName,OBJ_FIBOARC,objectWindow,objectTime1,objectPrice1,objectTime2,objectPrice2))   {
+      if (objectColor!=Yellow) fiboaSet(objectName,OBJPROP_COLOR,objectColor);
       return(true);
    }
    return(false);
 }
 
-bool fiboaSet(string object.name,int object.index,double object.value) {
-   return(objectSet(object.name,object.index,object.value));
+bool fiboaSet(string objectName,int objectIndex,double objectValue) {
+   return(objectSet(objectName,objectIndex,objectValue));
 }
 
-bool fiboaSetText(string object.name,string objectText,int object.fontsize,string object.font="Arial",color object.color=CLR_NONE) {
-   return(objectSetText(object.name,objectText,object.fontsize,object.font,object.color));
+bool fiboaSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
+   return(objectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
 }
 
-double fiboaGet(string object.name,int object.index) {
-   return(objectGet(object.name,object.index));
+double fiboaGet(string objectName,int objectIndex) {
+   return(objectGet(objectName,objectIndex));
 }
 
 //fibonacci expansion object functions
 
-bool fiboeCreate(string object.name,datetime object.time1,double object.price1,datetime object.time2,double object.price2,datetime object.time3,double object.price3,color object.color=Blue,int object.window=0) {
-   if (objectCreate(object.name,OBJ_EXPANSION,object.window,object.time1,object.price1,object.time2,object.price2,object.time3,object.price3))   {
-      if (object.color!=Blue) fiboeSet(object.name,OBJPROP_COLOR,object.color);
+bool fiboeCreate(string objectName,datetime objectTime1,double objectPrice1,datetime objectTime2,double objectPrice2,datetime objectTime3,double objectPrice3,color objectColor=Blue,int objectWindow=0) {
+   if (objectCreate(objectName,OBJ_EXPANSION,objectWindow,objectTime1,objectPrice1,objectTime2,objectPrice2,objectTime3,objectPrice3))   {
+      if (objectColor!=Blue) fiboeSet(objectName,OBJPROP_COLOR,objectColor);
       return(true);
    }
    return(false);
 }
 
-bool fiboeSet(string object.name,int object.index,double object.value)   {
+bool fiboeSet(string objectName,int objectIndex,double objectValue)   {
    bool res;
-   if (objectFind(object.name)!=-1) {
-      res = objectSet(object.name,object.index,object.value);
+   if (objectFind(objectName)!=-1) {
+      res = objectSet(objectName,objectIndex,objectValue);
    }
    return(res);   
 }
 
-bool fiboeSetText(string object.name,string objectText,int object.fontsize,string object.font="Arial",color object.color=CLR_NONE) {
-   return(objectSetText(object.name,objectText,object.fontsize,object.font,object.color));
+bool fiboeSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
+   return(objectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
 }
 
-double fiboeGet(string object.name,int object.index)  {
-   if (objectFind(object.name)!=-1)   {
-      return(objectGet(object.name,object.index));      
+double fiboeGet(string objectName,int objectIndex)  {
+   if (objectFind(objectName)!=-1)   {
+      return(objectGet(objectName,objectIndex));      
    } 
    return(-1);
 }
 
 //fibonacci channel object functions
 
-bool fibocCreate(string object.name,datetime object.time1,double object.price1,datetime object.time2,double object.price2,datetime object.time3,double object.price3,color object.color=Blue,int object.window=0) {
-   if (objectCreate(object.name,OBJ_FIBOCHANNEL,object.window,object.time1,object.price1,object.time2,object.price2,object.time3,object.price3))   {
-      if (object.color!=Blue) fibocSet(object.name,OBJPROP_COLOR,object.color);
+bool fibocCreate(string objectName,datetime objectTime1,double objectPrice1,datetime objectTime2,double objectPrice2,datetime objectTime3,double objectPrice3,color objectColor=Blue,int objectWindow=0) {
+   if (objectCreate(objectName,OBJ_FIBOCHANNEL,objectWindow,objectTime1,objectPrice1,objectTime2,objectPrice2,objectTime3,objectPrice3))   {
+      if (objectColor!=Blue) fibocSet(objectName,OBJPROP_COLOR,objectColor);
       return(true);
    }
    return(false);
 }
 
-bool fibocSet(string object.name,int object.index,double object.value)   {
+bool fibocSet(string objectName,int objectIndex,double objectValue)   {
    bool res;
-   if (objectFind(object.name)!=-1) {
-      res = objectSet(object.name,object.index,object.value);
+   if (objectFind(objectName)!=-1) {
+      res = objectSet(objectName,objectIndex,objectValue);
    }
    return(res);   
 }
 
-bool fibocSetText(string object.name,string objectText,int object.fontsize,string object.font="Arial",color object.color=CLR_NONE) {
-   return(objectSetText(object.name,objectText,object.fontsize,object.font,object.color));
+bool fibocSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
+   return(objectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
 }
 
-double fibocGet(string object.name,int object.index)  {
-   if (objectFind(object.name)!=-1)   {
-      return(objectGet(object.name,object.index));      
+double fibocGet(string objectName,int objectIndex)  {
+   if (objectFind(objectName)!=-1)   {
+      return(objectGet(objectName,objectIndex));      
    } 
    return(-1);
 }
 
 //rectangle object functions
 
-bool rectCreate(string object.name,datetime object.time1,double object.price1,datetime object.time2,double object.price2,color object.color=Blue,int object.window=0) {
-   if (objectCreate(object.name,OBJ_RECTANGLE,object.window,object.time1,object.price1,object.time2,object.price2))   {
-      if (object.color!=Blue) rectSet(object.name,OBJPROP_COLOR,object.color);
+bool rectCreate(string objectName,datetime objectTime1,double objectPrice1,datetime objectTime2,double objectPrice2,color objectColor=Blue,int objectWindow=0) {
+   if (objectCreate(objectName,OBJ_RECTANGLE,objectWindow,objectTime1,objectPrice1,objectTime2,objectPrice2))   {
+      if (objectColor!=Blue) rectSet(objectName,OBJPROP_COLOR,objectColor);
       return(true);
    }
    return(false);
 }
 
-bool rectSet(string object.name,int object.index,double object.value) {
-   return(objectSet(object.name,object.index,object.value));
+bool rectSet(string objectName,int objectIndex,double objectValue) {
+   return(objectSet(objectName,objectIndex,objectValue));
 }
 
-bool rectSetText(string object.name,string objectText,int object.fontsize,string object.font="Arial",color object.color=CLR_NONE) {
-   return(objectSetText(object.name,objectText,object.fontsize,object.font,object.color));
+bool rectSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
+   return(objectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
 }
 
-double rectGet(string object.name,int object.index) {
-   return(objectGet(object.name,object.index));
+double rectGet(string objectName,int objectIndex) {
+   return(objectGet(objectName,objectIndex));
 }
 
 //triangle object functions
 
-bool triangleCreate(string object.name,datetime object.time1,double object.price1,datetime object.time2,double object.price2,datetime object.time3,double object.price3,color object.color=Blue,int object.window=0) {
-   if (objectCreate(object.name,OBJ_TRIANGLE,object.window,object.time1,object.price1,object.time2,object.price2,object.time3,object.price3))   {
-      if (object.color!=Blue) triangleSet(object.name,OBJPROP_COLOR,object.color);
+bool triangleCreate(string objectName,datetime objectTime1,double objectPrice1,datetime objectTime2,double objectPrice2,datetime objectTime3,double objectPrice3,color objectColor=Blue,int objectWindow=0) {
+   if (objectCreate(objectName,OBJ_TRIANGLE,objectWindow,objectTime1,objectPrice1,objectTime2,objectPrice2,objectTime3,objectPrice3))   {
+      if (objectColor!=Blue) triangleSet(objectName,OBJPROP_COLOR,objectColor);
       return(true);
    }
    return(false);
 }
 
-bool triangleSet(string object.name,int object.index,double object.value)   {
+bool triangleSet(string objectName,int objectIndex,double objectValue)   {
    bool res;
-   if (objectFind(object.name)!=-1) {
-      res = objectSet(object.name,object.index,object.value);
+   if (objectFind(objectName)!=-1) {
+      res = objectSet(objectName,objectIndex,objectValue);
    }
    return(res);   
 }
 
-bool triangleSetText(string object.name,string objectText,int object.fontsize,string object.font="Arial",color object.color=CLR_NONE) {
-   return(objectSetText(object.name,objectText,object.fontsize,object.font,object.color));
+bool triangleSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
+   return(objectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
 }
 
-double triangleGet(string object.name,int object.index)  {
-   if (objectFind(object.name)!=-1)   {
-      return(objectGet(object.name,object.index));      
+double triangleGet(string objectName,int objectIndex)  {
+   if (objectFind(objectName)!=-1)   {
+      return(objectGet(objectName,objectIndex));      
    } 
    return(-1);
 }
 
 //ellipse object functions
 
-bool ellipseCreate(string object.name,datetime object.time1,double object.price1,datetime object.time2,double object.price2,double object.scale=1.0,color object.color=DarkSlateGray,int object.window=0) {
-   if (objectCreate(object.name,OBJ_ELLIPSE,object.window,object.time1,object.price1,object.time2,object.price2))   {
-      if (object.color!=DarkSlateGray) ellipseSet(object.name,OBJPROP_COLOR,object.color);
-      if (object.scale!=1.0) ellipseSet(object.name,OBJPROP_SCALE,object.scale);
+bool ellipseCreate(string objectName,datetime objectTime1,double objectPrice1,datetime objectTime2,double objectPrice2,double objectScale=1.0,color objectColor=DarkSlateGray,int objectWindow=0) {
+   if (objectCreate(objectName,OBJ_ELLIPSE,objectWindow,objectTime1,objectPrice1,objectTime2,objectPrice2))   {
+      if (objectColor!=DarkSlateGray) ellipseSet(objectName,OBJPROP_COLOR,objectColor);
+      if (objectScale!=1.0) ellipseSet(objectName,OBJPROP_SCALE,objectScale);
       return(true);
    }
    return(false);
 }
 
-bool ellipseSet(string object.name,int object.index,double object.value) {
-   return(objectSet(object.name,object.index,object.value));
+bool ellipseSet(string objectName,int objectIndex,double objectValue) {
+   return(objectSet(objectName,objectIndex,objectValue));
 }
 
-bool ellipseSetText(string object.name,string objectText,int object.fontsize,string object.font="Arial",color object.color=CLR_NONE) {
-   return(objectSetText(object.name,objectText,object.fontsize,object.font,object.color));
+bool ellipseSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
+   return(objectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
 }
 
-double ellipseGet(string object.name,int object.index) {
-   return(objectGet(object.name,object.index));
+double ellipseGet(string objectName,int objectIndex) {
+   return(objectGet(objectName,objectIndex));
 }
 
 //andrew's pitchfork object functions
 
-bool pitchforkCreate(string object.name,datetime object.time1,double object.price1,datetime object.time2,double object.price2,datetime object.time3,double object.price3,color object.color=Blue,int object.window=0) {
-   if (objectCreate(object.name,OBJ_PITCHFORK,object.window,object.time1,object.price1,object.time2,object.price2,object.time3,object.price3))   {
-      if (object.color!=Blue) pitchforkSet(object.name,OBJPROP_COLOR,object.color);
+bool pitchforkCreate(string objectName,datetime objectTime1,double objectPrice1,datetime objectTime2,double objectPrice2,datetime objectTime3,double objectPrice3,color objectColor=Blue,int objectWindow=0) {
+   if (objectCreate(objectName,OBJ_PITCHFORK,objectWindow,objectTime1,objectPrice1,objectTime2,objectPrice2,objectTime3,objectPrice3))   {
+      if (objectColor!=Blue) pitchforkSet(objectName,OBJPROP_COLOR,objectColor);
       return(true);
    }
    return(false);
 }
 
-bool pitchforkSet(string object.name,int object.index,double object.value)   {
+bool pitchforkSet(string objectName,int objectIndex,double objectValue)   {
    bool res;
-   if (objectFind(object.name)!=-1) {
-      res = objectSet(object.name,object.index,object.value);
+   if (objectFind(objectName)!=-1) {
+      res = objectSet(objectName,objectIndex,objectValue);
    }
    return(res);   
 }
 
-bool pitchforkSetText(string object.name,string objectText,int object.fontsize,string object.font="Arial",color object.color=CLR_NONE) {
-   return(objectSetText(object.name,objectText,object.fontsize,object.font,object.color));
+bool pitchforkSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
+   return(objectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
 }
 
-double pitchforkGet(string object.name,int object.index)  {
-   if (objectFind(object.name)!=-1)   {
-      return(objectGet(object.name,object.index));      
+double pitchforkGet(string objectName,int objectIndex)  {
+   if (objectFind(objectName)!=-1)   {
+      return(objectGet(objectName,objectIndex));      
    } 
    return(-1);
 }
 
 //cycle lines object functions
 
-bool clineCreate(string object.name,datetime object.time1,double object.price1,datetime object.time2,double object.price2,color object.color=Red,int object.window=0) {
-   if (objectCreate(object.name,OBJ_CYCLES,object.window,object.time1,object.price1,object.time2,object.price2))   {
-      if (object.color!=Red) clineSet(object.name,OBJPROP_COLOR,object.color);
+bool clineCreate(string objectName,datetime objectTime1,double objectPrice1,datetime objectTime2,double objectPrice2,color objectColor=Red,int objectWindow=0) {
+   if (objectCreate(objectName,OBJ_CYCLES,objectWindow,objectTime1,objectPrice1,objectTime2,objectPrice2))   {
+      if (objectColor!=Red) clineSet(objectName,OBJPROP_COLOR,objectColor);
       return(true);
    }
    return(false);
 }
 
-bool clineSet(string object.name,int object.index,double object.value) {
-   return(objectSet(object.name,object.index,object.value));
+bool clineSet(string objectName,int objectIndex,double objectValue) {
+   return(objectSet(objectName,objectIndex,objectValue));
 }
 
-bool clineSetText(string object.name,string objectText,int object.fontsize,string object.font="Arial",color object.color=CLR_NONE) {
-   return(objectSetText(object.name,objectText,object.fontsize,object.font,object.color));
+bool clineSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
+   return(objectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
 }
 
-double clineGet(string object.name,int object.index) {
-   return(objectGet(object.name,object.index));
+double clineGet(string objectName,int objectIndex) {
+   return(objectGet(objectName,objectIndex));
 }
 
 //text object functions
 
-bool textCreate(string object.name,string objectText,double object.angle,datetime object.time1,double object.price1,int object.fontsize=10,string object.font="Arial",color object.color=Gray,int object.window=0) {
-   if (objectCreate(object.name,OBJ_TEXT,object.window,object.time1,object.price1))   {
-      if (object.color!=Gray) textSet(object.name,OBJPROP_COLOR,object.color);
-      textSetText(object.name,objectText,object.fontsize,object.font,object.color);
+bool textCreate(string objectName,string objectText,double objectAngle,datetime objectTime1,double objectPrice1,int objectFontsize=10,string objectFont="Arial",color objectColor=Gray,int objectWindow=0) {
+   if (objectCreate(objectName,OBJ_TEXT,objectWindow,objectTime1,objectPrice1))   {
+      if (objectColor!=Gray) textSet(objectName,OBJPROP_COLOR,objectColor);
+      textSetText(objectName,objectText,objectFontsize,objectFont,objectColor);
       return(true);
    }
    return(false);
 }
 
-bool textSet(string object.name,int object.index,double object.value) {
-   return(objectSet(object.name,object.index,object.value));
+bool textSet(string objectName,int objectIndex,double objectValue) {
+   return(objectSet(objectName,objectIndex,objectValue));
 }
 
-bool textSetText(string object.name,string objectText,int object.fontsize,string object.font="Arial",color object.color=CLR_NONE) {
-   return(objectSetText(object.name,objectText,object.fontsize,object.font,object.color));
+bool textSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
+   return(objectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
 }
 
-double textGet(string object.name,int object.index) {
-   return(objectGet(object.name,object.index));
+double textGet(string objectName,int objectIndex) {
+   return(objectGet(objectName,objectIndex));
 }
 
 //arrow object functions
 
-bool arrowCreate(string object.name,double object.angle,int object.code,datetime object.time1,double object.price1,color object.color=Red,int object.window=0) {
-   if (objectCreate(object.name,OBJ_ARROW,object.window,object.time1,object.price1))   {
-      arrowSet(object.name,OBJPROP_COLOR,object.color);
-      arrowSet(object.name,OBJPROP_ARROWCODE,object.code);
+bool arrowCreate(string objectName,double objectAngle,int objectCode,datetime objectTime1,double objectPrice1,color objectColor=Red,int objectWindow=0) {
+   if (objectCreate(objectName,OBJ_ARROW,objectWindow,objectTime1,objectPrice1))   {
+      arrowSet(objectName,OBJPROP_COLOR,objectColor);
+      arrowSet(objectName,OBJPROP_ARROWCODE,objectCode);
       return(true);
    }
    return(false);
 }
 
-bool arrowSet(string object.name,int object.index,double object.value) {
-   return(objectSet(object.name,object.index,object.value));
+bool arrowSet(string objectName,int objectIndex,double objectValue) {
+   return(objectSet(objectName,objectIndex,objectValue));
 }
 
-bool arrowSetText(string object.name,string objectText,int object.fontsize,string object.font="Arial",color object.color=CLR_NONE) {
-   return(objectSetText(object.name,objectText,object.fontsize,object.font,object.color));
+bool arrowSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
+   return(objectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
 }
 
-double arrowGet(string object.name,int object.index) {
-   return(objectGet(object.name,object.index));
+double arrowGet(string objectName,int objectIndex) {
+   return(objectGet(objectName,objectIndex));
 }
 
 //label object functions
 
-bool labelCreate(string object.name,string objectText,double object.angle,int object.corner,int object.x,int object.y,int object.fontsize=10,string object.font="Arial",color object.color=Gray,int object.window=0) {
-   if (objectCreate(object.name,OBJ_LABEL,object.window))   {
-      if (object.color!=Gray) objectSet(object.name,OBJPROP_COLOR,object.color);
-      labelSet(object.name,OBJPROP_CORNER,object.corner);
-      labelSet(object.name,OBJPROP_XDISTANCE,object.x);
-      labelSet(object.name,OBJPROP_YDISTANCE,object.y);      
-      labelSetText(object.name,objectText,object.fontsize,object.font,object.color);
+bool labelCreate(string objectName,string objectText,double objectAngle,int objectCorner,int objectX,int objectY,int objectFontsize=10,string objectFont="Arial",color objectColor=Gray,int objectWindow=0) {
+   if (objectCreate(objectName,OBJ_LABEL,objectWindow))   {
+      if (objectColor!=Gray) objectSet(objectName,OBJPROP_COLOR,objectColor);
+      labelSet(objectName,OBJPROP_CORNER,objectCorner);
+      labelSet(objectName,OBJPROP_XDISTANCE,objectX);
+      labelSet(objectName,OBJPROP_YDISTANCE,objectY);      
+      labelSetText(objectName,objectText,objectFontsize,objectFont,objectColor);
       return(true);
    }
    return(false);
 }
 
-bool labelCreateUpdate(string object.name,string objectText,double object.angle,int object.corner,int object.x,int object.y,int object.fontsize=10,string object.font="Arial",color object.color=Gray,int object.window=0) {
-   bool res,found = objectExists(object.name);
-   if (!found) res = labelCreate(object.name,objectText,object.angle,object.corner,object.x,object.y,object.fontsize,object.font,object.color,object.window);
+bool labelCreateUpdate(string objectName,string objectText,double objectAngle,int objectCorner,int objectX,int objectY,int objectFontsize=10,string objectFont="Arial",color objectColor=Gray,int objectWindow=0) {
+   bool res,found = objectExists(objectName);
+   if (!found) res = labelCreate(objectName,objectText,objectAngle,objectCorner,objectX,objectY,objectFontsize,objectFont,objectColor,objectWindow);
    if (found)   {
-      if (object.color!=Gray) objectSet(object.name,OBJPROP_COLOR,object.color);
-      labelSet(object.name,OBJPROP_CORNER,object.corner);
-      labelSet(object.name,OBJPROP_XDISTANCE,object.x);
-      labelSet(object.name,OBJPROP_YDISTANCE,object.y);      
-      labelSetText(object.name,objectText,object.fontsize,object.font,object.color);
+      if (objectColor!=Gray) objectSet(objectName,OBJPROP_COLOR,objectColor);
+      labelSet(objectName,OBJPROP_CORNER,objectCorner);
+      labelSet(objectName,OBJPROP_XDISTANCE,objectX);
+      labelSet(objectName,OBJPROP_YDISTANCE,objectY);      
+      labelSetText(objectName,objectText,objectFontsize,objectFont,objectColor);
       return(true);
    }
    return(false);
 }
 
-bool labelSet(string object.name,int object.index,double object.value) {
-   return(objectSet(object.name,object.index,object.value));
+bool labelSet(string objectName,int objectIndex,double objectValue) {
+   return(objectSet(objectName,objectIndex,objectValue));
 }
 
-bool labelSetText(string object.name,string objectText,int object.fontsize,string object.font="Arial",color object.color=CLR_NONE) {
-   return(objectSetText(object.name,objectText,object.fontsize,object.font,object.color));
+bool labelSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
+   return(objectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
 }
 
-double labelGet(string object.name,int object.index) {
-   return(objectGet(object.name,object.index));
+double labelGet(string objectName,int objectIndex) {
+   return(objectGet(objectName,objectIndex));
 }
 
 

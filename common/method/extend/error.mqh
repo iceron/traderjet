@@ -20,7 +20,7 @@
  */
 
 int errorCritListReal[] = {3,65,147,149};
-int errorCritListTest[] = {3,65,129.130,131,134,147,149};
+int errorCritListTest[] = {3,65,129,130,131,134,147,149};
 
 void errorManager(int type)  {
    lastError = getLastError();
@@ -35,7 +35,7 @@ void errorManager(int type)  {
          message = "error modifying order ";
          break;
       }
-       case ERR_OPEN:       {
+       case ERR_CLOSE:       {
          message = "error closing order ";
          break;
       }

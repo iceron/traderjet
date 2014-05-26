@@ -59,41 +59,41 @@ int objectType(string name)  {
    return(ObjectType(name));
 }
 
-bool objectCreate(string object.name,int objectType,int object.window=0,datetime object.time1=0,double object.price1=0,datetime object.time2=0,double object.price2=0,datetime object.time3=0,double object.price3=0) {
+bool objectCreate(string objectName,int objectType,int objectWindow=0,datetime objectTime1=0,double objectPrice1=0,datetime objectTime2=0,double objectPrice2=0,datetime objectTime3=0,double objectPrice3=0) {
    bool res;
-   if (objectFind(object.name)==-1)
-      res = ObjectCreate(object.name,objectType,object.window,object.time1,object.price1,object.time2,object.price2,object.time3,object.price3);    
+   if (objectFind(objectName)==-1)
+      res = ObjectCreate(objectName,objectType,objectWindow,objectTime1,objectPrice1,objectTime2,objectPrice2,objectTime3,objectPrice3);    
    return(res);
 }
 
-bool objectSet(string object.name,int object.index,double object.value)   {
+bool objectSet(string objectName,int objectIndex,double objectValue)   {
    bool res;
-   if (objectFind(object.name)!=-1) 
-      res = ObjectSet(object.name,object.index,object.value);
+   if (objectFind(objectName)!=-1) 
+      res = ObjectSet(objectName,objectIndex,objectValue);
    return(res);   
 }
 
-bool objectSetText(string object.name,string objectText,int object.fontsize=8,string object.font="Arial",color object.color=CLR_NONE)   {
+bool objectSetText(string objectName,string objectText,int objectFontsize=8,string objectFont="Arial",color objectColor=CLR_NONE)   {
    bool res;
-   if (objectFind(object.name)!=-1)
-      res = ObjectSetText(object.name,objectText,object.fontsize,object.font,object.color);
+   if (objectFind(objectName)!=-1)
+      res = ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor);
    return(res);   
 }
 
-double objectGet(string object.name,int object.index)  {
-   if (objectFind(object.name)!=-1)
-      return(ObjectGet(object.name,object.index));      
+double objectGet(string objectName,int objectIndex)  {
+   if (objectFind(objectName)!=-1)
+      return(ObjectGet(objectName,objectIndex));      
    return(-1);
 }
 
-int objectFind(string object.name){
-   if (object.name=="") return(-1);
-   return(ObjectFind(object.name));
+int objectFind(string objectName){
+   if (objectName=="") return(-1);
+   return(ObjectFind(objectName));
 }
 
-bool objectDelete(string object.name){
-   if (objectFind(object.name)>=0)
-      return(ObjectDelete(object.name));
+bool objectDelete(string objectName){
+   if (objectFind(objectName)>=0)
+      return(ObjectDelete(objectName));
    return(true);   
 }
 

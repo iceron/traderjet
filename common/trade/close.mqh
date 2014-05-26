@@ -36,7 +36,7 @@ bool cOrderClose(int ticket, double lots=0, double price=0) {
    return(result);
 }
 
-int orderCloseAll(int type=CMD_ALL)   {
+void orderCloseAll(int type=CMD_ALL)   {
    int i, total = ordersTotal();
    for (i=total-1; i>=0; i--)   {
       if (!cOrderSelect(i,SELECT_BY_POS)) continue;

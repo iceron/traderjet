@@ -35,7 +35,7 @@ int signalFilter(int& arr[]){
          i++;
          b = arr[i];
       }
-      if (a&b!=a|b && b!=CMD_NEUTRAL){
+      if (a!=b && b!=CMD_NEUTRAL){
          s = CMD_VOID;
          break;
       } 
@@ -200,5 +200,6 @@ int signalReverse(int signal) {
          return(CMD_VOID);
       }
    }
+   return(CMD_VOID);
 }
 

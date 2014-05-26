@@ -7,32 +7,32 @@ int price_mode = TICKS;
 
 int orderBuy(double volume,double price,double stoploss,double takeprofit,string comment="")
 {
-   cOrderSend(OP_BUY,volume,price,stoploss,takeprofit,comment,0);
+   return(cOrderSend(OP_BUY,volume,price,stoploss,takeprofit,comment,0));
 }
 
 int orderSell(double volume,double price,double stoploss,double takeprofit,string comment="")
 {
-   cOrderSend(OP_SELL,volume,price,stoploss,takeprofit,comment,0);
+   return(cOrderSend(OP_SELL,volume,price,stoploss,takeprofit,comment,0));
 }
 
 int orderBuyStop(double volume,double price,double stoploss,double takeprofit,string comment="",datetime expiration=0)
 {
-   cOrderSend(OP_BUYSTOP,volume,price,stoploss,takeprofit,comment,expiration);
+   return(cOrderSend(OP_BUYSTOP,volume,price,stoploss,takeprofit,comment,expiration));
 }
 
 int orderBuyLimit(double volume,double price,double stoploss,double takeprofit,string comment="",datetime expiration=0)
 {
-   cOrderSend(OP_BUYLIMIT,volume,price,stoploss,takeprofit,comment,expiration);
+   return(cOrderSend(OP_BUYLIMIT,volume,price,stoploss,takeprofit,comment,expiration));
 }
 
 int orderSellStop(double volume,double price,double stoploss,double takeprofit,string comment="",datetime expiration=0)
 {
-   cOrderSend(OP_SELLSTOP,volume,price,stoploss,takeprofit,comment,expiration);
+   return(cOrderSend(OP_SELLSTOP,volume,price,stoploss,takeprofit,comment,expiration));
 }
 
 int orderSellLimit(double volume,double price,double stoploss,double takeprofit,string comment="",datetime expiration=0)
 {
-   cOrderSend(OP_SELLLIMIT,volume,price,stoploss,takeprofit,comment,expiration);
+   return(cOrderSend(OP_SELLLIMIT,volume,price,stoploss,takeprofit,comment,expiration));
 }
 
 int cOrderSend(int cmd,double volume,double price,double stoploss,double takeprofit,string comment="",datetime expiration=0)   {
