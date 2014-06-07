@@ -83,6 +83,6 @@
 #include <traderjet\common\trade\open.mqh>
 #include <traderjet\common\trade\modify.mqh>
 #include <traderjet\common\trade\close.mqh>
-#include <traderjet\common\trade\events.mqh>
+
 
 
