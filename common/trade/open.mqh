@@ -65,7 +65,11 @@ int cOrderSend(int cmd,double volume,double price,double stoploss,double takepro
       else	{
          ticket = sendOrder(cmd,vo,pr,sl,tp,comment,expiration);            
       }   	   
-      if (ticket>0) break;      
+      if (ticket>0) 
+      {
+         onTrade();
+         break;      
+      }   
    }   
 	if (ticket<=0) Print("orderSend(): trade operation aborted [resend request(s) failed]");	
    return(ticket); 

@@ -32,7 +32,11 @@ bool cOrderClose(int ticket, double lots=0, double price=0) {
       }
    }   
    if (!result && status>=1) Print(StringConcatenate("orderClose(): ","trade closing aborted [resend request(s) failed reason ",lastError," ]")); 
-   if (result) Print(StringConcatenate("orderClose(): ","order processing (exit) - ",cmdToString(orderType)," volume: ",volumeFormat(lots)," price: ",priceFormat(price)," bid/ask: ",priceFormat(tickBid),"/",priceFormat(tickAsk)," magic: ",serverMagic));
+   if (result) 
+   {
+      Print(StringConcatenate("orderClose(): ","order processing (exit) - ",cmdToString(orderType)," volume: ",volumeFormat(lots)," price: ",priceFormat(price)," bid/ask: ",priceFormat(tickBid),"/",priceFormat(tickAsk)," magic: ",serverMagic));
+      onTradeClose();
+   }   
    return(result);
 }
 

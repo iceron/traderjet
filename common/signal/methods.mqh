@@ -85,8 +85,6 @@ void signalManage(int& open,int& close,int timeframe=0)  {
       open = CMD_VOID;     
    if (!serverExitEnabled)
       close = CMD_NEUTRAL;    
-   //dashAdd("entry_filters","entry filters",signalText(open)); 
-   //dashAdd("exit_filters","exit filters",signalText(close,true));   
    signalOpen = signalText(open);
    signalClose = signalText(close,true);
    if (open==signalReverse(close) || close==CMD_ALL) {      
@@ -100,14 +98,11 @@ void signalManage(int& open,int& close,int timeframe=0)  {
       if (newbar) last = CMD_VOID;
       if (last!=open)   {
          last = open;
-         //dashAdd("signal.once","signal for bar","..."); 
-         //dash.add("onceperbar ","onceperbar",open+" ",+last);
          signalDone = SIGNAL_NOT_DONE;
       }   
       else  {
          last = open;  
          open = CMD_VOID;       
-         //dashAdd("signal.once","signal for bar","DONE"); 
          signalDone = SIGNAL_DONE;         
       }        
    }      
