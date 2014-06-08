@@ -19,14 +19,7 @@
  *  @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
  */
 //libs
-#import "stdlib.ex4"
-
-string ErrorDescription(int error_code);
-int    RGB(int red_value,int green_value,int blue_value);
-bool   CompareDoubles(double number1,double number2);
-string DoubleToStrMorePrecision(double number,int precision);
-string IntegerToHexString(int integer_number);
-
+#include <stdlib.mqh>
 
 //constants
 #include <traderjet\const\error.mqh>
