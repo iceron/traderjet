@@ -1,4 +1,4 @@
-bool cOrderClose(int ticket, double lots=0, double price=0) {   
+bool orderClose(int ticket, double lots=0, double price=0) {   
    bool result;
    int status; 
    color clr;  
@@ -45,6 +45,6 @@ void orderCloseAll(int type=CMD_ALL)   {
    for (i=total-1; i>=0; i--)   {
       if (!OrderSelect(i,SELECT_BY_POS)) continue;
       if (!orderInGroup(type,orderType)) continue;
-      cOrderClose(orderTicket);
+      orderClose(orderTicket);
    }
 }

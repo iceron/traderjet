@@ -1,10 +1,10 @@
-bool cOrderModify(int ticket,double price,double stoploss,double takeprofit,double expiration=0,color arrowcl=CLR_NONE)   {
+bool orderModify(int ticket,double price,double stoploss,double takeprofit,double expiration=0,color arrowcl=CLR_NONE)   {
    bool mod,res;
    int status;
    if (!OrderSelect(ticket,SELECT_BY_TICKET)) return(false);
-   if (!pricesIsEqual(takeprofit,orderTakeProfit) && serverTakeProfitModify) mod = true;
+   if (!isPriceSame(takeprofit,orderTakeProfit) && serverTakeProfitModify) mod = true;
    else takeprofit = orderTakeProfit;
-   if (!pricesIsEqual(stoploss,orderStopLoss) && serverStopLossModify) mod = true;
+   if (!isPriceSame(stoploss,orderStopLoss) && serverStopLossModify) mod = true;
    else stoploss = orderStopLoss;   
    Print(StringConcatenate("orderModify(): ","order processing (modify) - #",orderTicket," ",cmdToString(orderType)," price: ",priceFormat(price)," old sl: ",priceFormat(orderStopLoss)," new sl: ",priceFormat(stoploss)," old tp: ",priceFormat(orderTakeProfit)," new tp: ",priceFormat(takeprofit)," bid/ask: ",priceFormat(tickBid),"/",priceFormat(tickAsk)," magic: ",serverMagic));
    for (int i=0;i<serverRetryMax;i++)	{

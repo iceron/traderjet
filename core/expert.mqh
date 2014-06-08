@@ -53,14 +53,7 @@
 #include <traderjet\common\method\timeseries.mqh>
 
 //optional extended functions
-#include <traderjet\common\method\account.mqh>
-#include <traderjet\common\method\checkup.mqh>
 #include <traderjet\common\method\file.mqh>
-#include <traderjet\common\method\global.mqh>
-#include <traderjet\common\method\print.mqh>
-#include <traderjet\common\method\terminal.mqh>
-#include <traderjet\common\method\time.mqh>
-#include <traderjet\common\method\trade.mqh>
 #include <traderjet\common\method\window.mqh>
 
 //components

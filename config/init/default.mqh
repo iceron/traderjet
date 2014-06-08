@@ -35,6 +35,8 @@ serverArrowColorLongMod    = TradeArrowColorLongMod;
 serverArrowColorShortMod   = TradeArrowColorShortMod;
 serverArrowColorLongExit   = TradeArrowColorLongExit;
 serverArrowColorShortExit  = TradeArrowColorShortExit;
+serverLongEnabled          = TradeLongEnabled;
+serverShortEnabled         = TradeShortEnabled;
 symbolSet();
 
 //ORDER INIT

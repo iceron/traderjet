@@ -41,3 +41,6 @@ bool serverECNEnabled = false;
 
 bool serverEntryEnabled = true;
 bool serverExitEnabled = true;
+
+bool serverLongEnabled = true;
+bool serverShortEnabled = true;

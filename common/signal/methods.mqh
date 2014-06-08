@@ -125,7 +125,7 @@ void signalInit(int open=0,int close=0)   {
 }
 
 bool signalIsEnabled(int signal) {
-   if ((signal==CMD_LONG && TradeLongEnabled) || (signal==CMD_SHORT && TradeShortEnabled)) return(true);
+   if ((signal==CMD_LONG && serverLongEnabled) || (signal==CMD_SHORT && serverShortEnabled)) return(true);
    return(false);
 }
 void filterInit(int& num) {
@@ -196,4 +196,3 @@ int signalReverse(int signal) {
    }
    return(CMD_VOID);
 }
-

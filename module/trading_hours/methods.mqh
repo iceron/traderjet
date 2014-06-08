@@ -28,14 +28,14 @@ bool tradingIsValid(string s,string e,bool enable=true,int gmt=0)  {
    }
    bool res;
    datetime current  = timeCurrent();  
-   datetime start    = strToTime(s);
-   datetime stop     = strToTime(e);
-   if (start<stop)  {
-      if (current>start && current<stop) res = true;
+   datetime begin    = strToTime(s);
+   datetime end      = strToTime(e);
+   if (begin<end)  {
+      if (current>begin && current<end) res = true;
    }
-   else if (start>stop)  {
-      if (!(current>stop && current<start)) res = true;
+   else if (begin>end)  {
+      if (!(current>end && current<begin)) res = true;
    }
-   else if (start==stop) res = true;
+   else if (begin==end) res = true;
    return (res);
 }

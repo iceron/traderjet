@@ -74,10 +74,10 @@ void vstopSetCreate(string& name,string type,double& val,int stoptype,color clr)
       }         
       if (name==vstopStandardName && mode!=STEALTH_PURE) v = stop;
       else  {
-         if (!pricesIsEqual(val,0)) v = orderOpenPrice+val*tickFractPoints;
+         if (!isPriceSame(val,0)) v = orderOpenPrice+val*tickFractPoints;
          //else v = stop;
       }
-      if (!pricesIsEqual(v,0)) hlineCreate(name+type+orderTicket,v);
+      if (!isPriceSame(v,0)) hlineCreate(name+type+orderTicket,v);
       else hlineCreate(name+type+orderTicket,temp);      
       if (ObjectFind(name+type+orderTicket)!=-1) ObjectSet(name+type+orderTicket,OBJPROP_COLOR,clr);         
    }
@@ -121,11 +121,11 @@ void vstopAdjust(string name)   {
    if (mod1 || mod2) mod = true;
    if (!mod) return;
    vstopAdjustSendToBroker(sendtobroker,objStoploss,objTakeprofit);      
-   if (sendtobroker) cOrderModify(orderTicket,orderOpenPrice,vstopStoploss,vstopTakeprofit);             
+   if (sendtobroker) orderModify(orderTicket,orderOpenPrice,vstopStoploss,vstopTakeprofit);             
 }
 
 void vstopAdjustCompare(bool& ret,double& objval,double& val,double& stop)   {
-   if (!pricesIsEqual(objval,val) && objval>0) {
+   if (!isPriceSame(objval,val) && objval>0) {
       if (objval>0 && objval<EMPTY_VALUE)  {
          stop = objval;
          ret = true;
@@ -174,15 +174,15 @@ bool vstopCheckClose(string& name,double& val,string type,double& lots)   {
    if (type==vstopStopLossName) stop = orderStopLoss;
    else if (type==vstopTakeProfitName) stop = orderTakeProfit;
    if ((orderType==OP_SELL && type==vstopTakeProfitName) || (orderType==OP_BUY && type==vstopStopLossName))   {
-      if (val>0 && val<EMPTY_VALUE && !pricesIsEqual(val,stop))
+      if (val>0 && val<EMPTY_VALUE && !isPriceSame(val,stop))
          if (orderClosePrice<=val) close = true;
    }   
    else if ((orderType==OP_BUY && type==vstopTakeProfitName) || (orderType==OP_SELL && type==vstopStopLossName))   {
-      if (val>0 && val<EMPTY_VALUE && !pricesIsEqual(val,stop)) 
+      if (val>0 && val<EMPTY_VALUE && !isPriceSame(val,stop)) 
          if (orderClosePrice>=val) close = true; 
    }   
    if (close)   {
-      if (cOrderClose(orderTicket,lots))  {
+      if (orderClose(orderTicket,lots))  {
          objectHide(name+type+orderTicket);
          Print(StringConcatenate("vstopCheckClose():","exit signal by: ",name,type,orderTicket));
          if (lots>0 || orderVolume>lots)   {
@@ -246,4 +246,3 @@ int ticketGet()  {
    }
    return(-1);
 }
-

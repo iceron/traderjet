@@ -22,7 +22,7 @@
 bool fileExists(string filename) {
    bool res;
    int handle = FileOpen(filename,FILE_READ);
-   if (handle>-1) res = true;
+   if (handle!=INVALID_HANDLE) res = true;
    FileClose(handle);
    return(res);
 }

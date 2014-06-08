@@ -321,7 +321,7 @@ int cmdToSignal(int cmd) {
    return(cmd+1);
 }
 
-int signalToCMD(int signal,int mode=MODE_MARKET,int type=MODE_STOP) {
+int signalToCmd(int signal,int mode=MODE_MARKET,int type=MODE_STOP) {
    int cmd;
    if (signal==CMD_LONG || signal==CMD_SHORT)   {
       if (mode==MODE_MARKET)  {

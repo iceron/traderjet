@@ -23,34 +23,34 @@ void magicSet(int digits = 3)  {
    int val;
    if (serverMagic>=0) return;
    while(true)   {
-      int windowhandle = windowHandle(tickSymbol,0);
+      int windowhandle = WindowHandle(tickSymbol,0);
       if (windowhandle==0) {
-         sleep(serverSleepError);
+         Sleep(serverSleepError);
          continue;
       }      
-      int rand = mathRandS(timeCurrent()+windowhandle);
-      val = mathPow(10,digits)*(rand/32767.0); 
+      int rand = mathRandS(TimeCurrent()+windowhandle);
+      val = MathPow(10,digits)*(rand/32767.0); 
       if (!magicCollisionCheck(val)) {
-         globalVariableSet(doubleToString(val,0),val);  
+         GlobalVariableSet(DoubleToString(val,0),val);  
          serverMagic = val;
          break;
       }
-      sleep(serverSleepError);
+      Sleep(serverSleepError);
    }
 }
 
 bool magicCollisionCheck(int& value)  {
-   int i,existing,total = globalVariablesTotal();
+   int i,existing,total = GlobalVariablesTotal();
    string name;
    for (i=0;i<total;i++)   {
-      name = globalVariableName(i);
-      existing = globalVariableGet(name);  
+      name = GlobalVariableName(i);
+      existing = GlobalVariableGet(name);  
       if (value==existing || value==0) {
-         Print("automagic: ",stringConcatenate("calculated magic number already in use, getting new value.."," calculated: ",value," existing: ",existing));
+         Print("automagic: ",StringConcatenate("calculated magic number already in use, getting new value.."," calculated: ",value," existing: ",existing));
          return(true);
       }   
    }   
-   Print("automagic: ",stringConcatenate("no magic number collission"," magic: ",value));
+   Print("automagic: ",StringConcatenate("no magic number collission"," magic: ",value));
    return(false);
 }
 

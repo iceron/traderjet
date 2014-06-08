@@ -44,16 +44,5 @@ void marketwatchGetSymbols() {
       marketwatchSymbol[i] = s;      
       marketwatchDesc[i] = desc;        
    }   
-   //printresult();
    fileClose(handle);   
 }
-
-/*
-void printresult()
-{
-   int size = ArraySize(marketwatchSymbol);
-   for (int i=0;i<size;i++)   {
-      Print(i," ",marketwatchSymbol[i]," ",marketwatchDesc[i]);
-   }
-}
-*/

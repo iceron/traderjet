@@ -276,7 +276,7 @@ bool doubleInArray(double val,double& arr[])
    bool ret;
    int size = arraySizeDouble(arr)-1;
    while(size>0)  {
-      if (pricesIsEqual(val,arr[size]))   {
+      if (isPriceSame(val,arr[size]))   {
          ret = true;
          break;
       }   

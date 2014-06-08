@@ -19,7 +19,7 @@
  *  @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
  */
 
-void sendAlert(string text="",string subject="") {
+void sendAlert(string text="",string subject="",string sound="alert.wav") {
    if (AlertSoundOn)
       playSound(AlertSound);
    if (AlertEmailOn)

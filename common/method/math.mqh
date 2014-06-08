@@ -19,9 +19,9 @@
  *  @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
  */
 
-bool pricesIsEqual(double value1,double value2)   {
+bool isPriceSame(double value1,double value2)   {
    if (MathAbs(value1-value2)>tickSize) return(false);
-   else return(true);
+   return(true);
 }
 
 int mathRandS(int seed = 0)   {
