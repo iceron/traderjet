@@ -23,7 +23,7 @@ int errorCritListReal[] = {3,65,147,149};
 int errorCritListTest[] = {3,65,129,130,131,134,147,149};
 
 void errorManager(int type)  {
-   lastError = getLastError();
+   lastError = GetLastError();
    string desc = "["+errorDescription(lastError)+"]";
    string message = "";
    switch(type)   {
@@ -146,11 +146,11 @@ string errorDescription(int error_code)  {
 }
 
 bool errorCheckCritical(int error)  {
-   if (error==0) error = getLastError();
+   if (error==0) error = GetLastError();
    if (error==0) return(false);
-   if (error>4000) return(true);
-   if (isTesting())
+   if (error>4000) return(true);   
+   if (IsTesting())
       if (intInArray(error,errorCritListTest)) return(true);
-   else if (intInArray(error,errorCritListReal)) return(true);   
+   else if (intInArray(error,errorCritListReal)) return(true);      
    return(false);
 }

@@ -32,22 +32,6 @@
 //symbol initialization functions
 #include <traderjet\init\symbol.mqh>
 
-//base functions
-#include <traderjet\common\method\base\account.mqh>
-#include <traderjet\common\method\base\array.mqh>
-#include <traderjet\common\method\base\checkup.mqh>
-#include <traderjet\common\method\base\common.mqh>
-#include <traderjet\common\method\base\convert.mqh>
-#include <traderjet\common\method\base\file.mqh>
-#include <traderjet\common\method\base\global.mqh>
-#include <traderjet\common\method\base\math.mqh>
-#include <traderjet\common\method\base\object.mqh>
-#include <traderjet\common\method\base\string.mqh>
-#include <traderjet\common\method\base\terminal.mqh>
-#include <traderjet\common\method\base\time.mqh>
-#include <traderjet\common\method\base\timeseries.mqh>
-#include <traderjet\common\method\base\trade.mqh>
-#include <traderjet\common\method\base\window.mqh>
 
 //extended functions
 

@@ -24,7 +24,7 @@
 
 void dashCreate()  {
    dashDelete();
-   if (isTesting() && !isVisualMode()) return;
+   if (IsTesting() && !IsVisualMode()) return;
    labelCreateUpdate(dashName,DASH_HEADER,0,dashCorner,dashX,dashY,dashFontSize,dashFont,dashTermColor);
    dashXDef = dashX;
    dashYDef = dashY;
@@ -47,12 +47,12 @@ void dashReset() {
 }
 
 void dashDelete()   {
-   int i,total = objectsTotal();
+   int i,total = ObjectsTotal();
    for (i=total-1;i>=0;i--)   {
-      string name = objectName(i);
-      if (objectType(name)!=OBJ_LABEL) continue;
-      if (stringFind(name,dashName)>=0)
-         if (objectDelete(name)) name="";
+      string name = ObjectName(i);
+      if (ObjectType(name)!=OBJ_LABEL) continue;
+      if (StringFind(name,dashName)>=0)
+         if (ObjectDelete(name)) name="";
    }      
 }
 

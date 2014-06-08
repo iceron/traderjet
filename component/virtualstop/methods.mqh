@@ -31,13 +31,13 @@ void vstopInit(int slmode,int tpmode)  {
 }
 
 void vstopSetLoop(string name,double stoploss,double takeprofit,int magic=EMPTY_VALUE) {   
-   int total = ordersTotal();
+   int total = OrdersTotal();
    for (int i=0;i<total;i++) vstopSetOrder(name,stoploss,takeprofit,i,magic,SELECT_BY_POS);
 }
 
 void vstopSetOrder(string name,double stoploss,double takeprofit,int ticket=0,int magic=EMPTY_VALUE,int select=SELECT_BY_TICKET)   {
    if (magic==EMPTY_VALUE) magic = serverMagic;   
-   if (orderSelect(ticket,select)) vstopSet(name,stoploss,takeprofit);
+   if (OrderSelect(ticket,select)) vstopSet(name,stoploss,takeprofit);
 }
 
 void vstopSet(string name,double vstopsetStoploss,double vstopsetTakeprofit)   {
@@ -52,14 +52,14 @@ void vstopSet(string name,double vstopsetStoploss,double vstopsetTakeprofit)   {
       clr_sl = vstopShortStopLossColor;
       clr_tp = vstopShortTakeProfitColor;
    }   
-   if (vstopStopLossMode>0 && mathAbs(vstopsetStoploss)>0) vstopSetCreate(name,vstopStopLossName,vstopsetStoploss,MODE_STOPLOSS,clr_sl);
-   if (vstopTakeProfitMode>0 && mathAbs(vstopsetTakeprofit)>0) vstopSetCreate(name,vstopTakeProfitName,vstopsetTakeprofit,MODE_TAKEPROFIT,clr_tp);
+   if (vstopStopLossMode>0 && MathAbs(vstopsetStoploss)>0) vstopSetCreate(name,vstopStopLossName,vstopsetStoploss,MODE_STOPLOSS,clr_sl);
+   if (vstopTakeProfitMode>0 && MathAbs(vstopsetTakeprofit)>0) vstopSetCreate(name,vstopTakeProfitName,vstopsetTakeprofit,MODE_TAKEPROFIT,clr_tp);
 }
 
 void vstopSetCreate(string& name,string type,double& val,int stoptype,color clr)  {
    double v,stop;
    int temp,mode;  
-   if (objectFind(name+type+orderTicket)==-1) {    
+   if (ObjectFind(name+type+orderTicket)==-1) {    
       if (stoptype==MODE_STOPLOSS)  {                  
          stop = orderStopLoss;
          mode = vstopStopLossMode;
@@ -79,18 +79,18 @@ void vstopSetCreate(string& name,string type,double& val,int stoptype,color clr)
       }
       if (!pricesIsEqual(v,0)) hlineCreate(name+type+orderTicket,v);
       else hlineCreate(name+type+orderTicket,temp);      
-      if (objectFind(name+type+orderTicket)!=-1) objectSet(name+type+orderTicket,OBJPROP_COLOR,clr);         
+      if (ObjectFind(name+type+orderTicket)!=-1) ObjectSet(name+type+orderTicket,OBJPROP_COLOR,clr);         
    }
 }
 
 void vstopUpdateLoop(string name,double stoploss,double takeprofit,int magic=EMPTY_VALUE) {   
-   int total = ordersTotal();
+   int total = OrdersTotal();
    for (int i=0;i<total;i++) vstopUpdateOrder(name,stoploss,takeprofit,i,magic,SELECT_BY_POS);
 }
 
 void vstopUpdateOrder(string name,double stoploss,double takeprofit,int ticket,int magic=EMPTY_VALUE,int select=SELECT_BY_TICKET)   {
    if (magic==EMPTY_VALUE) magic = serverMagic;  
-   if (orderSelect(ticket,select)) vstopUpdate(name,stoploss,takeprofit);       
+   if (OrderSelect(ticket,select)) vstopUpdate(name,stoploss,takeprofit);       
 }
 
 void vstopUpdate(string name,double stoploss,double takeprofit)   {
@@ -100,13 +100,13 @@ void vstopUpdate(string name,double stoploss,double takeprofit)   {
 
 
 void vstopAdjustLoop(string name,int magic=EMPTY_VALUE){
-   int total = ordersTotal();
+   int total = OrdersTotal();
    for (int i=0;i<total;i++) vstopAdjustOrder(name,i,magic,SELECT_BY_POS);
 }
 
 void vstopAdjustOrder(string name,int ticket,int magic=EMPTY_VALUE,int select=SELECT_BY_TICKET)   {
    if (magic==EMPTY_VALUE) magic = serverMagic; 
-   if (orderSelect(ticket,select)) vstopAdjust(name); 
+   if (OrderSelect(ticket,select)) vstopAdjust(name); 
 }
 
 void vstopAdjust(string name)   {
@@ -145,13 +145,13 @@ void vstopAdjustSendToBroker(bool& sendtobroker,double& stoploss,double& takepro
 }
 
 void vstopCheckLoop(string name,int magic=EMPTY_VALUE){   
-   int total = ordersTotal();
+   int total = OrdersTotal();
    for (int i=0;i<total;i++) vstopCheckOrder(name,i,magic,SELECT_BY_POS);
 }
 
 void vstopCheckOrder(string name,int ticket,int magic=EMPTY_VALUE,int select=SELECT_BY_TICKET)  {
    if (magic==EMPTY_VALUE) magic = serverMagic; 
-   if (orderSelect(ticket,select)) vstopCheck(name);
+   if (OrderSelect(ticket,select)) vstopCheck(name);
 }
 
 void vstopCheck(string name,double lots=0) {
@@ -195,17 +195,17 @@ bool vstopCheckClose(string& name,double& val,string type,double& lots)   {
 }
 
 void vstopCleanLoop() {
-   int total = objectsTotal();
+   int total = ObjectsTotal();
    string name;
    int ticket;
    for (int i=0;i<total;i++)   {
-      name = objectName(i);  
+      name = ObjectName(i);  
       if (name=="") continue;
-      if (objectType(name)!=OBJ_HLINE) continue;
+      if (ObjectType(name)!=OBJ_HLINE) continue;
       ticket = stringExtractInt(name);   
-      if (orderSelect(ticket,SELECT_BY_TICKET))      {
+      if (OrderSelect(ticket,SELECT_BY_TICKET))      {
          if (orderCloseTime>0) 
-            if (objectDelete(name))
+            if (ObjectDelete(name))
                Print(StringConcatenate("vstopCleanLoop(): ",name," deleted"));
       }
    }
@@ -222,15 +222,15 @@ void vstopClean(string name) {
 
 bool vstopInherit(int newticket, int oldticket)   {
    if (newticket<=0) return(false);
-   int total = objectsTotal();
-   string n = doubleToStr(newticket,0);
-   string o = doubleToStr(oldticket,0);
+   int total = ObjectsTotal();
+   string n = DoubleToStr(newticket,0);
+   string o = DoubleToStr(oldticket,0);
    for (int i=0;i<total;i++)   {
-      string newname,name = objectName(i);
+      string newname,name = ObjectName(i);
       if (name=="") continue;    
-      if (objectType(name)!=OBJ_HLINE) continue;
+      if (ObjectType(name)!=OBJ_HLINE) continue;
       double val = hlineGet(name,OBJPROP_PRICE1);
-      if (stringFind(name,vstopSep+o)>=0)  {
+      if (StringFind(name,vstopSep+o)>=0)  {
          newname = stringReplace(name,vstopSep+o,vstopSep+n);
          if (objectClone(newname,name)) total++;
       }   
@@ -239,7 +239,7 @@ bool vstopInherit(int newticket, int oldticket)   {
 }
 
 int ticketGet()  {
-   int total = ordersTotal();
+   int total = OrdersTotal();
    for (int i=0;i<total;i++)  {
       if (!OrderSelect(i,SELECT_BY_POS)) continue;
       if (OrderMagicNumber()==serverMagic) return(OrderTicket());

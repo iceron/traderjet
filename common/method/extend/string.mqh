@@ -21,21 +21,21 @@
 
 string stringLeft(string str,int len)   {
    if (len==0) return("");
-   return(stringSub(str,0,len));  
+   return(StringSubstr(str,0,len));  
 }
 
 string stringRight(string str,int start)  {
-   int size = stringLen(str);
+   int size = StringLen(str);
    if (size>start) return("");
-   return(stringSub(str,start,0));  
+   return(StringSubstr(str,start,0));  
 }
 
 string stringReplace(string str,string match,string rep)   {
-   int i = stringLen(str)-1;
+   int i = StringLen(str)-1;
    while (i>=0)   {
-      int len = stringLen(match);
+      int len = StringLen(match);
       string ch = "";
-      ch = stringSub(str,i,len);     
+      ch = StringSubstr(str,i,len);     
       if (ch==match) {
          string right = stringRight(str,i+len);
          string left = stringLeft(str,i);
@@ -47,7 +47,7 @@ string stringReplace(string str,string match,string rep)   {
 }
 
 string stringInsert(string str,string ins,int pos)   {
-   int i = stringLen(str)-1;
+   int i = StringLen(str)-1;
    string right = stringRight(str,pos);
    string left = stringLeft(str,pos);
    str = StringConcatenate(left,ins,right);
@@ -55,19 +55,19 @@ string stringInsert(string str,string ins,int pos)   {
 }
 
 int stringExtractInt(string str)   {
-   int i,len = stringLen(str)-1;
+   int i,len = StringLen(str)-1;
    string s = "";
    while (i<=len)   {
       string ch = "";
-      ch = stringSub(str,i,1);      
+      ch = StringSubstr(str,i,1);      
       if (charIsNumeric(ch)) StringConcatenate(s,ch);          
       i++;
    }
-   return(stringToInteger(s));
+   return(StringToInteger(s));
 }
 
 string stringConvert(string str,int mode)   {
-   int upper,lower,count,i=stringLen(str)-1;
+   int upper,lower,count,i=StringLen(str)-1;
    if (mode==MODE_LOWER)   {
       upper = 90;
       lower = 65; 
@@ -79,9 +79,9 @@ string stringConvert(string str,int mode)   {
       count = -32;       
    }     
    while (i>=0)   {
-      int code = stringGetChar(str,i);
+      int code = StringGetChar(str,i);
       if (code>=lower && code<=upper)
-         str = stringSetChar(str,i,code+count);    
+         str = StringSetChar(str,i,code+count);    
       i--;
    }
    return(str);
@@ -96,11 +96,11 @@ string stringToUpper(string str)  {
 }
 
 string stringExtractUpper(string str)   {
-   int i,len = stringLen(str);
+   int i,len = StringLen(str);
    string s = "";
    while (i<len)   {
       string ch = "";
-      ch = stringSub(str,i,1);     
+      ch = StringSubstr(str,i,1);     
       if (charIsUpper(ch)) StringConcatenate(s,ch);    
       i++;
    }
@@ -108,11 +108,11 @@ string stringExtractUpper(string str)   {
 }
 
 string stringExtractNoUpper(string str)   {
-   int i,len = stringLen(str);
+   int i,len = StringLen(str);
    string s = "";
    while (i<len)   {
       string ch = "";
-      ch = stringSub(str,i,1);    
+      ch = StringSubstr(str,i,1);    
       if (!charIsUpper(ch)) StringConcatenate(s,ch);    
       i++;
    }
@@ -120,11 +120,11 @@ string stringExtractNoUpper(string str)   {
 }
 
 string stringExtractLower(string str)   {
-   int i,len = stringLen(str);
+   int i,len = StringLen(str);
    string s = "";
    while (i<len)   {
       string ch = "";
-      ch = stringSub(str,i,1);   
+      ch = StringSubstr(str,i,1);   
       if (charIsLower(ch)) s = StringConcatenate(s,ch);    
       i++;
    }
@@ -132,11 +132,11 @@ string stringExtractLower(string str)   {
 }
 
 string stringExtractNoLower(string str)   {
-   int i,len = stringLen(str);
+   int i,len = StringLen(str);
    string s = "";
    while (i<len)   {
       string ch = "";
-      ch = stringSub(str,i,1);  
+      ch = StringSubstr(str,i,1);  
       if (!charIsLower(ch)) s = StringConcatenate(s,ch);     
       i++;
    }
@@ -144,7 +144,7 @@ string stringExtractNoLower(string str)   {
 }
 
 bool stringIsEmpty(string str)   {
-   if (stringLen(str)==0) return(true);
+   if (StringLen(str)==0) return(true);
    return(false);
 }
 
@@ -170,12 +170,12 @@ bool charIsLower(string ch)   {
 }
 
 bool charIsBounded(string ch,int lower,int upper)   {
-   int val = stringGetChar(ch);
+   int val = StringGetChar(ch,0);
    if (val>=lower && val<=upper) return(true);
    return(false);
 }
 
 bool charIsWhiteSpace(string str)   {
-   if (stringGetChar(str,0)==32) return(true);
+   if (StringGetChar(str,0)==32) return(true);
    return(false);
 }

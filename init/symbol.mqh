@@ -20,36 +20,36 @@
  */
 
 void symbolSet(string symbol=""){
-   if (symbol=="") tickSymbol = symbol();
+   if (symbol=="") tickSymbol = Symbol();
    else tickSymbol = symbol;
 }
 
 void symbolGet(){
-   refreshRates();   
-   tickTime              = marketInfo(tickSymbol, MODE_TIME);   
-   tickPoint             = marketInfo(tickSymbol, MODE_POINT);
-   tickDigits            = marketInfo(tickSymbol, MODE_DIGITS);
-   tickSpread            = marketInfo(tickSymbol, MODE_SPREAD);   
-   tickBid               = NormalizeDouble(marketInfo(tickSymbol, MODE_BID), tickDigits);
-   tickAsk               = NormalizeDouble(marketInfo(tickSymbol, MODE_ASK), tickDigits);   
-   tickStopLevel         = marketInfo(tickSymbol, MODE_STOPLEVEL);
-   tickLotSize           = marketInfo(tickSymbol, MODE_LOTSIZE);
-   tickValue             = marketInfo(tickSymbol, MODE_TICKVALUE);
-   tickSize              = marketInfo(tickSymbol, MODE_TICKSIZE);
-   tickSwapLong          = marketInfo(tickSymbol, MODE_SWAPLONG);
-   tickSwapShort         = marketInfo(tickSymbol, MODE_SWAPSHORT);
-   tickStarting          = marketInfo(tickSymbol, MODE_STARTING);
-   tickTradeAllowed      = marketInfo(tickSymbol, MODE_TRADEALLOWED);
-   tickExpiration        = marketInfo(tickSymbol, MODE_EXPIRATION);
-   tickMinLot            = marketInfo(tickSymbol, MODE_MINLOT);
-   tickLotStep           = marketInfo(tickSymbol, MODE_LOTSTEP);
-   tickMaxLot            = marketInfo(tickSymbol, MODE_MAXLOT);
-   tickSwapType          = marketInfo(tickSymbol, MODE_SWAPTYPE);
-   tickProfitCalcMode    = marketInfo(tickSymbol, MODE_PROFITCALCMODE);
-   tickMarginCalcMode    = marketInfo(tickSymbol, MODE_MARGINCALCMODE);
-   tickMarginMaintenance = marketInfo(tickSymbol, MODE_MARGINMAINTENANCE);
-   tickMarginRequired    = marketInfo(tickSymbol, MODE_MARGINREQUIRED);
-   tickFreezeLevel       = marketInfo(tickSymbol, MODE_FREEZELEVEL);   
+   RefreshRates();   
+   tickTime              = MarketInfo(tickSymbol, MODE_TIME);   
+   tickPoint             = MarketInfo(tickSymbol, MODE_POINT);
+   tickDigits            = MarketInfo(tickSymbol, MODE_DIGITS);
+   tickSpread            = MarketInfo(tickSymbol, MODE_SPREAD);   
+   tickBid               = NormalizeDouble(MarketInfo(tickSymbol, MODE_BID), tickDigits);
+   tickAsk               = NormalizeDouble(MarketInfo(tickSymbol, MODE_ASK), tickDigits);   
+   tickStopLevel         = MarketInfo(tickSymbol, MODE_STOPLEVEL);
+   tickLotSize           = MarketInfo(tickSymbol, MODE_LOTSIZE);
+   tickValue             = MarketInfo(tickSymbol, MODE_TICKVALUE);
+   tickSize              = MarketInfo(tickSymbol, MODE_TICKSIZE);
+   tickSwapLong          = MarketInfo(tickSymbol, MODE_SWAPLONG);
+   tickSwapShort         = MarketInfo(tickSymbol, MODE_SWAPSHORT);
+   tickStarting          = MarketInfo(tickSymbol, MODE_STARTING);
+   tickTradeAllowed      = MarketInfo(tickSymbol, MODE_TRADEALLOWED);
+   tickExpiration        = MarketInfo(tickSymbol, MODE_EXPIRATION);
+   tickMinLot            = MarketInfo(tickSymbol, MODE_MINLOT);
+   tickLotStep           = MarketInfo(tickSymbol, MODE_LOTSTEP);
+   tickMaxLot            = MarketInfo(tickSymbol, MODE_MAXLOT);
+   tickSwapType          = MarketInfo(tickSymbol, MODE_SWAPTYPE);
+   tickProfitCalcMode    = MarketInfo(tickSymbol, MODE_PROFITCALCMODE);
+   tickMarginCalcMode    = MarketInfo(tickSymbol, MODE_MARGINCALCMODE);
+   tickMarginMaintenance = MarketInfo(tickSymbol, MODE_MARGINMAINTENANCE);
+   tickMarginRequired    = MarketInfo(tickSymbol, MODE_MARGINREQUIRED);
+   tickFreezeLevel       = MarketInfo(tickSymbol, MODE_FREEZELEVEL);   
    tickSymbolRaw        = symbolRaw(tickSymbol);  
    tickSymbolPrefix     = symbolPrefix(tickSymbol,tickSymbolRaw);
    tickSymbolSuffix     = symbolSuffix(tickSymbol,tickSymbolRaw);

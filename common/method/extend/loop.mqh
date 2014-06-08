@@ -20,7 +20,7 @@
  */
 
 void orderLoop(int magic=EMPTY_VALUE,int type=CMD_ALL) {   
-   int total = ordersTotal();
+   int total = OrdersTotal();
    if (magic==EMPTY_VALUE) magic = serverMagic;
    for (int i=0;i<total;i++)   {
       if (!cOrderSelect(i,SELECT_BY_POS,MODE_TRADES)) continue;
@@ -30,7 +30,7 @@ void orderLoop(int magic=EMPTY_VALUE,int type=CMD_ALL) {
 }
 
 void orderLoopHistory(int total,int magic=EMPTY_VALUE,int type=CMD_ALL) {   
-   if (isTesting()) total = ordersHistoryTotal();
+   if (IsTesting()) total = OrdersHistoryTotal();
    if (magic==EMPTY_VALUE) magic = serverMagic;
    for (int i=0;i<total;i++)   {
       if (!cOrderSelect(i,SELECT_BY_POS,MODE_HISTORY)) continue;      

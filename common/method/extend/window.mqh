@@ -25,5 +25,5 @@ bool windowScreenShotNew(string& filename,int x,int y,int start=-1,int scale=-1,
       i++;
       filename = StringConcatenate(filename,i);
    }
-   return(windowScreenShot(filename,x,y,start,scale,mode));
+   return(WindowScreenShot(filename,x,y,start,scale,mode));
 }

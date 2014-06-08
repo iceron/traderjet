@@ -29,4 +29,4 @@ objectsDelete("p2");
 dashEADelete();
 
 //COMMENT DEINIT
-comment("");
+Comment("");

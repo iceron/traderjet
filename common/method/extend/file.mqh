@@ -21,9 +21,9 @@
 
 bool fileExists(string filename) {
    bool res;
-   int handle = fileOpen(filename,FILE_READ);
+   int handle = FileOpen(filename,FILE_READ);
    if (handle>-1) res = true;
-   fileClose(handle);
+   FileClose(handle);
    return(res);
 }
 
@@ -33,13 +33,13 @@ int fileOpenNew(string& filename,int mode,int delim=';')  {
       i++;
       filename = StringConcatenate(filename,i);
    }
-   return(fileOpen(filename,mode,delim));
+   return(FileOpen(filename,mode,delim));
 }
 
 bool filePutContents(string filename,int mode,int delimiter=';',string str="")   {
-   int handle = fileOpen(filename,mode,delimiter);
-   int ret = fileWrite(handle,str);
-   fileClose(handle);
+   int handle = FileOpen(filename,mode,delimiter);
+   int ret = FileWrite(handle,str);
+   FileClose(handle);
    if (ret>=0) return(true);
    return(false);
 }

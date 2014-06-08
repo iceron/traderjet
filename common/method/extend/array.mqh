@@ -192,38 +192,38 @@ int arrayInitializeColor(color& arr[],int value) {
 }  
 
 void stringToDoubleArray(string str, double& arr[],string delim=",",double init=0.0) { 
-   int strLen = stringLen(str);
+   int strLen = StringLen(str);
    if (strLen==0) return;
    int i,j;
    
-   arrayInitialize(arr,init);
+   ArrayInitialize(arr,init);
 
    while (i<strLen)   {
-      int delimNext = stringFind(str,delim,i);    
+      int delimNext = StringFind(str,delim,i);    
       if (delimNext==-1) {
-         arr[j] = stringToDouble(stringSub(str,i));
+         arr[j] = StringToDouble(StringSubstr(str,i));
          break;  
       }   
-      arr[j] = stringToDouble(stringSub(str,i,delimNext-i));
+      arr[j] = StringToDouble(StringSubstr(str,i,delimNext-i));
       j++;      
       i = delimNext+1;
    } 
 }
 
 void stringToIntArray(string str, int& arr[],string delim=",",int init=0)   { 
-   int strLen = stringLen(str);
+   int strLen = StringLen(str);
    if (strLen==0) return;
    int i,j;
       
    arrayInitializeInt(arr,init);
 
    while (i<strLen)   {
-      int delimNext = stringFind(str,delim,i);   
+      int delimNext = StringFind(str,delim,i);   
       if (delimNext==-1)   {
-         arr[j] = stringToDouble(stringSub(str,i));
+         arr[j] = StringToDouble(StringSubstr(str,i));
          break;   
       }   
-      arr[j] = stringToDouble(stringSub(str,i,delimNext-i));
+      arr[j] = StringToDouble(StringSubstr(str,i,delimNext-i));
       j++;      
       i = delimNext+1;
    } 
@@ -231,7 +231,7 @@ void stringToIntArray(string str, int& arr[],string delim=",",int init=0)   {
 }
 
 void stringToArray(string str, string& arr[],string delim=",",string init="")  { 
-   int strLen = stringLen(str);
+   int strLen = StringLen(str);
    if (strLen==0) return;
    int i,j;
    
@@ -239,12 +239,12 @@ void stringToArray(string str, string& arr[],string delim=",",string init="")  {
       arr[z] = init;
 
    while (i<strLen)   {
-      int delimNext = stringFind(str,delim,i);
+      int delimNext = StringFind(str,delim,i);
       if (delimNext==-1)   {
-         arr[j] = stringSub(str,i);
+         arr[j] = StringSubstr(str,i);
          break;      
       }   
-      arr[j] = stringSub(str,i,delimNext-i);
+      arr[j] = StringSubstr(str,i,delimNext-i);
       j++;      
       i = delimNext+1;
    } 
@@ -252,19 +252,19 @@ void stringToArray(string str, string& arr[],string delim=",",string init="")  {
 }
 
 void stringToColorArray(string str, color& arr[],string delim=",",int init=CLR_NONE)   { 
-   int strLen = stringLen(str);
+   int strLen = StringLen(str);
    if (strLen==0) return;
    int i,j;
       
    arrayInitializeColor(arr,init);
 
    while (i<strLen)   {
-      int delimNext = stringFind(str,delim,i);   
+      int delimNext = StringFind(str,delim,i);   
       if (delimNext==-1)   {
-         arr[j] = stringToColor(stringSub(str,i));
+         arr[j] = StringToColor(StringSubstr(str,i));
          break;   
       }   
-      arr[j] = stringToColor(stringSub(str,i,delimNext-i));
+      arr[j] = StringToColor(StringSubstr(str,i,delimNext-i));
       j++;      
       i = delimNext+1;
    } 

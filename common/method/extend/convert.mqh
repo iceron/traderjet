@@ -373,9 +373,9 @@ bool stringToBool(string str)  {
 
 // str <-> time
 void timeExtract(string tm,int& hour,int& min) {
-   datetime dt = strToTime(tm);
-   hour = timeHour(dt);
-   min = timeMinute(dt);
+   datetime dt = StrToTime(tm);
+   hour = TimeHour(dt);
+   min = TimeMinute(dt);
 }
 
 int strToTimeFrame(string tm)
@@ -408,25 +408,25 @@ string timeframeToString(int tm)
 }
 
 string priceFormat(double v)  {
-   return(doubleToStr(v,tickDigits));
+   return(DoubleToStr(v,tickDigits));
 }
 
 string volumeFormat(double v) {
-   return(doubleToStr(v,tickVolumePrecision));
+   return(DoubleToStr(v,tickVolumePrecision));
 }
 
 double cNormalizeDouble(double value,int mode=DOUBLE_PRICE) {
    string dblstr;
    int precision;
    if (mode==DOUBLE_PRICE)   {
-      dblstr = doubleToStr(value,tickDigits);
-      return(stringToDouble(dblstr));
+      dblstr = DoubleToStr(value,tickDigits);
+      return(StringToDouble(dblstr));
    }
    else if (mode==DOUBLE_VOLUME)   {
       if (ticks(value)>ticks(tickMinLot)) precision = serverPrecision(tickLotStep); 
       else precision = serverPrecision(tickMinLot);
-      dblstr = doubleToStr(value,precision);
-      return(stringToDouble(dblstr));
+      dblstr = DoubleToStr(value,precision);
+      return(StringToDouble(dblstr));
    }
    return(0);
 }

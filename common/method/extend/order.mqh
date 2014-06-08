@@ -62,7 +62,7 @@ bool orderIsLong(int ticket=-1)  {
 
 bool cOrderSelect(int index,int select=SELECT_BY_POS,int pool=MODE_TRADES){
    bool res;
-   res = orderSelect(index,select,pool);
+   res = OrderSelect(index,select,pool);
    if (res)   {      
       orderInfo();
       if (orderMagic!=orderSelectMagic) 
@@ -76,25 +76,25 @@ bool cOrderSelect(int index,int select=SELECT_BY_POS,int pool=MODE_TRADES){
 }
 
 void orderInfo(){
-   orderClosePrice = orderClosePrice();
-   orderOpenPrice = orderOpenPrice();  
-   orderCommission = orderCommission();
-   orderVolume = orderLots();
-   orderProfit = orderProfit();
-   orderStopLoss = orderStopLoss();
-   orderTakeProfit = orderTakeProfit();
-   orderSwap = orderSwap();
+   orderClosePrice = OrderClosePrice();
+   orderOpenPrice = OrderOpenPrice();  
+   orderCommission = OrderCommission();
+   orderVolume = OrderLots();
+   orderProfit = OrderProfit();
+   orderStopLoss = OrderStopLoss();
+   orderTakeProfit = OrderTakeProfit();
+   orderSwap = OrderSwap();
    
-   orderSymbol = orderSymbol();
-   orderComment = orderComment();
+   orderSymbol = OrderSymbol();
+   orderComment = OrderComment();
     
-   orderExpiration = orderExpiration();
-   orderCloseTime = orderCloseTime();
-   orderOpenTime = orderOpenTime();
+   orderExpiration = OrderExpiration();
+   orderCloseTime = OrderCloseTime();
+   orderOpenTime = OrderOpenTime();
    
-   orderMagic = orderMagicNumber();
-   orderTicket = orderTicket();
-   orderType = orderType();
+   orderMagic = OrderMagicNumber();
+   orderTicket = OrderTicket();
+   orderType = OrderType();
    orderProfitTicks = orderProfitTicks();
 }
 /*
@@ -197,10 +197,10 @@ bool orderInGroup(int type,int ordType){
 
 int orderCount(int pool=MODE_TRADES, int mode=CMD_ALL){
    int count,total;
-   if (pool==MODE_TRADES) total = ordersTotal();
-   else total = ordersHistoryTotal();
+   if (pool==MODE_TRADES) total = OrdersTotal();
+   else total = OrdersHistoryTotal();
    for (int i=0;i<total;i++)   {
-      if (!orderSelect(i,SELECT_BY_POS,pool)) continue;
+      if (!OrderSelect(i,SELECT_BY_POS,pool)) continue;
       else 
       {
          if (mode==CMD_ALL) count++;
@@ -215,9 +215,9 @@ int orderCount(int pool=MODE_TRADES, int mode=CMD_ALL){
 
 double orderProfitTicks(int ticket=-1){
    double val;
-   double size = MarketInfo(orderSymbol(),MODE_TICKSIZE);
+   double size = MarketInfo(OrderSymbol(),MODE_TICKSIZE);
    if (ticket>0 && ticket!=-1)
-      orderSelect(ticket,SELECT_BY_TICKET);
+      if (!OrderSelect(ticket,SELECT_BY_TICKET)) return(0);
    if (orderType==OP_BUY)
       val = (orderClosePrice-orderOpenPrice)/size;  
    else if (orderType==OP_SELL)
