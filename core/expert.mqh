@@ -35,30 +35,30 @@
 
 //extended functions
 
-#include <traderjet\common\method\extend\array.mqh>
-#include <traderjet\common\method\extend\common.mqh>
-#include <traderjet\common\method\extend\convert.mqh>
-#include <traderjet\common\method\extend\error.mqh>
-#include <traderjet\common\method\extend\loop.mqh>
-#include <traderjet\common\method\extend\math.mqh>
-#include <traderjet\common\method\extend\object.mqh>
-#include <traderjet\common\method\extend\order.mqh>
-#include <traderjet\common\method\extend\server.mqh>
-#include <traderjet\common\method\extend\string.mqh>
-#include <traderjet\common\method\extend\symbol.mqh>
+#include <traderjet\common\method\array.mqh>
+#include <traderjet\common\method\common.mqh>
+#include <traderjet\common\method\convert.mqh>
+#include <traderjet\common\method\error.mqh>
+#include <traderjet\common\method\loop.mqh>
+#include <traderjet\common\method\math.mqh>
+#include <traderjet\common\method\object.mqh>
+#include <traderjet\common\method\order.mqh>
+#include <traderjet\common\method\server.mqh>
+#include <traderjet\common\method\string.mqh>
+#include <traderjet\common\method\symbol.mqh>
 
-#include <traderjet\common\method\extend\timeseries.mqh>
+#include <traderjet\common\method\timeseries.mqh>
 
 //optional extended functions
-#include <traderjet\common\method\extend\account.mqh>
-#include <traderjet\common\method\extend\checkup.mqh>
-#include <traderjet\common\method\extend\file.mqh>
-#include <traderjet\common\method\extend\global.mqh>
-#include <traderjet\common\method\extend\print.mqh>
-#include <traderjet\common\method\extend\terminal.mqh>
-#include <traderjet\common\method\extend\time.mqh>
-#include <traderjet\common\method\extend\trade.mqh>
-#include <traderjet\common\method\extend\window.mqh>
+#include <traderjet\common\method\account.mqh>
+#include <traderjet\common\method\checkup.mqh>
+#include <traderjet\common\method\file.mqh>
+#include <traderjet\common\method\global.mqh>
+#include <traderjet\common\method\print.mqh>
+#include <traderjet\common\method\terminal.mqh>
+#include <traderjet\common\method\time.mqh>
+#include <traderjet\common\method\trade.mqh>
+#include <traderjet\common\method\window.mqh>
 
 //components
 #include <traderjet\component\traderjet\methods.mqh>
