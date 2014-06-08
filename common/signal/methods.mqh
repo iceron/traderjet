@@ -92,7 +92,6 @@ void signalManage(int& open,int& close,int timeframe=0)  {
       out = SIGNAL_CLOSE;
    }   
    else if (open==CMD_VOID) out = SIGNAL_VOID;
-   //dashAdd("signal.overall","overall signal status",out); 
    signalOut = out;
    if (SignalModeTradeOncePerBar && open>CMD_VOID) {
       if (newbar) last = CMD_VOID;
