@@ -36,7 +36,7 @@ void trailingStopLoss(string name,double begin,double step,double trailingstop) 
    begin *= tickFractPips;
    step *= tickFractPips;
    trailingstop *= tickFractPips;   
-   double objval = ObjectGet(name+vstopStopLossName+orderTicket,OBJPROP_PRICE1);
+   double objval = vstopGet(name+vstopStopLossName+orderTicket);
    if (objval==0) return;   
    double objvalTicks = ticks(objval);
    int openTicks = ticks(orderOpenPrice);
@@ -70,5 +70,5 @@ void trailingStopLoss(string name,double begin,double step,double trailingstop) 
 			}	
 		}
    }      
-   if (mod) ObjectSet(name+vstopStopLossName+orderTicket,OBJPROP_PRICE1,cNormalizeDouble(newPrice*tickSize));
+   if (mod) vstopSet(name+vstopStopLossName+orderTicket,cNormalizeDouble(newPrice*tickSize));
 }	

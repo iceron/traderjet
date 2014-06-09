@@ -30,14 +30,15 @@ void breakevenOrder(string name,int ticket,double target,double offset,int magic
 
 void breakeven(string name,double target,double offset=0)  {   
    if (target<=0) return;   
-   double open,val = ObjectGet(name+vstopStopLossName+orderTicket,OBJPROP_PRICE1);
+   bool mod = false;
+   double open,val = vstopGet(name+vstopStopLossName+orderTicket);
    if (val==0) return;
 	if (orderType==OP_BUY)	{
 		open = cNormalizeDouble(orderOpenPrice+offset*tickFractPoints);
 		if (ticks(orderClosePrice-orderOpenPrice)>target*tickFractPips) {
 			if (!isPriceSame(val,open))  {				
-				//if (val>open) return;
-				ObjectSet(name+vstopStopLossName+orderTicket,OBJPROP_PRICE1,open);
+				if (ticks(val)>ticks(open)) return;
+				mod = true;
 			}
 		} 
 	}
@@ -45,13 +46,11 @@ void breakeven(string name,double target,double offset=0)  {
 		open = cNormalizeDouble(orderOpenPrice-offset*tickFractPoints);
 		if (ticks(orderOpenPrice-orderClosePrice)>target*tickFractPips) {
 			if (!isPriceSame(val,open))  {				
-				//if (val<open) return;
-				ObjectSet(name+vstopStopLossName+orderTicket,OBJPROP_PRICE1,open);
+				if (ticks(val)<ticks(open)) return;
+				mod = true;
 			}
 		} 
 	}	
-	
-	Print(target," ",offset," ",OrderOpenPrice()," ",open);
-	
+	if (mod) vstopSet(name+vstopStopLossName+orderTicket,open);
 }
 

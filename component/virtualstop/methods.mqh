@@ -30,17 +30,17 @@ void vstopInit(int slmode,int tpmode)  {
    }      
 }
 
-void vstopSetLoop(string name,double stoploss,double takeprofit,int magic=EMPTY_VALUE) {   
+void vstopStartLoop(string name,double stoploss,double takeprofit,int magic=EMPTY_VALUE) {   
    int total = OrdersTotal();
-   for (int i=0;i<total;i++) vstopSetOrder(name,stoploss,takeprofit,i,magic,SELECT_BY_POS);
+   for (int i=0;i<total;i++) vstopStartOrder(name,stoploss,takeprofit,i,magic,SELECT_BY_POS);
 }
 
-void vstopSetOrder(string name,double stoploss,double takeprofit,int ticket=0,int magic=EMPTY_VALUE,int select=SELECT_BY_TICKET)   {
+void vstopStartOrder(string name,double stoploss,double takeprofit,int ticket=0,int magic=EMPTY_VALUE,int select=SELECT_BY_TICKET)   {
    if (magic==EMPTY_VALUE) magic = serverMagic;   
-   if (OrderSelect(ticket,select)) vstopSet(name,stoploss,takeprofit);
+   if (OrderSelect(ticket,select)) vstopStart(name,stoploss,takeprofit);
 }
 
-void vstopSet(string name,double vstopsetStoploss,double vstopsetTakeprofit)   {
+void vstopStart(string name,double vstopsetStoploss,double vstopsetTakeprofit)   {
    color clr_tp,clr_sl;   
    if (orderIsLong())  {
       vstopsetStoploss = -vstopsetStoploss;
@@ -52,11 +52,11 @@ void vstopSet(string name,double vstopsetStoploss,double vstopsetTakeprofit)   {
       clr_sl = vstopShortStopLossColor;
       clr_tp = vstopShortTakeProfitColor;
    }   
-   if (vstopStopLossMode>0 && MathAbs(vstopsetStoploss)>=0) vstopSetCreate(name,vstopStopLossName,vstopsetStoploss,MODE_STOPLOSS,clr_sl);
-   if (vstopTakeProfitMode>0 && MathAbs(vstopsetTakeprofit)>=0) vstopSetCreate(name,vstopTakeProfitName,vstopsetTakeprofit,MODE_TAKEPROFIT,clr_tp);
+   if (vstopStopLossMode>0 && MathAbs(vstopsetStoploss)>=0) vstopStartCreate(name,vstopStopLossName,vstopsetStoploss,MODE_STOPLOSS,clr_sl);
+   if (vstopTakeProfitMode>0 && MathAbs(vstopsetTakeprofit)>=0) vstopStartCreate(name,vstopTakeProfitName,vstopsetTakeprofit,MODE_TAKEPROFIT,clr_tp);
 }
 
-void vstopSetCreate(string& name,string type,double& val,int stoptype,color clr)  {
+void vstopStartCreate(string& name,string type,double& val,int stoptype,color clr)  {
    double v,stop;
    int temp,mode;  
    if (ObjectFind(name+type+orderTicket)==-1) {    
@@ -245,4 +245,14 @@ int ticketGet()  {
       if (OrderMagicNumber()==serverMagic) return(OrderTicket());
    }
    return(-1);
+}
+
+bool vstopSet(string name,double value)
+{
+   return(ObjectSet(name,OBJPROP_PRICE1,value));
+}
+
+double vstopGet(string name)
+{
+   return(ObjectGet(name,OBJPROP_PRICE1));
 }

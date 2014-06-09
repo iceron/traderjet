@@ -33,21 +33,23 @@ void trailingTakeProfit(string name, double begin,double step,double trailingtak
    if (trailingtake<=0) return;
    begin *= tickFractPips;
    step *= tickFractPips;
-   double val = ObjectGet(name+vstopTakeProfitName+orderTicket,OBJPROP_PRICE1);
+   double val = vstopGet(name+vstopTakeProfitName+orderTicket);
    if (val==0) return;
-	bool mod;
+	bool mod=false;
+	double take = 0;
 	if (orderType==OP_BUY) {
       if (ticks(orderClosePrice-orderOpenPrice)>=begin)	{
+         take = orderClosePrice+trailingtake*tickFractPoints;
 			if (ticks(val)<ticks(orderOpenPrice)+begin+trailingtake*tickFractPips || val==-1) mod = true;
-			else if (ticks(orderClosePrice+trailingtake*tickFractPoints)>ticks(val)+step)  mod = true;
-			if (mod) ObjectSet(name+vstopTakeProfitName+orderTicket,OBJPROP_PRICE1,orderClosePrice+trailingtake*tickFractPoints);
+			else if (ticks(take)>ticks(val)+step)  mod = true;
 		}
    }
 	else if (orderType==OP_SELL) {
       if (ticks(orderOpenPrice-orderClosePrice)>=begin)	{
+         take = orderClosePrice-trailingtake*tickFractPoints;
 			if (ticks(val)>ticks(orderOpenPrice)-begin-trailingtake*tickFractPips || val==-1) mod = true;
-			else if (ticks(orderClosePrice-trailingtake*tickFractPoints)<ticks(val)-step)  mod = true;			
-			if (mod) ObjectSet(name+vstopTakeProfitName+orderTicket,OBJPROP_PRICE1,orderClosePrice-trailingtake*tickFractPoints);
+			else if (ticks(take)<ticks(val)-step)  mod = true;			
 		}
    }
+   if (mod) vstopSet(name+vstopTakeProfitName+orderTicket,take);
 }
