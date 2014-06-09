@@ -19,37 +19,39 @@
  *  @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
  */
 
-void breakevenLoop(string name,double breakeven,int magic=-1,int type=CMD_MARKET,string name="stealth")  {
-   bool mod;
-   int i,total = ordersTotal();
-   for (i=0;i<total;i++) breakevenOrder(i,SELECT_BY_POS,breakeven,magic,type); 
+void breakevenLoop(string name,double target,double offset,int magic=-1)  {
+   int i,total = OrdersTotal();
+   for (i=0;i<total;i++) breakevenOrder(name,i,target,offset,magic,SELECT_BY_POS); 
 }
 
-void breakevenOrder(string name,int ticket,int select,double breakeven,int magic,int type=CMD_MARKET,string name="stealth"){
-   if (cOrderSelect(ticket,select,MODE_TRADES)) breakeven(breakeven);
+void breakevenOrder(string name,int ticket,double target,double offset,int magic,int select=SELECT_BY_TICKET){
+   if (cOrderSelect(ticket,select,MODE_TRADES)) breakeven(name,target,offset);
 }
 
-void breakeven(string name,double breakeven,double target=0,string name="stealth")  {   
-   if (breakeven<=0) return;
-   double open,val = objectGet(name+vstopStopLossName+orderTicket,OBJPROP_PRICE1);
+void breakeven(string name,double target,double offset=0)  {   
+   if (target<=0) return;   
+   double open,val = ObjectGet(name+vstopStopLossName+orderTicket,OBJPROP_PRICE1);
    if (val==0) return;
 	if (orderType==OP_BUY)	{
-		open = normalizeDouble(orderOpenPrice+target*tickFractPoints);
-		if (ticks(orderClosePrice-orderOpenPrice)>breakeven*tickFractPips) {
-			if (!pricesIsEqual(val,open))  {				
-				if (val>-1 && val>open) return;
-				objectSet(name+vstopStopLossName+orderTicket,OBJPROP_PRICE1,open);
+		open = cNormalizeDouble(orderOpenPrice+offset*tickFractPoints);
+		if (ticks(orderClosePrice-orderOpenPrice)>target*tickFractPips) {
+			if (!isPriceSame(val,open))  {				
+				//if (val>open) return;
+				ObjectSet(name+vstopStopLossName+orderTicket,OBJPROP_PRICE1,open);
 			}
 		} 
 	}
 	else if (orderType==OP_SELL)	{
-		open = normalizeDouble(orderOpenPrice-target*tickFractPoints);
-		if (ticks(orderOpenPrice-orderClosePrice)>breakeven*tickFractPips) {
-			if (!pricesIsEqual(val,open))  {				
-				if (val>-1 && val<open) return;
-				objectSet(name+vstopStopLossName+orderTicket,OBJPROP_PRICE1,open);
+		open = cNormalizeDouble(orderOpenPrice-offset*tickFractPoints);
+		if (ticks(orderOpenPrice-orderClosePrice)>target*tickFractPips) {
+			if (!isPriceSame(val,open))  {				
+				//if (val<open) return;
+				ObjectSet(name+vstopStopLossName+orderTicket,OBJPROP_PRICE1,open);
 			}
 		} 
 	}	
+	
+	Print(target," ",offset," ",OrderOpenPrice()," ",open);
+	
 }
 

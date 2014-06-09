@@ -18,14 +18,62 @@
  *
  *  @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
  */
+bool alertSoundOn = false;
+bool alertEmailOn = false;
+bool alertPopupOn = false;
+bool alertPushOn = false;
+string alertSound = "alert.wav";
 
-void sendAlert(string text="",string subject="",string sound="alert.wav") {
-   if (AlertSoundOn)
-      playSound(AlertSound);
-   if (AlertEmailOn)
+void alertInit()
+{
+   alertSoundOn = AlertSoundOn;
+   alertEmailOn = AlertEmailOn;
+   alertPopupOn = AlertPopupOn;
+   alertPushOn = AlertPushOn;
+   alertSound = AlertSound;
+}
+
+void alertSend(int id,string subject="",string text="") 
+{      
+   if (alertSoundOn)
+      playSound();
+   if (alertEmailOn)
       sendMail(subject,text);   
-   if (AlertPopupOn)
+   if (alertPopupOn)
       alert(text);    
-   if (AlertPushOn)
-      sendNotification(text);     
+   if (alertPushOn)
+      sendNotification(text);   
+}
+
+bool playSound()
+{
+   bool res;
+   res = PlaySound(alertSound);
+   if (!res)
+      Print("playSound(): sound filename does not exist");
+   return(res);
+}
+
+bool sendMail(string subject="",string text="")
+{
+   bool res;
+   if (TerminalInfoInteger(TERMINAL_EMAIL_ENABLED))
+      res = SendMail(subject,text);
+   else Print("sendMail(): not permitted to send emails");
+   return(res);
+}
+
+void alert(string subject="",string text="")
+{
+   Alert(StringConcatenate(text," ",subject));
+}
+
+
+bool sendNotification(string text="",string subject="")
+{
+   bool res;
+   if (TerminalInfoInteger(TERMINAL_NOTIFICATIONS_ENABLED))
+      res = SendNotification(StringConcatenate(text," ",subject));
+   else Print("sendMail(): not permitted to send emails");
+   return(res);
 }

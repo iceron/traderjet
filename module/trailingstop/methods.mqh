@@ -19,21 +19,21 @@
  *  @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
  */
 
-void trailingStopLossLoop(string name,double start,double step,double trailingstop,int magic=EMPTY_VALUE) {   
+void trailingStopLossLoop(string name,double begin,double step,double trailingstop,int magic=EMPTY_VALUE) {   
    int total = OrdersTotal();
-   for (int i=0;i<total;i++) trailingStopLossOrder(i,start,step,trailingstop,magic,SELECT_BY_POS,name);
+   for (int i=0;i<total;i++) trailingStopLossOrder(i,begin,step,trailingstop,magic,SELECT_BY_POS);
 }
 
-void trailingStopLossOrder(string name,int ticket,double start,double step,double trailingstop,int magic=EMPTY_VALUE,int select=SELECT_BY_TICKET)   {
+void trailingStopLossOrder(string name,int ticket,double begin,double step,double trailingstop,int magic=EMPTY_VALUE,int select=SELECT_BY_TICKET)   {
    if (magic==EMPTY_VALUE) magic = serverMagic;  
-   if (cOrderSelect(ticket,select)) trailingStopLoss(start,step,trailingstop,name);       
+   if (cOrderSelect(ticket,select)) trailingStopLoss(begin,step,trailingstop,name);       
 }
 
-void trailingStopLoss(string name,double start,double step,double trailingstop)   {
+void trailingStopLoss(string name,double begin,double step,double trailingstop)   {
    if (trailingstop<=0) return;
 	bool mod;
 	double newPrice,newPrice1,newPrice2;
-   start *= tickFractPips;
+   begin *= tickFractPips;
    step *= tickFractPips;
    trailingstop *= tickFractPips;   
    double objval = ObjectGet(name+vstopStopLossName+orderTicket,OBJPROP_PRICE1);
@@ -42,10 +42,10 @@ void trailingStopLoss(string name,double start,double step,double trailingstop) 
    int openTicks = ticks(orderOpenPrice);
    int closeTicks = ticks(orderClosePrice);
    if (orderType==OP_BUY) {
-      if (orderProfitTicks>=start)	{
-         newPrice1 = openTicks+start-trailingstop;
+      if (orderProfitTicks>=begin)	{
+         newPrice1 = openTicks+begin-trailingstop;
          newPrice2 = closeTicks-trailingstop;
-			if ((objvalTicks<newPrice1 && newPrice2<=openTicks+start+step) || (objval==-1))  {
+			if ((objvalTicks<newPrice1 && newPrice2<=openTicks+begin+step) || (objval==-1))  {
 			   newPrice = newPrice1;
 				mod = true;
 	      }			
@@ -57,10 +57,10 @@ void trailingStopLoss(string name,double start,double step,double trailingstop) 
    }
    
    else if (orderType==OP_SELL) {
-		if (orderProfitTicks>=start)	{
-		   newPrice1 = openTicks-start+trailingstop;
+		if (orderProfitTicks>=begin)	{
+		   newPrice1 = openTicks-begin+trailingstop;
          newPrice2 = closeTicks+trailingstop;
-			if ((objvalTicks>newPrice1 && newPrice2>=openTicks-start-step) || (objval==-1))  {
+			if ((objvalTicks>newPrice1 && newPrice2>=openTicks-begin-step) || (objval==-1))  {
 			   newPrice = newPrice1;
 				mod = true;
 			}	

@@ -39,7 +39,6 @@
 //extended functions
 
 #include <traderjet\common\method\array.mqh>
-#include <traderjet\common\method\common.mqh>
 #include <traderjet\common\method\convert.mqh>
 #include <traderjet\common\method\error.mqh>
 #include <traderjet\common\method\loop.mqh>

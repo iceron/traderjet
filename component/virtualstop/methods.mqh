@@ -52,8 +52,8 @@ void vstopSet(string name,double vstopsetStoploss,double vstopsetTakeprofit)   {
       clr_sl = vstopShortStopLossColor;
       clr_tp = vstopShortTakeProfitColor;
    }   
-   if (vstopStopLossMode>0 && MathAbs(vstopsetStoploss)>0) vstopSetCreate(name,vstopStopLossName,vstopsetStoploss,MODE_STOPLOSS,clr_sl);
-   if (vstopTakeProfitMode>0 && MathAbs(vstopsetTakeprofit)>0) vstopSetCreate(name,vstopTakeProfitName,vstopsetTakeprofit,MODE_TAKEPROFIT,clr_tp);
+   if (vstopStopLossMode>0 && MathAbs(vstopsetStoploss)>=0) vstopSetCreate(name,vstopStopLossName,vstopsetStoploss,MODE_STOPLOSS,clr_sl);
+   if (vstopTakeProfitMode>0 && MathAbs(vstopsetTakeprofit)>=0) vstopSetCreate(name,vstopTakeProfitName,vstopsetTakeprofit,MODE_TAKEPROFIT,clr_tp);
 }
 
 void vstopSetCreate(string& name,string type,double& val,int stoptype,color clr)  {

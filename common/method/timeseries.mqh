@@ -33,7 +33,7 @@ double candle(int price,int shift=1,string symbol="",int timeframe=0)   {
    }
 }
 
-bool barIsNew(int& timeframe) {
+bool barIsNew(int timeframe) {
    static datetime last;
    static string symbol;   
    if (symbol!=tickSymbol)   {

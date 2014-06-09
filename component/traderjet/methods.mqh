@@ -20,7 +20,7 @@
  */
 
 void TraderJet()  {
-   Print(AccountCompany()+": acct#"+DoubleToStr(AccountNumber()));
+   Print(AccountCompany()+": acct#"+DoubleToStr(AccountNumber(),0));
    Print(WindowExpertName() + " on " +TerminalName()+"("+TerminalPath()+"). Powered by TraderJet Framework.");    
    Print("TraderJet Framework: Copyright (C) 2013 Enrico Lambino. Released under the GNU Public License v3.0 <http://spdx.org/licenses/GPL-3.0+>.");
 }

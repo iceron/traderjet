@@ -28,8 +28,8 @@ void magicSet(int digits = 3)  {
          Sleep(serverSleepError);
          continue;
       }      
-      int rand = mathRandS(TimeCurrent()+windowhandle);
-      val = MathPow(10,digits)*(rand/32767.0); 
+      int r = mathRandS(TimeCurrent()+windowhandle);
+      val = MathPow(10,digits)*(r/32767.0); 
       if (!magicCollisionCheck(val)) {
          GlobalVariableSet(DoubleToString(val,0),val);  
          serverMagic = val;
