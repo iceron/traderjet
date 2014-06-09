@@ -27,9 +27,9 @@ bool tradingIsValid(string s,string e,bool enable=true,int gmt=0)  {
       e += gmt;
    }
    bool res;
-   datetime current  = timeCurrent();  
-   datetime begin    = strToTime(s);
-   datetime end      = strToTime(e);
+   datetime current  = TimeCurrent();  
+   datetime begin    = StrToTime(s);
+   datetime end      = StrToTime(e);
    if (begin<end)  {
       if (current>begin && current<end) res = true;
    }
