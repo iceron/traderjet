@@ -19,35 +19,35 @@
  *  @license GPL-3.0+ <http://spdx.org/licenses/GPL-3.0+>
  */
 
-void trailingTakeProfitLoop(string name,double start,double step,double trailingtake,int magic=EMPTY_VALUE) {   
-   int total = ordersTotal();
-   for (int i=0;i<total;i++) trailingTakeProfitOrder(i,start,step,trailingtake,magic,SELECT_BY_POS,name);
+void trailingTakeProfitLoop(string name,double begin,double step,double trailingtake,int magic=EMPTY_VALUE) {   
+   int total = OrdersTotal();
+   for (int i=0;i<total;i++) trailingTakeProfitOrder(i,begin,step,trailingtake,magic,SELECT_BY_POS,name);
 }
 
-void trailingTakeProfitOrder(string name, int ticket,double start,double step,double trailingtake,int magic=EMPTY_VALUE,int select=SELECT_BY_TICKET)   {
+void trailingTakeProfitOrder(string name, int ticket,double begin,double step,double trailingtake,int magic=EMPTY_VALUE,int select=SELECT_BY_TICKET)   {
    if (magic==EMPTY_VALUE) magic = serverMagic;  
-   if (cOrderSelect(ticket,select)) trailingTakeProfit(start,step,trailingtake,name);       
+   if (cOrderSelect(ticket,select)) trailingTakeProfit(begin,step,trailingtake,name);       
 }
 
-void trailingTakeProfit(string name, double start,double step,double trailingtake)   {
+void trailingTakeProfit(string name, double begin,double step,double trailingtake)   {
    if (trailingtake<=0) return;
-   start *= tickFractPips;
+   begin *= tickFractPips;
    step *= tickFractPips;
-   double val = objectGet(name+vstopTakeProfitName+orderTicket,OBJPROP_PRICE1);
+   double val = ObjectGet(name+vstopTakeProfitName+orderTicket,OBJPROP_PRICE1);
    if (val==0) return;
 	bool mod;
 	if (orderType==OP_BUY) {
-      if (ticks(orderClosePrice-orderOpenPrice)>=start)	{
-			if (ticks(val)<ticks(orderOpenPrice)+start+trailingtake*tickFractPips || val==-1) mod = true;
+      if (ticks(orderClosePrice-orderOpenPrice)>=begin)	{
+			if (ticks(val)<ticks(orderOpenPrice)+begin+trailingtake*tickFractPips || val==-1) mod = true;
 			else if (ticks(orderClosePrice+trailingtake*tickFractPoints)>ticks(val)+step)  mod = true;
-			if (mod) objectSet(name+vstopTakeProfitName+orderTicket,OBJPROP_PRICE1,orderClosePrice+trailingtake*tickFractPoints);
+			if (mod) ObjectSet(name+vstopTakeProfitName+orderTicket,OBJPROP_PRICE1,orderClosePrice+trailingtake*tickFractPoints);
 		}
    }
 	else if (orderType==OP_SELL) {
-      if (ticks(orderOpenPrice-orderClosePrice)>=start)	{
-			if (ticks(val)>ticks(orderOpenprice)-start-trailingtake*tickFractPips || val==-1) mod = true;
+      if (ticks(orderOpenPrice-orderClosePrice)>=begin)	{
+			if (ticks(val)>ticks(orderOpenPrice)-begin-trailingtake*tickFractPips || val==-1) mod = true;
 			else if (ticks(orderClosePrice-trailingtake*tickFractPoints)<ticks(val)-step)  mod = true;			
-			if (mod) objectSet(name+vstopTakeProfitName+orderTicket,OBJPROP_PRICE1,orderClosePrice-trailingtake*tickFractPoints);
+			if (mod) ObjectSet(name+vstopTakeProfitName+orderTicket,OBJPROP_PRICE1,orderClosePrice-trailingtake*tickFractPoints);
 		}
    }
 }

@@ -1,1 +1,1 @@
-trailingTakeProfit(TrailingTakeProfitStart,TrailingTakeProfitStep,TrailingTakeProfitValue);
+trailingTakeProfit(vstopStandardName,TrailingTakeProfitStart,TrailingTakeProfitStep,TrailingTakeProfitValue);
