@@ -256,3 +256,10 @@ double vstopGet(string name)
 {
    return(ObjectGet(name,OBJPROP_PRICE1));
 }
+
+bool vstopIsEmpty(string name)
+{
+   double val = vstopGet(name);
+   if (val==-1 || val==EMPTY_VALUE) return(true);
+   return(false);
+}
