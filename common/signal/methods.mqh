@@ -196,3 +196,8 @@ int signalReverse(int signal) {
    }
    return(CMD_VOID);
 }
+
+int signalToCMD(int signal)
+{
+   return 0;
+}
