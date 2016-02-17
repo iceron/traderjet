@@ -13,7 +13,9 @@ void trailingStopLossPrice(string name,double v,int type=CMD_ALL,bool floating=f
       if (orderType!=type) return;   
    if (orderType>1) return;
    if (v==0) return;   
-   double val = ObjectGet(name+vstopStopLossName+orderTicket,OBJPROP_PRICE1);
+   double val = 0;
+   if (objectExists(name+vstopStopLossName+orderTicket))
+      val = ObjectGet(name+vstopStopLossName+orderTicket,OBJPROP_PRICE1);
    if (val==0) return;
    bool update;
    if (orderType==OP_BUY) {

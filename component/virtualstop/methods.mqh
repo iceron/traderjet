@@ -249,12 +249,16 @@ int ticketGet()  {
 
 bool vstopSet(string name,double value)
 {
-   return(ObjectSet(name,OBJPROP_PRICE1,value));
+   if (objectExists(name))
+      return(ObjectSet(name,OBJPROP_PRICE1,value));
+   return 0;
 }
 
 double vstopGet(string name)
 {
-   return(ObjectGet(name,OBJPROP_PRICE1));
+   if (objectExists(name))
+      return(ObjectGet(name,OBJPROP_PRICE1));
+   return 0;
 }
 
 bool vstopIsEmpty(string name)

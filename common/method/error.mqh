@@ -48,6 +48,7 @@ void errorManager(int type)  {
 bool errorCheckCritical(int error)  {
    if (error==0) error = GetLastError();
    if (error==0) return(false);
+   Print("test error value: "+error);
    if (error>4000) return(true);   
    if (IsTesting())
       if (intInArray(error,errorCritListTest)) return(true);

@@ -35,7 +35,9 @@ void trailingStopLossCandle(string name,int begin,int price,int shift,double off
    if (orderType>1) return;
    datetime candleTime = candleTime(begin);
    if (orderOpenTime>candleTime) return;      
-   double val = ObjectGet(name+vstopStopLossName+orderTicket,OBJPROP_PRICE1);
+   double val = 0;
+   if (objectExists(name+vstopStopLossName+orderTicket))
+      val = ObjectGet(name+vstopStopLossName+orderTicket,OBJPROP_PRICE1);
    if (val==0) return;   
    double candlePrice = candlePrice(price,shift);
    bool update;

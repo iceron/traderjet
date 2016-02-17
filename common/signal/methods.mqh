@@ -117,7 +117,7 @@ void signalManageReset()   {
 
 
 
-void signalInit(int open=0,int close=0)   {
+void signalInit(int open=1,int close=1)   {
    arrayResizeInt(signalEntryArray,open);
    arrayResizeInt(signalExitArray,close); 
    ArrayInitialize(signalEntryArray,0);
@@ -197,7 +197,3 @@ int signalReverse(int signal) {
    return(CMD_VOID);
 }
 
-int signalToCMD(int signal)
-{
-   return 0;
-}

@@ -44,7 +44,7 @@ void orderCloseAll(int type=CMD_ALL)   {
    int i, total = OrdersTotal();
    for (i=total-1; i>=0; i--)   {
       if (!OrderSelect(i,SELECT_BY_POS)) continue;
-      if (!orderInGroup(type,orderType)) continue;
-      orderClose(orderTicket);
+      if (!orderInGroup(type,OrderType())) continue;
+      orderClose(OrderTicket());
    }
 }

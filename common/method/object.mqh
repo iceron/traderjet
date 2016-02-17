@@ -40,13 +40,19 @@ bool objectExists(string objectName) {
 }
 
 bool objectHide(string objectName)   {
-   return(ObjectSet(objectName,OBJPROP_TIMEFRAMES,-1));
+   if (objectExists(objectName))
+      return(ObjectSet(objectName,OBJPROP_TIMEFRAMES,-1));
+   return true;
 }
 
 bool objectHidden(string objectName) {
-   int val = ObjectGet(objectName,OBJPROP_TIMEFRAMES);
-   if (val==-1) return(true);
-   return(false);
+   if (objectExists(objectName))
+   {
+      int val = ObjectGet(objectName,OBJPROP_TIMEFRAMES);
+      if (val==-1) return(true);
+      else return false;
+   }   
+   return(true);
 }
 
 bool objectClone(string n,string o,bool create=true) {
@@ -490,15 +496,21 @@ bool hlineCreate(string objectName,double objectPrice1,color objectColor=Red,int
 }
 
 bool hlineSet(string objectName,int objectIndex,double objectValue) {
-   return(ObjectSet(objectName,objectIndex,objectValue));
+   if (objectExists(objectName))
+      return(ObjectSet(objectName,objectIndex,objectValue));
+   return true;
 }
 
 bool hlineSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
-   return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   if (objectExists(objectName))
+      return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   return true;   
 }
 
 double hlineGet(string objectName,int objectIndex) {
-   return(ObjectGet(objectName,objectIndex));
+   if (objectExists(objectName))
+      return(ObjectGet(objectName,objectIndex));
+   return 0;
 }
 
 //vline object functions
@@ -512,15 +524,21 @@ bool vlineCreate(string objectName,datetime objectTime1,color objectColor=Red,in
 }
 
 bool vlineSet(string objectName,int objectIndex,double objectValue) {
-   return(ObjectSet(objectName,objectIndex,objectValue));
+   if (objectExists(objectName))
+      return(ObjectSet(objectName,objectIndex,objectValue));
+   return true;
 }
 
 bool vlineSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
-   return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   if (objectExists(objectName))
+      return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   return true;   
 }
 
 double vlineGet(string objectName,int objectIndex) {
-   return(ObjectGet(objectName,objectIndex));
+   if (objectExists(objectName))
+      return(ObjectGet(objectName,objectIndex));
+   return 0;
 }
 
 //trendline object functions
@@ -534,15 +552,21 @@ bool trendCreate(string objectName,datetime objectTime1,double objectPrice1,date
 }
 
 bool trendSet(string objectName,int objectIndex,double objectValue) {
-   return(ObjectSet(objectName,objectIndex,objectValue));
+   if (objectExists(objectName))
+      return(ObjectSet(objectName,objectIndex,objectValue));
+   return false;
 }
 
 bool trendSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
-   return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   if (objectExists(objectName))
+      return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   return false;
 }
 
 double trendGet(string objectName,int objectIndex) {
-   return(ObjectGet(objectName,objectIndex));
+   if (objectExists(objectName))
+      return(ObjectGet(objectName,objectIndex));
+   return 0;
 }
 
 //angled trendline object functions
@@ -557,15 +581,21 @@ bool atrendCreate(string objectName,double objectAngle,datetime objectTime1,doub
 }
 
 bool atrendSet(string objectName,int objectIndex,double objectValue) {
-   return(ObjectSet(objectName,objectIndex,objectValue));
+   if (objectExists(objectName))
+      return(ObjectSet(objectName,objectIndex,objectValue));
+   return true;
 }
 
 bool atrendSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
-   return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   if (objectExists(objectName))
+      return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   return true;
 }
 
 double atrendGet(string objectName,int objectIndex) {
-   return(ObjectGet(objectName,objectIndex));
+   if (objectExists(objectName))
+      return(ObjectGet(objectName,objectIndex));
+   return 0;
 }
 
 //linear regression object functions
@@ -579,15 +609,21 @@ bool lregressionCreate(string objectName,datetime objectTime1,datetime objectTim
 }
 
 bool lregressionSet(string objectName,int objectIndex,double objectValue) {
-   return(ObjectSet(objectName,objectIndex,objectValue));
+   if (objectExists(objectName))
+      return(ObjectSet(objectName,objectIndex,objectValue));
+   return true;
 }
 
 bool lregressionSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
-   return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   if (objectExists(objectName))
+      return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   return true;
 }
 
 double lregressionGet(string objectName,int objectIndex) {
-   return(ObjectGet(objectName,objectIndex));
+   if (objectExists(objectName))
+      return(ObjectGet(objectName,objectIndex));
+   return 0;
 }
 
 //equidistant channel object functions
@@ -601,21 +637,20 @@ bool channelCreate(string objectName,datetime objectTime1,double objectPrice1,da
 }
 
 bool channelSet(string objectName,int objectIndex,double objectValue)   {
-   bool res;
-   if (ObjectFind(objectName)!=-1) {
-      res = ObjectSet(objectName,objectIndex,objectValue);
-   }
-   return(res);   
+   if (objectExists(objectName))
+      return ObjectSet(objectName,objectIndex,objectValue);
+   return(true);   
 }
 
 bool channelSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
-   return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   if (objectExists(objectName))
+      return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   return true;
 }
 
 double channelGet(string objectName,int objectIndex)  {
-   if (ObjectFind(objectName)!=-1)   {
+   if (objectExists(objectName))
       return(ObjectGet(objectName,objectIndex));      
-   } 
    return(-1);
 }
 
@@ -630,15 +665,21 @@ bool schannelCreate(string objectName,datetime objectTime1,datetime objectTime2,
 }
 
 bool schannelSet(string objectName,int objectIndex,double objectValue) {
-   return(ObjectSet(objectName,objectIndex,objectValue));
+   if (objectExists(objectName))
+      return(ObjectSet(objectName,objectIndex,objectValue));
+   return false;
 }
 
 bool schannelSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
-   return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   if (objectExists(objectName))
+      return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   return false;
 }
 
 double schannelGet(string objectName,int objectIndex) {
-   return(ObjectGet(objectName,objectIndex));
+   if (objectExists(objectName))
+      return(ObjectGet(objectName,objectIndex));
+   return 0;
 }
 
 //gann line object functions
@@ -653,15 +694,21 @@ bool glineCreate(string objectName,datetime objectTime1,double objectPrice1,date
 }
 
 bool glineSet(string objectName,int objectIndex,double objectValue) {
-   return(ObjectSet(objectName,objectIndex,objectValue));
+   if (objectExists(objectName))
+      return(ObjectSet(objectName,objectIndex,objectValue));
+   return 0;
 }
 
 bool glineSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
-   return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   if (objectExists(objectName))
+      return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   return true;
 }
 
 double glineGet(string objectName,int objectIndex) {
-   return(ObjectGet(objectName,objectIndex));
+   if (objectExists(objectName))
+      return(ObjectGet(objectName,objectIndex));
+   return 0;
 }
 
 //gann fan object functions
@@ -676,15 +723,21 @@ bool gfanCreate(string objectName,datetime objectTime1,double objectPrice1,datet
 }
 
 bool gfanSet(string objectName,int objectIndex,double objectValue) {
-   return(ObjectSet(objectName,objectIndex,objectValue));
+   if (objectExists(objectName))
+      return(ObjectSet(objectName,objectIndex,objectValue));
+   return true;
 }
 
 bool gfanSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
-   return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   if (objectExists(objectName))
+      return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   return true;
 }
 
 double gfanGet(string objectName,int objectIndex) {
-   return(ObjectGet(objectName,objectIndex));
+   if (objectExists(objectName))
+      return(ObjectGet(objectName,objectIndex));
+   return true;
 }
 
 //gann grid object functions
@@ -699,15 +752,21 @@ bool ggridCreate(string objectName,datetime objectTime1,double objectPrice1,date
 }
 
 bool ggridSet(string objectName,int objectIndex,double objectValue) {
-   return(ObjectSet(objectName,objectIndex,objectValue));
+   if (objectExists(objectName))
+      return(ObjectSet(objectName,objectIndex,objectValue));
+   return true;
 }
 
 bool ggridSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
-   return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   if (objectExists(objectName))
+      return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   return true;
 }
 
 double ggridGet(string objectName,int objectIndex) {
-   return(ObjectGet(objectName,objectIndex));
+   if (objectExists(objectName))
+      return(ObjectGet(objectName,objectIndex));
+   return 0;
 }
 
 //fibonacci object functions
@@ -721,15 +780,21 @@ bool fiboCreate(string objectName,datetime objectTime1,double objectPrice1,datet
 }
 
 bool fiboSet(string objectName,int objectIndex,double objectValue) {
-   return(ObjectSet(objectName,objectIndex,objectValue));
+   if (objectExists(objectName))
+      return(ObjectSet(objectName,objectIndex,objectValue));
+   return true;
 }
 
 bool fiboSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
-   return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   if (objectExists(objectName))
+      return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   return true;
 }
 
 double fiboGet(string objectName,int objectIndex) {
-   return(ObjectGet(objectName,objectIndex));
+   if (objectExists(objectName))
+      return(ObjectGet(objectName,objectIndex));
+   return true;
 }
 
 //fibonacci timezone object functions
@@ -743,15 +808,21 @@ bool fibotCreate(string objectName,datetime objectTime1,double objectPrice1,date
 }
 
 bool fibotSet(string objectName,int objectIndex,double objectValue) {
-   return(ObjectSet(objectName,objectIndex,objectValue));
+   if (objectExists(objectName))
+      return(ObjectSet(objectName,objectIndex,objectValue));
+   return true;
 }
 
 bool fibotSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
-   return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   if (objectExists(objectName))
+      return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   return true;
 }
 
 double fibotGet(string objectName,int objectIndex) {
-   return(ObjectGet(objectName,objectIndex));
+   if (objectExists(objectName))
+      return(ObjectGet(objectName,objectIndex));
+   return true;
 }
 
 //fibonacci fan object functions
@@ -765,15 +836,21 @@ bool fibofCreate(string objectName,datetime objectTime1,double objectPrice1,date
 }
 
 bool fibofSet(string objectName,int objectIndex,double objectValue) {
-   return(ObjectSet(objectName,objectIndex,objectValue));
+   if (objectExists(objectName))
+      return(ObjectSet(objectName,objectIndex,objectValue));
+   return false;
 }
 
 bool fibofSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
-   return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   if (objectExists(objectName))
+      return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   return false;
 }
 
 double fibofGet(string objectName,int objectIndex) {
-   return(ObjectGet(objectName,objectIndex));
+   if (objectExists(objectName))
+      return(ObjectGet(objectName,objectIndex));
+   return false;
 }
 
 //fibonacci arc object functions
@@ -787,15 +864,21 @@ bool fiboaCreate(string objectName,datetime objectTime1,double objectPrice1,date
 }
 
 bool fiboaSet(string objectName,int objectIndex,double objectValue) {
-   return(ObjectSet(objectName,objectIndex,objectValue));
+   if (objectExists(objectName))
+      return(ObjectSet(objectName,objectIndex,objectValue));
+   return false;
 }
 
 bool fiboaSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
-   return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   if (objectExists(objectName))
+      return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   return false;
 }
 
 double fiboaGet(string objectName,int objectIndex) {
-   return(ObjectGet(objectName,objectIndex));
+   if (objectExists(objectName))
+      return(ObjectGet(objectName,objectIndex));
+   return false;
 }
 
 //fibonacci expansion object functions
@@ -809,21 +892,20 @@ bool fiboeCreate(string objectName,datetime objectTime1,double objectPrice1,date
 }
 
 bool fiboeSet(string objectName,int objectIndex,double objectValue)   {
-   bool res;
-   if (ObjectFind(objectName)!=-1) {
-      res = ObjectSet(objectName,objectIndex,objectValue);
-   }
-   return(res);   
+   if (objectExists(objectName))
+      return ObjectSet(objectName,objectIndex,objectValue);
+   return(true);   
 }
 
 bool fiboeSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
-   return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   if (objectExists(objectName))
+      return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   return true;
 }
 
 double fiboeGet(string objectName,int objectIndex)  {
-   if (ObjectFind(objectName)!=-1)   {
+   if (objectExists(objectName))
       return(ObjectGet(objectName,objectIndex));      
-   } 
    return(-1);
 }
 
@@ -838,15 +920,15 @@ bool fibocCreate(string objectName,datetime objectTime1,double objectPrice1,date
 }
 
 bool fibocSet(string objectName,int objectIndex,double objectValue)   {
-   bool res;
-   if (ObjectFind(objectName)!=-1) {
-      res = ObjectSet(objectName,objectIndex,objectValue);
-   }
-   return(res);   
+   if (objectExists(objectName))
+      return ObjectSet(objectName,objectIndex,objectValue);
+   return(true);   
 }
 
 bool fibocSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
-   return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   if (objectExists(objectName))
+      return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   return true;
 }
 
 double fibocGet(string objectName,int objectIndex)  {
@@ -867,15 +949,21 @@ bool rectCreate(string objectName,datetime objectTime1,double objectPrice1,datet
 }
 
 bool rectSet(string objectName,int objectIndex,double objectValue) {
-   return(ObjectSet(objectName,objectIndex,objectValue));
+   if (objectExists(objectName))
+      return(ObjectSet(objectName,objectIndex,objectValue));
+   return true;
 }
 
 bool rectSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
-   return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   if (objectExists(objectName))
+      return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   return true;
 }
 
 double rectGet(string objectName,int objectIndex) {
-   return(ObjectGet(objectName,objectIndex));
+   if (objectExists(objectName))
+      return(ObjectGet(objectName,objectIndex));
+   return true;
 }
 
 //triangle object functions
@@ -889,21 +977,20 @@ bool triangleCreate(string objectName,datetime objectTime1,double objectPrice1,d
 }
 
 bool triangleSet(string objectName,int objectIndex,double objectValue)   {
-   bool res;
-   if (ObjectFind(objectName)!=-1) {
-      res = ObjectSet(objectName,objectIndex,objectValue);
-   }
-   return(res);   
+   if (objectExists(objectName))
+      return ObjectSet(objectName,objectIndex,objectValue);
+   return(true);   
 }
 
 bool triangleSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
-   return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   if (objectExists(objectName))
+      return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   return true;
 }
 
 double triangleGet(string objectName,int objectIndex)  {
-   if (ObjectFind(objectName)!=-1)   {
+   if (objectExists(objectName))
       return(ObjectGet(objectName,objectIndex));      
-   } 
    return(-1);
 }
 
@@ -919,15 +1006,21 @@ bool ellipseCreate(string objectName,datetime objectTime1,double objectPrice1,da
 }
 
 bool ellipseSet(string objectName,int objectIndex,double objectValue) {
-   return(ObjectSet(objectName,objectIndex,objectValue));
+   if (objectExists(objectName))
+      return(ObjectSet(objectName,objectIndex,objectValue));
+   return true;
 }
 
 bool ellipseSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
-   return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   if (objectExists(objectName))
+      return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   return true;
 }
 
 double ellipseGet(string objectName,int objectIndex) {
-   return(ObjectGet(objectName,objectIndex));
+   if (objectExists(objectName))
+      return(ObjectGet(objectName,objectIndex));
+   return true;
 }
 
 //andrew's pitchfork object functions
@@ -941,21 +1034,20 @@ bool pitchforkCreate(string objectName,datetime objectTime1,double objectPrice1,
 }
 
 bool pitchforkSet(string objectName,int objectIndex,double objectValue)   {
-   bool res;
-   if (ObjectFind(objectName)!=-1) {
-      res = ObjectSet(objectName,objectIndex,objectValue);
-   }
-   return(res);   
+   if (objectExists(objectName))
+      return ObjectSet(objectName,objectIndex,objectValue);
+   return(true);   
 }
 
 bool pitchforkSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
-   return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   if (objectExists(objectName))
+      return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   return true;
 }
 
 double pitchforkGet(string objectName,int objectIndex)  {
-   if (ObjectFind(objectName)!=-1)   {
+   if (objectExists(objectName))
       return(ObjectGet(objectName,objectIndex));      
-   } 
    return(-1);
 }
 
@@ -970,15 +1062,21 @@ bool clineCreate(string objectName,datetime objectTime1,double objectPrice1,date
 }
 
 bool clineSet(string objectName,int objectIndex,double objectValue) {
-   return(ObjectSet(objectName,objectIndex,objectValue));
+   if (objectExists(objectName))
+      return(ObjectSet(objectName,objectIndex,objectValue));
+   return true;
 }
 
 bool clineSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
-   return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   if (objectExists(objectName))
+      return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   return true;
 }
 
 double clineGet(string objectName,int objectIndex) {
-   return(ObjectGet(objectName,objectIndex));
+   if (objectExists(objectName))
+      return(ObjectGet(objectName,objectIndex));
+   return true;
 }
 
 //text object functions
@@ -993,15 +1091,21 @@ bool textCreate(string objectName,string objectText,double objectAngle,datetime 
 }
 
 bool textSet(string objectName,int objectIndex,double objectValue) {
-   return(ObjectSet(objectName,objectIndex,objectValue));
+   if (objectExists(objectName))
+      return(ObjectSet(objectName,objectIndex,objectValue));
+   return true;
 }
 
 bool textSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
-   return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   if (objectExists(objectName))
+      return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   return true;
 }
 
 double textGet(string objectName,int objectIndex) {
-   return(ObjectGet(objectName,objectIndex));
+   if (objectExists(objectName))
+      return(ObjectGet(objectName,objectIndex));
+   return 0;
 }
 
 //arrow object functions
@@ -1016,15 +1120,21 @@ bool arrowCreate(string objectName,double objectAngle,int objectCode,datetime ob
 }
 
 bool arrowSet(string objectName,int objectIndex,double objectValue) {
-   return(ObjectSet(objectName,objectIndex,objectValue));
+   if (objectExists(objectName))
+      return(ObjectSet(objectName,objectIndex,objectValue));
+   return true;
 }
 
 bool arrowSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
-   return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   if (objectExists(objectName))
+      return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   return true;
 }
 
 double arrowGet(string objectName,int objectIndex) {
-   return(ObjectGet(objectName,objectIndex));
+   if (objectExists(objectName))
+      return(ObjectGet(objectName,objectIndex));
+   return true;
 }
 
 //label object functions
@@ -1056,15 +1166,21 @@ bool labelCreateUpdate(string objectName,string objectText,double objectAngle,in
 }
 
 bool labelSet(string objectName,int objectIndex,double objectValue) {
-   return(ObjectSet(objectName,objectIndex,objectValue));
+   if (objectExists(objectName))
+      return(ObjectSet(objectName,objectIndex,objectValue));
+   return true;
 }
 
 bool labelSetText(string objectName,string objectText,int objectFontsize,string objectFont="Arial",color objectColor=CLR_NONE) {
-   return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   if (objectExists(objectName))
+      return(ObjectSetText(objectName,objectText,objectFontsize,objectFont,objectColor));
+   return true;
 }
 
 double labelGet(string objectName,int objectIndex) {
-   return(ObjectGet(objectName,objectIndex));
+   if (objectExists(objectName))
+      return(ObjectGet(objectName,objectIndex));
+   return true;
 }
 
 

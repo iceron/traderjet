@@ -41,10 +41,10 @@ bool barIsNew(int timeframe) {
       symbol = tickSymbol;
    }      
    datetime open = iTime(tickSymbol,timeframe,0);
-   if (last==0)   {
+   if (last==0 || open>last)   {
       last = open;
       return(true);
-   }   
+   } 
    return(false);
 }
 
